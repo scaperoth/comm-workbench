@@ -1,7 +1,28 @@
 <?php
 
+/**
+ * @author: Matt Scaperoth
+ * @date: 7-7-14
+ * 
+ * API for communications dashboard application.
+ * This api uses the ApiHelper class to call various functions
+ * This ApiHelper can be found in protected/components/. It extends CHTML.
+ */
 class ApiController extends Controller {
-
+    
+    //source and destination locations. A prefix of the application's base path
+    //will be added before the action is exectured in beforeAction(). This base
+    //path here is expected to be ../protected/components/
+    private $source = '/data/backup/';
+    private $dest = '/data/filesystem/';
+    
+    public function beforeAction($action)
+    {
+        $this->source = Yii::app()->basePath.$this->source;
+        $this->dest = Yii::app()->basePath.$this->dest;
+        return parent::beforeAction($action);
+    }
+    
     /**
      * Declares class-based actions.
      */
@@ -32,54 +53,18 @@ class ApiController extends Controller {
 
     /**
      * Syncs /protected/data/filesystem contents with current filesystem in remote server
-     * code pulled from http://stackoverflow.com/questions/5707806/recursive-copy-of-directory
+     * or vice versa
      */
-    public function actionSyncfiles() {
-        ////fbwnas11/Public/
-        $source = Yii::app()->basePath . '/data/backup/';
-        $dest = Yii::app()->basePath . '/data/filesystem/';
+    public function actionSync() {
 
-        foreach (
-        $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($dest, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-            if ($item->isDir()) {
-                $this->delete_files($item);
-            }
+        if ($push_or_pull = CHttpRequest::getParam('push_or_pull')) {
+            $JSON_array = ApiHelper::_ProcessSync($push_or_pull, $this->source, $this->dest);
         }
-
-
-        foreach (
-        $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-            //make sure file/folder doesn't already exist first
-            if (!file_exists($dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName())) {
-                if ($item->isDir()) {
-                    mkdir($dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
-                } else {
-                    copy($item, $dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
-                }
-            }
-        }
-    }
-
-    /*
-     * php delete function that deals with directories recursively
-     */
-
-    function delete_files($target) {
-        if (is_dir($target)) {
-            $files = glob($target . '*', GLOB_MARK); //GLOB_MARK adds a slash to directories returned
-
-            foreach ($files as $file) {
-                $this->delete_files($file);
-            }
-            if (file_exists($target))
-                rmdir($target);
-        } elseif (is_file($target)) {
-            unlink($target);
-        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+        
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+        
     }
 
 }

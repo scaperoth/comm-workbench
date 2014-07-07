@@ -782,3 +782,107 @@ Stack trace:
 #10 {main}
 REQUEST_URI=/comm-workbench/index.php/api/syncfiles
 ---
+2014/07/07 15:50:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "syncfiles".' in C:\xampp\htdocs\comm-workbench\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(270): CController->missingAction('syncfiles')
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('syncfiles')
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/syncfiles')
+#3 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/comm-workbench/index.php/api/sync/push
+---
+2014/07/07 15:50:29 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "sync".' in C:\xampp\htdocs\comm-workbench\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(270): CController->missingAction('sync')
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('sync')
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/sync')
+#3 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/comm-workbench/index.php/api/sync/push
+---
+2014/07/07 16:27:13 [error] [php] Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:72) (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:159)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionSync()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/sync/pull
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (159)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (56)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/07 16:27:28 [error] [php] Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:72) (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:159)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionSync()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/sync/push
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (159)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (56)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/07 16:27:47 [error] [php] Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:72) (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:159)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionSync()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/sync/push
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (159)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (56)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/07 16:28:27 [error] [php] Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:72) (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:159)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionSync()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/sync/push
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (159)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (56)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/07 16:38:38 [error] [php] Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:73) (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:168)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionSync()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/sync/push
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (168)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (56)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/07 16:41:35 [error] [php] Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:57) (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:171)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionSync()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/sync/push
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (171)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (59)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
