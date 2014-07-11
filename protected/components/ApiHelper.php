@@ -6,7 +6,7 @@
  */
 
 class ApiHelper extends CHtml {
-    // Members
+// Members
     /**
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
      */
@@ -65,14 +65,14 @@ class ApiHelper extends CHtml {
 //first check to see if there's anything in the local fs that doesn't belong
         self::_delete_from_dest($source, $dest);
 
-        //now copy over all systems that do belong from source fs
+//now copy over all systems that do belong from source fs
         self::_copy_from_source($source, $dest);
-        $destination_array['destination folder']=$dest;
+        $destination_array['destination folder'] = $dest;
         $destination_array['contents'] = self::_ReadFolderDirectory($dest);
         /*
-        echo '<pre>';
-        print_r($destination_array);
-        echo '</pre>';
+          echo '<pre>';
+          print_r($destination_array);
+          echo '</pre>';
          * 
          */
         return $destination_array;
@@ -86,7 +86,7 @@ class ApiHelper extends CHtml {
      * @param type $dest
      */
     public static function _delete_from_dest($source, $dest) {
-        //first check to see if there's anything in the destination fs that doesn't belong
+//first check to see if there's anything in the destination fs that doesn't belong
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($dest, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
@@ -105,12 +105,13 @@ class ApiHelper extends CHtml {
      * @param type $dest
      */
     public static function _copy_from_source($source, $dest) {
-        //now copy over all systems that do belong from source fs
+//now copy over all systems that do belong from source fs
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
         ) {
-            //make sure file/folder doesn't already exist first
+
+//make sure file/folder doesn't already exist first
             if (!file_exists($dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName())) {
                 if ($item->isDir()) {
                     mkdir($dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
@@ -139,6 +140,67 @@ class ApiHelper extends CHtml {
     }
 
     /**
+     * returns every parent of all images
+     * @param type $image_name
+     * @param type $root
+     */
+    public static function _find_all_image_parent($root, $bucket) {
+        $image_details = array();
+        foreach (
+        $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($bucket, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+            if (!$item->isDir()) {
+                $file = $iterator->current();
+                $file = pathinfo($file->getPath() . DIRECTORY_SEPARATOR . $file->getFilename());
+                $folder = self::_find_image_parent($file['basename'], $root);
+                $image_details[$file['basename']] = self::_find_image_parent($file['basename'], $root);
+            }
+        }
+
+        return $image_details;
+    }
+
+    /**
+     * returns every parent of image
+     * @param type $image_name
+     * @param type $root
+     */
+    public static function _find_image_parent($image_name, $root) {
+        $all_parents = array();
+        foreach (
+        $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($root, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+            if (!$item->isDir()) {
+                $file = $iterator->current();
+                $file = pathinfo($file->getPath() . DIRECTORY_SEPARATOR . $file->getFilename());
+                if ($file['basename'] == $image_name) {
+                    $all_parents[] = self::_trim_directory($file['dirname'], $root);
+                }
+            }
+        }
+
+        return $all_parents;
+    }
+
+    /**
+     * shrinks large directory name to only relevant data
+     * @param type $dirname
+     * @param type $root
+     * @return type
+     */
+    public static function _trim_directory($dirname, $root) {
+
+        if ($dirname . "\\" == $root) {
+            $dirname = 'GWU';
+        } else {
+            $dirname = preg_replace('/^' . preg_quote($root, '/') . '/', '', $dirname);
+        }
+        return $dirname;
+    }
+
+    /**
      * tranlsates folder directory into json array
      * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
      * @param type $dir
@@ -163,32 +225,58 @@ class ApiHelper extends CHtml {
     }
 
     /**
+     * fills image bucket from source. 
+     * bucket found in themes/bootstrap/images/gadget_images/
+     * @param type $source
+     * @param type $bucket
+     */
+    public static function _fill_bucket($source, $bucket) {
+//now copy over all systems that do belong from source fs
+        foreach (
+        $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+            if (!$item->isDir()) {
+                $file = $iterator->current();
+                $file = pathinfo($file->getPath() . "\\" . $file->getFilename());
+                $ext = $file['extension'];
+                if ($ext == 'jpg' || $ext == 'jpeg') {
+                    echo 'Image found!</br>';
+                    copy($item, $bucket . DIRECTORY_SEPARATOR . $file['basename']);
+                } else {
+                    echo 'not an image</br>';
+                }
+            }
+        }
+    }
+
+    /**
      * 
      * @param type $status
      * @param string $body
      * @param type $content_type
      */
     public static function _sendResponse($status = 200, $body = '', $content_type = 'text/html') {
-        // set the status
+// set the status
         header("Access-Control-Allow-Origin: *");
         $status_header = 'HTTP/1.1 ' . $status . ' ' . self::_getStatusCodeMessage($status);
         header($status_header);
-        // and the content type
+// and the content type
         header('Content-type: ' . $content_type);
 
-        // pages with body are easy
+// pages with body are easy
         if ($body != '') {
-            // send the body
+// send the body
             echo $body;
         }
-        // we need to create the body if none is passed
+// we need to create the body if none is passed
         else {
-            // create some body messages
+// create some body messages
             $message = '';
 
-            // this is purely optional, but makes the pages a little nicer to read
-            // for your users.  Since you won't likely send a lot of different status codes,
-            // this also shouldn't be too ponderous to maintain
+// this is purely optional, but makes the pages a little nicer to read
+// for your users.  Since you won't likely send a lot of different status codes,
+// this also shouldn't be too ponderous to maintain
             switch ($status) {
                 case 401:
                     $message = 'You must be authorized to view this page.';
@@ -204,11 +292,11 @@ class ApiHelper extends CHtml {
                     break;
             }
 
-            // servers don't always have a signature turned on 
-            // (this is an apache directive "ServerSignature On")
+// servers don't always have a signature turned on 
+// (this is an apache directive "ServerSignature On")
             $signature = ($_SERVER['SERVER_SIGNATURE'] == '') ? $_SERVER['SERVER_SOFTWARE'] . ' Server at ' . $_SERVER['SERVER_NAME'] . ' Port ' . $_SERVER['SERVER_PORT'] : $_SERVER['SERVER_SIGNATURE'];
 
-            // this should be templated in a real-world solution
+// this should be templated in a real-world solution
             $body = '
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -230,9 +318,9 @@ class ApiHelper extends CHtml {
     }
 
     public static function _getStatusCodeMessage($status) {
-        // these could be stored in a .ini file and loaded
-        // via parse_ini_file()... however, this will suffice
-        // for an example
+// these could be stored in a .ini file and loaded
+// via parse_ini_file()... however, this will suffice
+// for an example
         $codes = Array(
             200 => 'OK',
             400 => 'Bad Request',
@@ -247,5 +335,4 @@ class ApiHelper extends CHtml {
     }
 
 }
-
 ?>

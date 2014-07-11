@@ -15,7 +15,7 @@ return array(
     'defaultController' => 'site',
     'basePath' => dirname(__FILE__) . DIRECTORY_SEPARATOR . '..',
     'homeUrl' => array(
-        '/'
+        '/site/login'
     ) ,
     'name' => 'AT Comm Workbench',
     'theme' => 'bootstrap',
@@ -79,6 +79,7 @@ return array(
             'urlFormat' => 'path',
             'rules' => array(
                 'api/sync/<push_or_pull:[\w]+>' => 'api/sync',
+                'api/imagedir/<image_name:[\w\-\ \.]+>' => 'api/imagedir',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
