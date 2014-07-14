@@ -266,23 +266,26 @@ class ApiHelper extends CHtml {
 
         Yii::app()->mongodb->gadgets->remove();
 
-        $r = array();
+        $r = array(
+            "timestamp" => date('m-d-y h:i:s'),
+            "files" => array(),
+        );
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($local, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
         ) {
-            if ($item->getFilename() != 'Thumbs.db') {
-                $path = $item->isDir() ? array($item->getFilename() => array()) : array($item->getFilename());
+            if ($item->getFilename() != 'Thumbs.db' && $item->getFilename() != 'Block.txt') {
+                $path = $item->isDir() ? array($item->getFilename() => array()) : array("images" => $item->getFilename());
 
                 for ($depth = $iterator->getDepth() - 1; $depth >= 0; $depth--) {
                     $path = array($iterator->getSubIterator($depth)->current()->getFilename() => $path);
                 }
-                $r = array_merge_recursive($r, $path);
+                $r["files"] = array_merge_recursive($r["files"], $path);
             }
         }
-        $r = array("GWU" => $r);
+        array_multisort(array_keys($r), SORT_STRING, $r);
         Yii::app()->mongodb->gadgets->save($r);
-        
+
         return $r;
     }
 
@@ -379,4 +382,5 @@ class ApiHelper extends CHtml {
     }
 
 }
+
 ?>

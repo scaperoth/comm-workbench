@@ -6,7 +6,7 @@ $this->pageTitle = Yii::app()->name;
 $themePath = Yii::app()->theme->baseUrl;
 $bucket = $themePath . 'assets/images/gadget_images/';
 
-
+/*
 //next example will insert new conversation
 $service_url = 'http://localhost/comm-workbench/index.php/api/imagedir/all';
 $curl = curl_init($service_url);
@@ -17,16 +17,21 @@ $decoded = json_decode($curl_response);
 if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
     die('error occured: ' . $decoded->response->errormessage);
 }
+
+
 var_dump($decoded);
 
-var_dump(Yii::app()->mongodb->gadgets->findOne());
-
 $cursor = Yii::app()->mongodb->gadgets->find();
+
+
 foreach ($cursor as $doc) {
     echo '<pre>';
     print_r($doc);
     echo '</pre>';
 }
+ *  
+ */
+ 
 ?>
 
 
