@@ -57,6 +57,16 @@ main{
     text-align: center;
 }
 
+.large{
+    font-size:10em;
+}
+
+
+.no-margin{
+    margin:0;
+}
+
+
 /******************NAVBAR**************************/
 /* Custom navbar
 -------------------------------------------------- */
@@ -92,6 +102,49 @@ main{
     border-bottom:1px solid #000;
     height:1px;
 }
+
+/******************HOME ICONS**************************/
+/* 
+-------------------------------------------------- */
+.home-icons{
+    color:#004065;
+}
+
+.home-icons:hover{
+    color:#004065;
+    text-decoration:none;
+}
+
+.buff{
+    color:#c8b18b;
+}
+a:hover .buff{
+    color:#004065;
+}
+
+.gwblue{
+    color:#004065;
+}
+.gwblue:hover{
+    color:#c8b18b;
+}
+
+.close-text-top{
+    margin-top:-30px;
+}
+
+.fade-bg.buff{
+    background:transparent;
+}
+.fade-bg:hover {
+    background: transparent;
+    color:#fff;
+}
+.fade-bg:hover.white{
+    background:transparent;
+    color:#000;
+}
+
 /******************NOTIFICATIONS**************************/
 /* 
 -------------------------------------------------- */
@@ -152,19 +205,16 @@ footer{
 
 .fade-bg {
     transition: background .50s ease-in-out, 
-        color .10s ease-in-out;
+        color .40s ease-in-out;
     -moz-transition: background .50s ease-in-out, 
-        color .10s ease-in-out;
+        color .40s ease-in-out;
     -webkit-transition: background .50s ease-in-out, 
-        color .10s ease-in-out;
+        color .40s ease-in-out;
 }
 .fade-bg.white{
     background:transparent;
 }
-.fade-bg:hover {
-    background: #FF6666;
-    color:#fff;
-}
+
 .fade-bg:hover.white{
     background:transparent;
     color:#000;

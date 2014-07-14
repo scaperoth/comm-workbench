@@ -19,7 +19,7 @@
         //$cs->registerCssFile($themePath . '/assets/css/bootstrap-theme.min.css');
         $cs->registerCssFile($themePath . '/assets/fractionslider/fractionslider.css');
         $cs->registerCssFile($themePath . '/assets/css/style.css');
-        $cs->registerCssFile($themePath . '/assets/font-awesome-4.0.3/css/font-awesome.min.css');
+        $cs->registerCssFile($themePath . '/assets/font-awesome-4.1.0/css/font-awesome.min.css');
 
 
         /**
@@ -30,7 +30,7 @@
 
 
         $cs->registerScriptFile($themePath . '/assets/js/bootstrap.min.js', CClientScript::POS_END);
-        $cs->registerScriptFile($themePath . '/assets/js/stellar/jquery.stellar.min.js', CClientScript::POS_BEGIN);
+        
         $cs->registerScriptFile($themePath . '/assets/fractionslider/jquery.fractionslider.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/nicescroll/jquery.nicescroll.min.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/js/script.js', CClientScript::POS_END);
@@ -161,12 +161,6 @@
                         'dimensions': '1700, 300',
                         'slideTransitionSpeed': 0,
                         'increase': true,
-                    });
-                    $.stellar({
-                        horizontalScrolling: false,
-                        verticalScrolling: true,
-                        responsive: true,
-                        positionProperty: 'position',
                     });
 
 

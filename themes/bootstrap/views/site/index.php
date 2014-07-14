@@ -2,88 +2,42 @@
 /* @var $this SiteController */
 
 $this->pageTitle = Yii::app()->name;
-
-$themePath = Yii::app()->theme->baseUrl;
-$bucket = $themePath . 'assets/images/gadget_images/';
-
-/*
-//next example will insert new conversation
-$service_url = 'http://localhost/comm-workbench/index.php/api/imagedir/all';
-$curl = curl_init($service_url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-$curl_response = curl_exec($curl);
-curl_close($curl);
-$decoded = json_decode($curl_response);
-if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
-    die('error occured: ' . $decoded->response->errormessage);
-}
-
-
-var_dump($decoded);
-
-$cursor = Yii::app()->mongodb->gadgets->find();
-
-
-foreach ($cursor as $doc) {
-    echo '<pre>';
-    print_r($doc);
-    echo '</pre>';
-}
- *  
- */
- 
 ?>
 
-
-
 <div class="container">
-
     <div class="row">
-        <div class="col-md-12">
-            <div class="center">
-                <div class="btn-group " data-toggle="buttons">
-                    <label class="btn btn-lg btn-primary active"  id="image-view-button">
-                        <input type="radio" name="options"  checked> Image View
-                    </label>
-                    <label class="btn btn-lg btn-primary" hidden id="location-view-button" >
-                        <input type="radio" name="options" > Location View
-                    </label>
+        <div class="col-xs-12">
+            <div class="col-sm-4 col-sm-offset-2">
+                <div class="col-sm-12 no-margin center">
+                    <a class="home-icons" href="<?= $this->createUrl('gadgets/'); ?>">
+                        <div class="row">
+                            <span class="fa-stack large">
+                                <i class="fa  fade-bg fa-square-o buff fa-stack-2x " style="text-align:center;"></i>
+                                <i class="fa fa-image fa-stack-1x"></i>
+                            </span>
+                        </div>
+                        <div class="row">
+                            <h1 class="close-text-top">Gadgets</h1>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="col-sm-4">
+                <div class="col-sm-12 center no-margin">
+                    <a class="home-icons" href="<?= $this->createUrl('wepa/'); ?>">
+                        <div class="row">
+                            <span class="fa-stack large">
+                                <i class="fa fa-square-o buff fa-stack-2x " style="text-align:center;"></i>
+                                <i class="fa fa-print fa-stack-1x"></i>
+                                
+                            </span>
+                        </div>
+                        <div class="row">
+                            <h1 class="close-text-top">WEPA</h1>
+                        </div>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
-    <p></p>
-    <div class="row">
-        <div class="col-md-12">
-            <div class="col-md-4">
-                <div class="col-md-12 well image-section" id="image-sidebar" style="height:300px;">
-                    image
-                </div><!--end left sidebar-->
-
-                <div class="col-md-12 well location-section" hidden id="location-sidebar" style="height:300px;">
-                    location
-                </div><!--end left sidebar-->
-            </div><!--end 4 col-->
-            <div class="col-md-8 col-xs-12">
-
-
-                <div id="image-view" class="image-section">
-
-                    <div class="col-md-12 well">
-                        image
-                    </div>
-
-                </div><!--end image view-->
-
-                <div id="location-view" hidden class="location-section">
-                    <div class="col-md-12 well">
-                        location
-                    </div>
-
-                </div><!--end location view-->
-
-            </div><!--end 8 col-->
-        </div>
-    </div><!--end row-->
-
-</div><!--end container-->
+</div>

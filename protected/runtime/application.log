@@ -925,3 +925,232 @@ Stack trace:
 #19 {main}
 REQUEST_URI=/comm-workbench/index.php/
 ---
+2014/07/14 17:18:17 [error] [php] strpos() expects parameter 1 to be string, array given (C:\xampp\htdocs\comm-workbench\framework\web\CController.php:963)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CBaseController.php(126): require()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CBaseController.php(95): SiteController->renderInternal()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(869): SiteController->renderFile()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(782): SiteController->renderPartial()
+#4 C:\xampp\htdocs\comm-workbench\protected\controllers\SiteController.php(92): SiteController->render()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#6 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(133): SiteController->runAction()
+#8 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#10 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): SiteController->run()
+#11 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php
+in C:\xampp\htdocs\comm-workbench\themes\bootstrap\views\site\index.php (12)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\SiteController.php (92)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/14 17:18:18 [error] [php] strpos() expects parameter 1 to be string, array given (C:\xampp\htdocs\comm-workbench\framework\web\CController.php:963)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CBaseController.php(126): require()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CBaseController.php(95): SiteController->renderInternal()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(869): SiteController->renderFile()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(782): SiteController->renderPartial()
+#4 C:\xampp\htdocs\comm-workbench\protected\controllers\SiteController.php(92): SiteController->render()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): SiteController->actionLogin()
+#6 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#7 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(133): SiteController->runAction()
+#8 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): CFilterChain->run()
+#9 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): SiteController->runActionWithFilters()
+#10 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): SiteController->run()
+#11 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#12 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#13 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php
+in C:\xampp\htdocs\comm-workbench\themes\bootstrap\views\site\index.php (12)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\SiteController.php (92)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/14 17:24:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/html5shiv.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/html5shiv.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:24:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/respond.min.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/respond.min.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:24:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/respond.min.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/respond.min.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php
+---
+2014/07/14 17:24:47 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/html5shiv.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/html5shiv.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php
+---
+2014/07/14 17:24:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/respond.min.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/respond.min.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:24:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/html5shiv.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/html5shiv.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:24:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/html5shiv.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/html5shiv.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:24:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/respond.min.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/respond.min.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:24:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/html5shiv.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/html5shiv.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:24:59 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/respond.min.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/respond.min.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:29:05 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/index
+---
+2014/07/14 17:29:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/index
+---
+2014/07/14 17:29:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/index
+---
+2014/07/14 17:29:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/index
+---
+2014/07/14 17:29:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/font-awesome-4.1.0/css/font-awesome.min.css
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/index
+---
+2014/07/14 17:51:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/respond.min.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/respond.min.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:51:53 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/html5shiv.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/html5shiv.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:51:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/respond.min.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/respond.min.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:51:56 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/html5shiv.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/html5shiv.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:51:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/html5shiv.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/html5shiv.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
+2014/07/14 17:51:58 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'Unable to resolve the request "themes/bootstrap/assets/js/respond.min.js".' in C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php:286
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('themes/bootstra...')
+#1 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#2 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#3 {main}
+REQUEST_URI=/comm-workbench/themes/bootstrap/assets/js/respond.min.js
+HTTP_REFERER=http://localhost/comm-workbench/index.php/site/login
+---
