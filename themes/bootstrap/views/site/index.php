@@ -19,7 +19,14 @@ if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') 
 }
 var_dump($decoded);
 
-print_r(Yii::app()->mongodb->listCollections ());
+var_dump(Yii::app()->mongodb->gadgets->findOne());
+
+$cursor = Yii::app()->mongodb->gadgets->find();
+foreach ($cursor as $doc) {
+    echo '<pre>';
+    print_r($doc);
+    echo '</pre>';
+}
 ?>
 
 

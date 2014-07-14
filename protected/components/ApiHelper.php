@@ -21,6 +21,10 @@ class ApiHelper extends CHtml {
 
     const LOGIN_ERROR = "You have insufficient permissions to continue";
 
+    /*     * *******************************
+     * Sync Functions
+     * ******************************* */
+
     /**
      * 
      * @param type $push_or_pull
@@ -248,6 +252,46 @@ class ApiHelper extends CHtml {
                 }
             }
         }
+    }
+
+    /*     * *******************************
+     * Save and UPdate Functions
+     * ******************************* */
+
+    /**
+     * translates the file system into a mongo db
+     * @param type $local
+     */
+    public static function _save_to_db_load_from_local($local) {
+
+        Yii::app()->mongodb->gadgets->remove();
+
+        $r = array();
+        foreach (
+        $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($local, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+            if ($item->getFilename() != 'Thumbs.db') {
+                $path = $item->isDir() ? array($item->getFilename() => array()) : array($item->getFilename());
+
+                for ($depth = $iterator->getDepth() - 1; $depth >= 0; $depth--) {
+                    $path = array($iterator->getSubIterator($depth)->current()->getFilename() => $path);
+                }
+                $r = array_merge_recursive($r, $path);
+            }
+        }
+        $r = array("GWU" => $r);
+        Yii::app()->mongodb->gadgets->save($r);
+        
+        return $r;
+    }
+
+    /**
+     * 
+     * @param type $local
+     */
+    public static function _load_from_db_save_to_local($local) {
+        
     }
 
     /**

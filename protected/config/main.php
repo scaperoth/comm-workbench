@@ -80,6 +80,7 @@ return array(
             'rules' => array(
                 'api/sync/<push_or_pull:[\w]+>' => 'api/sync',
                 'api/imagedir/<image_name:[\w\-\ \.]+>' => 'api/imagedir',
+                'api/update/<load_or_save:[\w]+>' => 'api/update',
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',

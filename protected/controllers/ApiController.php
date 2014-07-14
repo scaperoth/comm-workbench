@@ -20,7 +20,7 @@ class ApiController extends Controller {
     public function beforeAction($action) {
         $this->shared = Yii::app()->basePath . $this->shared;
         $this->local = Yii::app()->basePath . $this->local;
-        $this->bucket = dirname(Yii::getPathOfAlias('webroot')) . Yii::app()->theme->baseUrl .$this->bucket;
+        $this->bucket = dirname(Yii::getPathOfAlias('webroot')) . Yii::app()->theme->baseUrl . $this->bucket;
         return parent::beforeAction($action);
     }
 
@@ -67,11 +67,31 @@ class ApiController extends Controller {
         ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
     }
 
+    public function actionUpdate() {
+        if ($load_or_save = CHttpRequest::getParam('load_or_save')) {
+            switch ($load_or_save) {
+                case 'load':
+                    $JSON_array = ApiHelper::_load_from_db_save_to_local($this->local);
+                    break;
+                case 'save':
+                    $JSON_array = ApiHelper::_save_to_db_load_from_local($this->local);
+                    break;
+                default:
+                    $JSON_array = ApiHelper::_save_to_db_load_from_local($this->local);
+                    break;
+            }
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+
     public function actionImagedir() {
         if ($image_name = CHttpRequest::getParam('image_name')) {
             switch ($image_name) {
                 case 'all':
-                    $JSON_array =  ApiHelper::_find_all_image_parent($this->local, $this->bucket);
+                    $JSON_array = ApiHelper::_find_all_image_parent($this->local, $this->bucket);
                     break;
                 default:
                     $JSON_array = ApiHelper::_find_image_parent($image_name, $this->local);
