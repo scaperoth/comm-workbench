@@ -21,40 +21,6 @@ class ApiHelper extends CHtml {
 
     const LOGIN_ERROR = "You have insufficient permissions to continue";
 
-    /*     * *******************************
-     * Sync Functions
-     * ******************************* */
-
-    /**
-     * 
-     * @param type $push_or_pull
-     * @param type $source
-     * @param type $dest
-     * @return mixed array
-     * @throws CHttpException
-     */
-    public static function _ProcessSync($push_or_pull, $source, $dest) {
-
-
-        if ($push_or_pull) {
-            switch ($push_or_pull) {
-                case 'push':
-                    $JSON_array[] = self::_sync_from_source($dest, $source);
-                    break;
-                case 'pull':
-                    $JSON_array[] = self::_sync_from_source($source, $dest);
-                    break;
-
-                default:
-                    throw new CHttpException(404, "The API for 'api/syncfiles/$pushpull' cannot be found.");
-            }
-        }
-        else
-            throw new CHttpException(404, "The page you are looking for does not exist.");
-
-        return $JSON_array;
-    }
-
     /**
      * abstracts the delete and copy functions
      * returns array of the files in the destination directory
@@ -145,7 +111,8 @@ class ApiHelper extends CHtml {
     }
 
     /**
-     * returns every parent of all images
+     * returns every parent of all images 
+     * could be optimized!!!!
      * @param type $image_name
      * @param type $root
      */
@@ -340,7 +307,8 @@ class ApiHelper extends CHtml {
     }
 
     /**
-     * 
+     * TODO
+     * moves assets from bucket to local
      * @param type $local
      */
     public static function _load_from_db_save_to_local($local, $bucket) {

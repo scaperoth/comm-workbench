@@ -1675,3 +1675,52 @@ REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
 in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (283)
 in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (159)
 in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/15 17:06:17 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:65
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionSync()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('sync')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/sync/pull')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/sync/pull
+---
+2014/07/15 17:07:07 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:113
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionImagedir()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('imagedir')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/imagedir/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/imagedir/wepa/
+---
+2014/07/15 17:08:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "imagedir".' in C:\xampp\htdocs\comm-workbench\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(270): CController->missingAction('imagedir')
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('imagedir')
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/imagedir/ga...')
+#3 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/comm-workbench/index.php/api/imagedir/gadgets/
+---
+2014/07/15 17:14:00 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The API for 'api/sync/gadgets/blah' cannot be found.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:69
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionSync()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('sync')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/sync')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/sync/gadgets/blah
+---

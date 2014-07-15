@@ -79,7 +79,8 @@ return array(
             'urlFormat' => 'path',
             'rules' => array(
                 'api/sync/<which_service:[\w]+>/<push_or_pull:[\w]+>' => 'api/sync',
-                'api/imagedir/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/imagedir',
+                'api/getdir/<which_service:[\w]+>' => 'api/getdir',
+                'api/getdir/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/getdir',
                 'api/update/<which_service:[\w]+>/<load_or_save:[\w]+>' => 'api/update',
                 'api/putimage/<which_service:[\w]+>' => 'api/putimage',
                 'api/putimage/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/putimage',

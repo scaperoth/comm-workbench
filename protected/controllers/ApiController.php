@@ -49,6 +49,7 @@ class ApiController extends Controller {
     /**
      * Syncs /protected/data/filesystem contents with current filesystem in remote server
      * or vice versa
+     * @throws CHttpException
      */
     public function actionSync() {
         //first find out which service the API will be accessing
@@ -56,6 +57,17 @@ class ApiController extends Controller {
             $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
 
             if ($push_or_pull = CHttpRequest::getParam('push_or_pull')) {
+                switch ($push_or_pull) {
+                    case 'push':
+                        $JSON_array = self::_sync_from_source($service_details['local_file'], $service_details['shared_file']);
+                        break;
+                    case 'pull':
+                        $JSON_array = self::_sync_from_source($service_details['shared_file'], $service_details['local_file']);
+                        break;
+
+                    default:
+                        throw new CHttpException(404, "The API for 'api/sync/$service/$push_or_pull' cannot be found.");
+                }
                 $JSON_array = ApiHelper::_ProcessSync($push_or_pull, $service_details['shared_file'], $service_details['local_file']);
             }
             else
@@ -67,24 +79,31 @@ class ApiController extends Controller {
         ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
     }
 
+    /**
+     * synchronizes databse with local filesystem
+     * @throws CHttpException
+     */
     public function actionUpdate() {
 
-        //first find out which service the API will be accessing and get the details of that service
-        $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
+        if ($service = CHttpRequest::getParam('which_service')) {
+            $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
 
-        //now which action will the service be completeing
-        if ($load_or_save = CHttpRequest::getParam('load_or_save')) {
-            switch ($load_or_save) {
-                case 'load':
-                    $JSON_array = ApiHelper::_load_from_db_save_to_local($service_details['local_file'], $service_details['database']);
-                    break;
-                case 'save':
-                    $JSON_array = ApiHelper::_save_to_db_load_from_local($service_details['local_file'], $service_details['database']);
-                    break;
-                default:
-                    $JSON_array = ApiHelper::_save_to_db_load_from_local($service_details['local_file'], $service_details['database']);
-                    break;
+            //now which action will the service be completeing
+            if ($load_or_save = CHttpRequest::getParam('load_or_save')) {
+                switch ($load_or_save) {
+                    case 'load':
+                        $JSON_array = ApiHelper::_load_from_db_save_to_local($service_details['local_file'], $service_details['database']);
+                        break;
+                    case 'save':
+                        $JSON_array = ApiHelper::_save_to_db_load_from_local($service_details['local_file'], $service_details['database']);
+                        break;
+                    default:
+                        throw new CHttpException(404, "The API for 'api/update/$service/$load_or_save' cannot be found.");
+                        break;
+                }
             }
+            else
+                throw new CHttpException(404, "The sub-page you are looking for does not exist.");
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
@@ -97,7 +116,7 @@ class ApiController extends Controller {
      * or all image directories if "all" passed
      * @throws CHttpException
      */
-    public function actionImagedir() {
+    public function actionGetdir() {
         //first find out which service the API will be accessing and get the details of that service
         if ($service = CHttpRequest::getParam('which_service')) {
             $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
@@ -152,7 +171,7 @@ class ApiController extends Controller {
             $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
             //if an image name is given, insert that image, else sync them all
             if ($image_name = CHttpRequest::getParam('image_name')) {
-                $JSON_array = ApiHelper::_remove_image_from_bucket($service_details['bucket'],$image_name);
+                $JSON_array = ApiHelper::_remove_image_from_bucket($service_details['bucket'], $image_name);
             }
             else
             //removes all images from bucket
