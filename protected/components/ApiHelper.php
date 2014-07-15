@@ -235,7 +235,14 @@ class ApiHelper extends CHtml {
      * @param type $bucket
      */
     public static function _fill_bucket($source, $bucket) {
-//now copy over all systems that do belong from source fs
+        $supported_images = array(
+            'gif',
+            'jpg',
+            'jpeg',
+            'png'
+        );
+        
+        $bucket_files = array();
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
@@ -244,14 +251,16 @@ class ApiHelper extends CHtml {
                 $file = $iterator->current();
                 $file = pathinfo($file->getPath() . "\\" . $file->getFilename());
                 $ext = $file['extension'];
-                if ($ext == 'jpg' || $ext == 'jpeg') {
-                    echo 'Image found!</br>';
+                if (in_array($ext,$supported_images) && !in_array($file['basename'], $bucket_files)) {
+                    //echo 'Image found!</br>';
+                    $bucket_files[] = $file['basename'];
                     copy($item, $bucket . DIRECTORY_SEPARATOR . $file['basename']);
                 } else {
-                    echo 'not an image</br>';
+                    //echo 'not an image</br>';
                 }
             }
         }
+        return $bucket_files;
     }
 
     /*     * *******************************
@@ -262,7 +271,7 @@ class ApiHelper extends CHtml {
      * translates the file system into a mongo db
      * @param type $local
      */
-    public static function _save_to_db_load_from_local($local) {
+    public static function _save_to_db_load_from_local($local, $which_db) {
 
         Yii::app()->mongodb->gadgets->remove();
 
@@ -283,8 +292,9 @@ class ApiHelper extends CHtml {
                 $r["files"] = array_merge_recursive($r["files"], $path);
             }
         }
+
         array_multisort(array_keys($r), SORT_STRING, $r);
-        Yii::app()->mongodb->gadgets->save($r);
+        $which_db->save($r);
 
         return $r;
     }
