@@ -128,6 +128,7 @@ class ApiHelper extends CHtml {
 
     /**
      * php delete function that deals with directories recursively
+     * @param type $target
      */
     public static function _delete_files($target) {
         if (is_dir($target)) {
@@ -241,7 +242,7 @@ class ApiHelper extends CHtml {
             'jpeg',
             'png'
         );
-        
+
         $bucket_files = array();
         foreach (
         $iterator = new RecursiveIteratorIterator(
@@ -251,21 +252,60 @@ class ApiHelper extends CHtml {
                 $file = $iterator->current();
                 $file = pathinfo($file->getPath() . "\\" . $file->getFilename());
                 $ext = $file['extension'];
-                if (in_array($ext,$supported_images) && !in_array($file['basename'], $bucket_files)) {
-                    //echo 'Image found!</br>';
+                if (in_array($ext, $supported_images) && !in_array($file['basename'], $bucket_files)) {
+//echo 'Image found!</br>';
                     $bucket_files[] = $file['basename'];
                     copy($item, $bucket . DIRECTORY_SEPARATOR . $file['basename']);
                 } else {
-                    //echo 'not an image</br>';
+//echo 'not an image</br>';
                 }
             }
         }
         return $bucket_files;
     }
 
-    /*     * *******************************
+    /**
+     * adds a specific image to the bucket
+     * @param type $source
+     * @param type $bucket
+     */
+    public static function _add_image_to_bucket($image_name, $bucket) {
+        $bucket_files = array();
+        $bucket_files['message']= 'no implementation of this api yet';
+        return $bucket_files;
+    }
+
+
+    /**
+     * adds a specific image to the bucket
+     * @param type $source
+     * @param type $bucket
+     */
+    public static function _remove_image_from_bucket($bucket,$image_name = '') {
+        $message = "Success";
+        $delete_images = array();
+        foreach (
+        $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($bucket, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+            if (!$item->isDir()) {
+                if ($image_name == '' || $image_name == $item->getFilename()) {
+                    self::_delete_files($item);
+                    $deleted_images['images'] = $item->getFilename();
+                }
+            }
+        }
+        
+        if(empty($deleted_images))
+            $message = 'File not found.';
+        
+        $delete_images['message'] = $message;
+        return $delete_images;
+    }
+
+    /* #############################################
      * Save and UPdate Functions
-     * ******************************* */
+     * ############################################# */
 
     /**
      * translates the file system into a mongo db
@@ -273,7 +313,7 @@ class ApiHelper extends CHtml {
      */
     public static function _save_to_db_load_from_local($local, $which_db) {
 
-        Yii::app()->mongodb->gadgets->remove();
+        $which_db->remove();
 
         $r = array(
             "timestamp" => date('m-d-y h:i:s'),
@@ -303,7 +343,7 @@ class ApiHelper extends CHtml {
      * 
      * @param type $local
      */
-    public static function _load_from_db_save_to_local($local) {
+    public static function _load_from_db_save_to_local($local, $bucket) {
         
     }
 

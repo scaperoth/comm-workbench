@@ -1301,3 +1301,377 @@ REQUEST_URI=/comm-workbench/index.php/api/syncbucket/wepa
 in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (254)
 in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (126)
 in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/15 16:47:31 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa/
+---
+2014/07/15 16:47:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+---
+2014/07/15 16:48:39 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+---
+2014/07/15 16:48:40 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+---
+2014/07/15 16:48:41 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+---
+2014/07/15 16:49:03 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+---
+2014/07/15 16:49:04 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+---
+2014/07/15 16:49:06 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa/
+---
+2014/07/15 16:49:16 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa/
+---
+2014/07/15 16:50:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:151
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionDeleteimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('deleteimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/deleteimage...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa/
+---
+2014/07/15 16:52:13 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The system is unable to find the requested action "putimages".' in C:\xampp\htdocs\comm-workbench\framework\web\CController.php:483
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(270): CController->missingAction('putimages')
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimages')
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimages/w...')
+#3 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#4 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#5 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimages/wepa
+---
+2014/07/15 16:52:21 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:129
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:53:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:135
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:54:27 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:54:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:54:28 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:54:46 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:139
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:54:54 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:54:55 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:54:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:139
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:54:57 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:139
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:56:01 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:56:02 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:56:19 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:56:20 [error] [exception.CHttpException.404] exception 'CHttpException' with message 'The page you are looking for does not exist.' in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php:138
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): ApiController->actionPutimage()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams(Array)
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): CController->runAction(Object(CInlineAction))
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): CController->runActionWithFilters(Object(CInlineAction), Array)
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): CController->run('putimage')
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController('api/putimage/we...')
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(13): CApplication->run()
+#8 {main}
+REQUEST_URI=/comm-workbench/index.php/api/putimage/wepa
+---
+2014/07/15 16:56:41 [error] [php] Missing argument 2 for ApiHelper::_remove_image_from_bucket(), called in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php on line 158 and defined (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:283)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (283)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (158)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/15 16:57:34 [error] [php] Missing argument 2 for ApiHelper::_remove_image_from_bucket(), called in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php on line 159 and defined (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:283)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (283)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (159)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/15 16:57:35 [error] [php] Missing argument 2 for ApiHelper::_remove_image_from_bucket(), called in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php on line 159 and defined (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:283)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (283)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (159)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
+2014/07/15 16:57:35 [error] [php] Missing argument 2 for ApiHelper::_remove_image_from_bucket(), called in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php on line 159 and defined (C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php:283)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(286): ApiController->runAction()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#5 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#6 C:\xampp\htdocs\comm-workbench\index.php(13): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/deleteimage/wepa
+in C:\xampp\htdocs\comm-workbench\protected\components\ApiHelper.php (283)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\ApiController.php (159)
+in C:\xampp\htdocs\comm-workbench\index.php (13)
