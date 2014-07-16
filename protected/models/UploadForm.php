@@ -12,6 +12,7 @@ class UploadForm extends CFormModel {
     public $tmp_name;
     public $error;
     public $size;
+    public $service;
 
     /**
      * Declares the validation rules.
@@ -34,7 +35,7 @@ class UploadForm extends CFormModel {
      * @return boolean whether login is successful
      */
     public function upload() {
-        $url = Yii::app()->createAbsoluteUrl('api/getbucket/gadgets');
+        $url = Yii::app()->createAbsoluteUrl('api/bucketdir/'.$this->service);
         $uploaddir = Yii::app()->curl->get($url);
         $uploaddir = str_replace("\"", "", $uploaddir);
         $uploaddir = trim($uploaddir)."/";

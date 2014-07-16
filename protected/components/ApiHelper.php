@@ -263,7 +263,7 @@ class ApiHelper extends CHtml {
         } else {
             echo "Invalid file";
         }
-        
+
         $bucket_files['files'] = self::_ReadFolderDirectory($bucket);
 
         return $bucket_files;
@@ -339,6 +339,23 @@ class ApiHelper extends CHtml {
      */
     public static function _load_from_db_save_to_local($local, $bucket) {
         
+    }
+
+    /**
+     * TODO
+     * moves assets from bucket to local
+     * @param type $local
+     */
+    public static function _load_db_structure($which_db) {
+        $db_to_array = array();
+        $cursor = $which_db->find();
+        
+        foreach($cursor as $doc){
+            
+            $db_to_array[] = $doc;
+            
+        }
+        return $db_to_array;
     }
 
     /**
@@ -426,4 +443,5 @@ class ApiHelper extends CHtml {
     }
 
 }
+
 ?>

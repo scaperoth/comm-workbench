@@ -108,4 +108,30 @@ class SiteController extends Controller {
         $this->redirect(Yii::app()->homeUrl);
     }
 
+    /**
+     * upload document to the proper bucket directory
+     */
+    public function actionUpload() {
+        $model = new UploadForm();
+// if it is ajax validation request
+        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
+            echo CActiveForm::validate($model);
+            Yii::app()->end();
+        }
+
+// collect user input data
+        if (isset($_FILES['file'])) {
+            $model->attributes = $_FILES['file'];
+            $model->service = $_POST['service'];
+            
+// validate user input and redirect to the previous page if valid
+            if ($model->validate() && $model->upload()) {
+                Yii::app()->user->setFlash('success', 'image uploaded!');
+                $this->redirect(array('site/upload'));
+            }
+        }
+// display the login form
+        $this->render('upload', array('model' => $model));
+    }
+
 }

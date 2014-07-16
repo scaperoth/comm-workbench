@@ -82,7 +82,9 @@ return array(
             'urlFormat' => 'path',
             'rules' => array(
                 'api/sync/<which_service:[\w]+>/<push_or_pull:[\w]+>' => 'api/sync',
-                'api/getbucket/<which_service:[\w]+>' => 'api/getbucket',
+                'api/bucketdir/<which_service:[\w]+>' => 'api/bucketdir',
+                'api/filestructure/<which_service:[\w]+>' => 'api/filestructure',
+                'api/bucketfiles/<which_service:[\w]+>' => 'api/bucketfiles',
                 'api/getdir/<which_service:[\w]+>' => 'api/getdir',
                 'api/getdir/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/getdir',
                 'api/update/<which_service:[\w]+>/<load_or_save:[\w]+>' => 'api/update',

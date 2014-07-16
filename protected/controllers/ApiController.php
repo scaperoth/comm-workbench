@@ -197,13 +197,45 @@ class ApiController extends Controller {
     /**
      * 
      */
-    public function actionGetbucket() {
+    public function actionBucketdir() {
         if ($service = CHttpRequest::getParam('which_service')) {
             $service_details = self::_get_service($service);
 //if an image name is given, insert that image, else sync them all
             
             
             $JSON_array = $service_details['bucket'];
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+    
+    /**
+     * 
+     */
+    public function actionFilestructure() {
+        if ($service = CHttpRequest::getParam('which_service')) {
+            $service_details = self::_get_service($service);
+//if an image name is given, insert that image, else sync them all
+
+            $JSON_array = ApiHelper::_load_db_structure($service_details['database']);
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+    
+    /**
+     * 
+     */
+    public function actionBucketfiles() {
+        if ($service = CHttpRequest::getParam('which_service')) {
+            $service_details = self::_get_service($service);
+//if an image name is given, insert that image, else sync them all
+
+            $JSON_array = ApiHelper::_ReadFolderDirectory($service_details['bucket']);
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
@@ -229,14 +261,14 @@ class ApiController extends Controller {
                 $service_details['local_file'] = $this->gadgets_local_full;
                 $service_details['shared_file'] = $this->gadgets_shared_full;
                 $service_details['bucket'] = $this->gadgets_bucket_full;
-                $service_details['database'] = Yii::app()->mongodb->gadgets_full;
+                $service_details['database'] = Yii::app()->mongodb->gadgets;
                 break;
             case 'wepa':
                 $service_details['local_file'] = $this->wepa_local_full;
                 $service_details['shared_file'] = $this->wepa_shared_full;
                 $service_details['bucket'] = $this->wepa_bucket_full;
                 $service_details['outage_bucket'] = $this->wepa_outage_bucket_full;
-                $service_details['database'] = Yii::app()->mongodb->wepa_full;
+                $service_details['database'] = Yii::app()->mongodb->wepa;
 
                 break;
         }

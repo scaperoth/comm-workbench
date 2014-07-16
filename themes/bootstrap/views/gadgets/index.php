@@ -1,5 +1,4 @@
 <?php
-
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,31 +9,41 @@ $themePath = Yii::app()->theme->baseUrl;
 $bucket = $themePath . 'assets/images/gadget_images/';
 
 /*
+ * Yii::app()->createAbsoluteUrl('api/bucketdir/'.$this->service)
+ * 
+ */
 //next example will insert new conversation
-$service_url = 'http://localhost/comm-workbench/index.php/api/imagedir/all';
-$curl = curl_init($service_url);
-curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-$curl_response = curl_exec($curl);
-curl_close($curl);
-$decoded = json_decode($curl_response);
-if (isset($decoded->response->status) && $decoded->response->status == 'ERROR') {
+$url = Yii::app()->createAbsoluteUrl('api/filestructure/gadgets');
+$curl_response = Yii::app()->curl->get($url);
+$files = json_decode($curl_response);
+if (isset($files->response->status) && $files->response->status == 'ERROR') {
     die('error occured: ' . $decoded->response->errormessage);
 }
 
+echo '<pre>';
+print_r($files);
+echo '</pre>';
 
-var_dump($decoded);
 
-$cursor = Yii::app()->mongodb->gadgets->find();
-
-
-foreach ($cursor as $doc) {
-    echo '<pre>';
-    print_r($doc);
-    echo '</pre>';
+$url = Yii::app()->createAbsoluteUrl('api/bucketfiles/gadgets');
+$curl_response = Yii::app()->curl->get($url);
+$bucket = json_decode($curl_response);
+if (isset($bucket->response->status) && $bucket->response->status == 'ERROR') {
+    die('error occured: ' . $decoded->response->errormessage);
 }
- *  
- */
- 
+
+var_dump($bucket);
+
+foreach ($bucket as $image) {
+    echo $image;
+    $cursor = Yii::app()->mongodb->gadgets->find();
+    foreach($cursor as $doc){
+        echo '<pre>';
+        if(in_array($image, $doc))
+                echo 'olay';
+        echo '</pre>';
+    }
+}
 ?>
 
 <div class="container">
@@ -86,5 +95,42 @@ foreach ($cursor as $doc) {
             </div><!--end 8 col-->
         </div>
     </div><!--end row-->
-
+    <div id="accordion" class="panel-group">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">1. What is HTML?</a>
+                </h4>
+            </div>
+            <div id="collapseOne" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>HTML stands for HyperText Markup Language. HTML is the main markup language for describing the structure of Web pages. <a href="http://www.tutorialrepublic.com/html-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">2. What is Twitter Bootstrap?</a>
+                </h4>
+            </div>
+            <div id="collapseTwo" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <p>Twitter Bootstrap is a powerful front-end framework for faster and easier web development. It is a collection of CSS and HTML conventions. <a href="http://www.tutorialrepublic.com/twitter-bootstrap-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#collapseThree">3. What is CSS?</a>
+                </h4>
+            </div>
+            <div id="collapseThree" class="panel-collapse collapse">
+                <div class="panel-body">
+                    <p>CSS stands for Cascading Style Sheet. CSS allows you to specify various style properties for a given HTML element such as colors, backgrounds, fonts etc. <a href="http://www.tutorialrepublic.com/css-tutorial/" target="_blank">Learn more.</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div><!--end container-->

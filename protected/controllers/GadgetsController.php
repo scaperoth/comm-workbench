@@ -14,26 +14,7 @@ class GadgetsController extends Controller {
         $this->render('index');
     }
 
-    public function actionUpload() {
-        $model = new UploadForm();
-// if it is ajax validation request
-        if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
-            echo CActiveForm::validate($model);
-            Yii::app()->end();
-        }
-
-// collect user input data
-        if (isset($_FILES['file'])) {
-            $model->attributes = $_FILES['file'];
-// validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->upload()) {
-                Yii::app()->user->setFlash('success','image uploaded!');
-                $this->redirect(array('gadgets/upload'));
-            }
-        }
-// display the login form
-        $this->render('upload', array('model' => $model));
-    }
+    
 
 // Uncomment the following methods and override them if needed
     /*

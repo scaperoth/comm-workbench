@@ -73,6 +73,12 @@
                             'icon' => 'home fw',
                         ),
                         array(
+                            'label' => 'Upload',
+                            //'icon' => 'dashboard fw',
+                            'url' => array('site/upload'),
+                            'icon' => 'folder fw',
+                        ),
+                        array(
                             'label' => 'Logout',
                             //'icon' => 'dashboard fw',
                             'url' => array('site/logout'),
