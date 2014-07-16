@@ -175,8 +175,8 @@ class ApiHelper extends CHtml {
     /**
      * tranlsates folder directory into json array
      * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
-     * @param type $dir
-     * @param type $listDir
+     * @param type $dir directory to start search from
+     * @param type $listDir array the append directory to
      * @return type
      */
     public static function _ReadFolderDirectory($dir, $listDir = array()) {
@@ -236,19 +236,45 @@ class ApiHelper extends CHtml {
      * @param type $source
      * @param type $bucket
      */
-    public static function _add_image_to_bucket($image_name, $bucket) {
-        $bucket_files = array();
-        $bucket_files['message']= 'no implementation of this api yet';
+    public static function _add_image_to_bucket($bucket, $file) {
+        $bucket_files = array(
+        );
+
+        $allowedExts = array("gif", "jpeg", "jpg", "png");
+
+        $temp = explode(".", $file["name"]);
+        $extension = end($temp);
+
+        if ($file["size"] < 20000 && in_array($extension, $allowedExts)) {
+            if ($file["error"] > 0) {
+                $bucket_files["Return Code"] = $file["error"];
+            } else {
+                $bucket_files["Return Code"] = $file["name"];
+                $bucket_files["Return Code"] = $file["type"];
+                $bucket_files["Return Code"] = ($file["size"] / 1024) . " kB";
+                $bucket_files["Return Code"] = $file["tmp_name"];
+                if (file_exists("upload/" . $file["name"])) {
+                    $bucket_files["Return Code"] = $file["name"];
+                } else {
+                    move_uploaded_file($file["tmp_name"], $bucket . $file["name"]);
+                    $bucket_files["Return Code"] = "Stored in: " . $bucket . $file["name"];
+                }
+            }
+        } else {
+            echo "Invalid file";
+        }
+        
+        $bucket_files['files'] = self::_ReadFolderDirectory($bucket);
+
         return $bucket_files;
     }
-
 
     /**
      * adds a specific image to the bucket
      * @param type $source
      * @param type $bucket
      */
-    public static function _remove_image_from_bucket($bucket,$image_name = '') {
+    public static function _remove_image_from_bucket($bucket, $image_name = '') {
         $message = "Success";
         $delete_images = array();
         foreach (
@@ -262,10 +288,10 @@ class ApiHelper extends CHtml {
                 }
             }
         }
-        
-        if(empty($deleted_images))
+
+        if (empty($deleted_images))
             $message = 'File not found.';
-        
+
         $delete_images['message'] = $message;
         return $delete_images;
     }
@@ -365,16 +391,16 @@ class ApiHelper extends CHtml {
             $body = '
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    <title>' . $status . ' ' . self::_getStatusCodeMessage($status) . '</title>
-</head>
-<body>
-    <h1>' . self::_getStatusCodeMessage($status) . '</h1>
-    <p>' . $message . '</p>
-    <hr />
-    <address>' . $signature . '</address>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>' . $status . ' ' . self::_getStatusCodeMessage($status) . '</title>
+    </head>
+    <body>
+        <h1>' . self::_getStatusCodeMessage($status) . '</h1>
+        <p>' . $message . '</p>
+        <hr />
+        <address>' . $signature . '</address>
+    </body>
 </html>';
 
             echo $body;
@@ -400,5 +426,4 @@ class ApiHelper extends CHtml {
     }
 
 }
-
 ?>

@@ -21,7 +21,7 @@ return array(
     'name' => 'AT Comm Workbench',
     'theme' => 'bootstrap',
     // requires you to copy the theme under your themes directory
-    // preloading 'log' component
+// preloading 'log' component
     'preload' => array(
         'log',
         'bootstrap'
@@ -61,12 +61,15 @@ return array(
     ),
     // application components
     'components' => array(
+        'curl' => array(
+            'class' => 'ext.curl.Curl',
+        ),
         'session' => array
             (
             'class' => 'HttpSession'
         ),
         'user' => array(
-            // enable cookie-based authentication
+// enable cookie-based authentication
             'allowAutoLogin' => true,
             'class' => 'WebUser',
         ),
@@ -79,6 +82,7 @@ return array(
             'urlFormat' => 'path',
             'rules' => array(
                 'api/sync/<which_service:[\w]+>/<push_or_pull:[\w]+>' => 'api/sync',
+                'api/getbucket/<which_service:[\w]+>' => 'api/getbucket',
                 'api/getdir/<which_service:[\w]+>' => 'api/getdir',
                 'api/getdir/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/getdir',
                 'api/update/<which_service:[\w]+>/<load_or_save:[\w]+>' => 'api/update',
@@ -107,7 +111,7 @@ return array(
             'db' => 'super_test'
         ),
         'errorHandler' => array(
-            // use 'site/error' action to display errors
+// use 'site/error' action to display errors
             'errorAction' => 'site/error',
         ),
         'log' => array(
@@ -123,14 +127,13 @@ return array(
               'class'=>'CWebLogRoute',
               ),
              */
-                
             ),
         ),
     ),
     // application-level parameters that can be accessed
-    // using Yii::app()->params['paramName']
+// using Yii::app()->params['paramName']
     'params' => array(
-        // this is used in contact page
+// this is used in contact page
         'adminEmail' => 'webmaster@example.com',
     ),
 );

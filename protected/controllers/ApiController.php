@@ -10,9 +10,9 @@
  */
 class ApiController extends Controller {
 
-    //source and destination locations. A prefix of the application's base path
-    //will be added before the action is exectured in beforeAction(). This base
-    //path here is expected to be ../protected/components/
+//source and destination locations. A prefix of the application's base path
+//will be added before the action is exectured in beforeAction(). This base
+//path here is expected to be ../protected/components/
     private $gadgets_shared = '\\data\\gadgets\\backup\\';
     private $gadgets_local = '\\data\\gadgets\\filesystem\\';
     private $gadgets_bucket = "\\assets\\images\\gadget_images";
@@ -20,17 +20,25 @@ class ApiController extends Controller {
     private $wepa_local = '\\data\\wepa\\filesystem\\';
     private $wepa_bucket = "\\assets\\images\\wepa_images\\production_images";
     private $wepa_outage_bucket = "\\assets\\images\\wepa_images\\outage_images";
-
+    
+    private $gadgets_shared_full;
+    private $gadgets_local_full;
+    private $gadgets_bucket_full;
+    private $wepa_shared_full;
+    private $wepa_local_full;
+    private $wepa_bucket_full;
+    private $wepa_outage_bucket_full;
+    
     public function beforeAction($action) {
-        //gadgets
-        $this->gadgets_shared = Yii::app()->basePath . $this->gadgets_shared;
-        $this->gadgets_local = Yii::app()->basePath . $this->gadgets_local;
-        $this->gadgets_bucket = dirname(Yii::getPathOfAlias('webroot')) . Yii::app()->theme->baseUrl . $this->gadgets_bucket;
+//gadgets
+        $this->gadgets_shared_full = Yii::app()->basePath . $this->gadgets_shared;
+        $this->gadgets_local_full = Yii::app()->basePath . $this->gadgets_local;
+        $this->gadgets_bucket_full = dirname(Yii::getPathOfAlias('webroot')) . Yii::app()->theme->baseUrl . $this->gadgets_bucket;
 
-        //wepa
-        $this->wepa_shared = Yii::app()->basePath . $this->wepa_shared;
-        $this->wepa_local = Yii::app()->basePath . $this->wepa_local;
-        $this->wepa_bucket = dirname(Yii::getPathOfAlias('webroot')) . Yii::app()->theme->baseUrl . $this->wepa_bucket;
+//wepa
+        $this->wepa_shared_full = Yii::app()->basePath . $this->wepa_shared;
+        $this->wepa_local_full = Yii::app()->basePath . $this->wepa_local;
+        $this->wepa_bucket_full = dirname(Yii::getPathOfAlias('webroot')) . Yii::app()->theme->baseUrl . $this->wepa_bucket;
 
         return parent::beforeAction($action);
     }
@@ -41,8 +49,8 @@ class ApiController extends Controller {
      * when an action is not explicitly requested by users.
      */
     public function actionIndex() {
-        // renders the view file 'protected/views/site/index.php'
-        // using the default layout 'protected/views/layouts/main.php'
+// renders the view file 'protected/views/site/index.php'
+// using the default layout 'protected/views/layouts/main.php'
         $this->render('index');
     }
 
@@ -52,7 +60,7 @@ class ApiController extends Controller {
      * @throws CHttpException
      */
     public function actionSync() {
-        //first find out which service the API will be accessing
+//first find out which service the API will be accessing
         if ($service = CHttpRequest::getParam('which_service')) {
             $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
 
@@ -88,7 +96,7 @@ class ApiController extends Controller {
         if ($service = CHttpRequest::getParam('which_service')) {
             $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
 
-            //now which action will the service be completeing
+//now which action will the service be completeing
             if ($load_or_save = CHttpRequest::getParam('load_or_save')) {
                 switch ($load_or_save) {
                     case 'load':
@@ -117,11 +125,11 @@ class ApiController extends Controller {
      * @throws CHttpException
      */
     public function actionGetdir() {
-        //first find out which service the API will be accessing and get the details of that service
+//first find out which service the API will be accessing and get the details of that service
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
+            $service_details = self::_get_service($service);
 
-            //if an image name is given, get the directory of that image, else get them all
+//if an image name is given, get the directory of that image, else get them all
             if ($image_name = CHttpRequest::getParam('image_name')) {
                 $JSON_array = ApiHelper::_find_image_parent($image_name, $service_details['local_file']);
             }
@@ -141,15 +149,18 @@ class ApiController extends Controller {
      * @throws CHttpException
      */
     public function actionPutimage() {
-        //first find out which service the API will be accessing and get the details of that service
+//first find out which service the API will be accessing and get the details of that service
+
         if (CHttpRequest::getParam('which_service')) {
             $service = CHttpRequest::getParam('which_service');
             $service_details = self::_get_service($service);
 
-            //if an image name is given, insert that image, else sync them all
-            if (CHttpRequest::getParam('image_name')) {
-                $image_name = CHttpRequest::getParam('image_name');
-                $JSON_array = ApiHelper::_add_image_to_bucket($image_name, $service_details['bucket']);
+//if an image name is given, insert that image, else sync them all
+
+            if (isset($_FILES)) {
+
+//$image_name = CHttpRequest::getParam('image_name');
+                $JSON_array = ApiHelper::_add_image_to_bucket($service_details['bucket'], $_FILES['new_image']);
             }
             else
                 $JSON_array = ApiHelper::_fill_bucket($service_details['local_file'], $service_details['bucket']);
@@ -166,16 +177,33 @@ class ApiController extends Controller {
      * @throws CHttpException
      */
     public function actionDeleteimage() {
-        //first find out which service the API will be accessing and get the details of that service
+//first find out which service the API will be accessing and get the details of that service
         if ($service = CHttpRequest::getParam('which_service')) {
             $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
-            //if an image name is given, insert that image, else sync them all
+//if an image name is given, insert that image, else sync them all
             if ($image_name = CHttpRequest::getParam('image_name')) {
                 $JSON_array = ApiHelper::_remove_image_from_bucket($service_details['bucket'], $image_name);
             }
             else
-            //removes all images from bucket
+//removes all images from bucket
                 $JSON_array = ApiHelper::_remove_image_from_bucket($service_details['bucket']);
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+
+    /**
+     * 
+     */
+    public function actionGetbucket() {
+        if ($service = CHttpRequest::getParam('which_service')) {
+            $service_details = self::_get_service($service);
+//if an image name is given, insert that image, else sync them all
+            
+            
+            $JSON_array = $service_details['bucket'];
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
@@ -198,17 +226,17 @@ class ApiController extends Controller {
         $service_details = array();
         switch ($param) {
             case 'gadgets':
-                $service_details['local_file'] = $this->gadgets_local;
-                $service_details['shared_file'] = $this->gadgets_shared;
-                $service_details['bucket'] = $this->gadgets_bucket;
-                $service_details['database'] = Yii::app()->mongodb->gadgets;
+                $service_details['local_file'] = $this->gadgets_local_full;
+                $service_details['shared_file'] = $this->gadgets_shared_full;
+                $service_details['bucket'] = $this->gadgets_bucket_full;
+                $service_details['database'] = Yii::app()->mongodb->gadgets_full;
                 break;
             case 'wepa':
-                $service_details['local_file'] = $this->wepa_local;
-                $service_details['shared_file'] = $this->wepa_shared;
-                $service_details['bucket'] = $this->wepa_bucket;
-                $service_details['outage_bucket'] = $this->wepa_outage_bucket;
-                $service_details['database'] = Yii::app()->mongodb->wepa;
+                $service_details['local_file'] = $this->wepa_local_full;
+                $service_details['shared_file'] = $this->wepa_shared_full;
+                $service_details['bucket'] = $this->wepa_bucket_full;
+                $service_details['outage_bucket'] = $this->wepa_outage_bucket_full;
+                $service_details['database'] = Yii::app()->mongodb->wepa_full;
 
                 break;
         }
