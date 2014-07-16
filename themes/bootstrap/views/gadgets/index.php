@@ -20,9 +20,9 @@ if (isset($files->response->status) && $files->response->status == 'ERROR') {
     die('error occured: ' . $decoded->response->errormessage);
 }
 
-echo '<pre>';
-print_r($files);
-echo '</pre>';
+//echo '<pre>';
+//print_r($files);
+//echo '</pre>';
 
 
 $url = Yii::app()->createAbsoluteUrl('api/bucketfiles/gadgets');
@@ -32,18 +32,8 @@ if (isset($bucket->response->status) && $bucket->response->status == 'ERROR') {
     die('error occured: ' . $decoded->response->errormessage);
 }
 
-var_dump($bucket);
+//var_dump($bucket);
 
-foreach ($bucket as $image) {
-    echo $image;
-    $cursor = Yii::app()->mongodb->gadgets->find();
-    foreach($cursor as $doc){
-        echo '<pre>';
-        if(in_array($image, $doc))
-                echo 'olay';
-        echo '</pre>';
-    }
-}
 ?>
 
 <div class="container">

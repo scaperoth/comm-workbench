@@ -332,6 +332,8 @@ class ApiHelper extends CHtml {
         return $r;
     }
 
+    
+
     /**
      * TODO
      * moves assets from bucket to local
@@ -348,12 +350,13 @@ class ApiHelper extends CHtml {
      */
     public static function _load_db_structure($which_db) {
         $db_to_array = array();
+
+
         $cursor = $which_db->find();
-        
-        foreach($cursor as $doc){
-            
-            $db_to_array[] = $doc;
-            
+
+        foreach ($cursor as $doc) {
+
+            $db_to_array [] = $doc;
         }
         return $db_to_array;
     }
@@ -410,7 +413,8 @@ class ApiHelper extends CHtml {
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-        <title>' . $status . ' ' . self::_getStatusCodeMessage($status) . '</title>
+        <title>'
+                    . $status . ' ' . self::_getStatusCodeMessage($status) . '</title>
     </head>
     <body>
         <h1>' . self::_getStatusCodeMessage($status) . '</h1>
