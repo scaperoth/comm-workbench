@@ -21,40 +21,6 @@ class ApiHelper extends CHtml {
 
     const LOGIN_ERROR = "You have insufficient permissions to continue";
 
-    /*     * *******************************
-     * Sync Functions
-     * ******************************* */
-
-    /**
-     * 
-     * @param type $push_or_pull
-     * @param type $source
-     * @param type $dest
-     * @return mixed array
-     * @throws CHttpException
-     */
-    public static function _ProcessSync($push_or_pull, $source, $dest) {
-
-
-        if ($push_or_pull) {
-            switch ($push_or_pull) {
-                case 'push':
-                    $JSON_array[] = self::_sync_from_source($dest, $source);
-                    break;
-                case 'pull':
-                    $JSON_array[] = self::_sync_from_source($source, $dest);
-                    break;
-
-                default:
-                    throw new CHttpException(404, "The API for 'api/syncfiles/$pushpull' cannot be found.");
-            }
-        }
-        else
-            throw new CHttpException(404, "The page you are looking for does not exist.");
-
-        return $JSON_array;
-    }
-
     /**
      * abstracts the delete and copy functions
      * returns array of the files in the destination directory
@@ -128,6 +94,7 @@ class ApiHelper extends CHtml {
 
     /**
      * php delete function that deals with directories recursively
+     * @param type $target
      */
     public static function _delete_files($target) {
         if (is_dir($target)) {
@@ -144,7 +111,8 @@ class ApiHelper extends CHtml {
     }
 
     /**
-     * returns every parent of all images
+     * returns every parent of all images 
+     * could be optimized!!!!
      * @param type $image_name
      * @param type $root
      */
@@ -235,7 +203,14 @@ class ApiHelper extends CHtml {
      * @param type $bucket
      */
     public static function _fill_bucket($source, $bucket) {
-//now copy over all systems that do belong from source fs
+        $supported_images = array(
+            'gif',
+            'jpg',
+            'jpeg',
+            'png'
+        );
+
+        $bucket_files = array();
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
@@ -244,27 +219,68 @@ class ApiHelper extends CHtml {
                 $file = $iterator->current();
                 $file = pathinfo($file->getPath() . "\\" . $file->getFilename());
                 $ext = $file['extension'];
-                if ($ext == 'jpg' || $ext == 'jpeg') {
-                    echo 'Image found!</br>';
+                if (in_array($ext, $supported_images) && !in_array($file['basename'], $bucket_files)) {
+//echo 'Image found!</br>';
+                    $bucket_files[] = $file['basename'];
                     copy($item, $bucket . DIRECTORY_SEPARATOR . $file['basename']);
                 } else {
-                    echo 'not an image</br>';
+//echo 'not an image</br>';
                 }
             }
         }
+        return $bucket_files;
     }
 
-    /*     * *******************************
+    /**
+     * adds a specific image to the bucket
+     * @param type $source
+     * @param type $bucket
+     */
+    public static function _add_image_to_bucket($image_name, $bucket) {
+        $bucket_files = array();
+        $bucket_files['message']= 'no implementation of this api yet';
+        return $bucket_files;
+    }
+
+
+    /**
+     * adds a specific image to the bucket
+     * @param type $source
+     * @param type $bucket
+     */
+    public static function _remove_image_from_bucket($bucket,$image_name = '') {
+        $message = "Success";
+        $delete_images = array();
+        foreach (
+        $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($bucket, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+            if (!$item->isDir()) {
+                if ($image_name == '' || $image_name == $item->getFilename()) {
+                    self::_delete_files($item);
+                    $deleted_images['images'] = $item->getFilename();
+                }
+            }
+        }
+        
+        if(empty($deleted_images))
+            $message = 'File not found.';
+        
+        $delete_images['message'] = $message;
+        return $delete_images;
+    }
+
+    /* #############################################
      * Save and UPdate Functions
-     * ******************************* */
+     * ############################################# */
 
     /**
      * translates the file system into a mongo db
      * @param type $local
      */
-    public static function _save_to_db_load_from_local($local) {
+    public static function _save_to_db_load_from_local($local, $which_db) {
 
-        Yii::app()->mongodb->gadgets->remove();
+        $which_db->remove();
 
         $r = array(
             "timestamp" => date('m-d-y h:i:s'),
@@ -283,17 +299,19 @@ class ApiHelper extends CHtml {
                 $r["files"] = array_merge_recursive($r["files"], $path);
             }
         }
+
         array_multisort(array_keys($r), SORT_STRING, $r);
-        Yii::app()->mongodb->gadgets->save($r);
+        $which_db->save($r);
 
         return $r;
     }
 
     /**
-     * 
+     * TODO
+     * moves assets from bucket to local
      * @param type $local
      */
-    public static function _load_from_db_save_to_local($local) {
+    public static function _load_from_db_save_to_local($local, $bucket) {
         
     }
 
