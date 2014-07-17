@@ -130,8 +130,8 @@
                     <legend><h2>Communications Dashboard</h2></legend>
                 </div>
                 <?php echo $content; ?>
-
-                <div class="clearfix"></div>
+                    
+                <div class="clearfix top30"></div>
 
 
 

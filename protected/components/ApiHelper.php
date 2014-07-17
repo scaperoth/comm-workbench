@@ -28,7 +28,7 @@ class ApiHelper extends CHtml {
      * @param type $dest
      * @return type
      */
-    public static function _sync_from_source($source, $dest) {
+    public static function _sync_from_source($source, $dest, $which_db) {
         $destination_array = array();
         $counter = 0;
 
@@ -38,7 +38,7 @@ class ApiHelper extends CHtml {
 //now copy over all systems that do belong from source fs
         self::_copy_from_source($source, $dest);
         $destination_array['destination folder'] = $dest;
-        $destination_array['contents'] = self::_ReadFolderDirectory($dest);
+        $destination_array['contents'] = self::_ReadFolderDirectory_from_db($which_db);
         /*
           echo '<pre>';
           print_r($destination_array);
@@ -139,7 +139,10 @@ class ApiHelper extends CHtml {
      * @param type $root
      */
     public static function _find_image_parent($image_name, $root) {
-        $all_parents = array();
+        $all_parents = array(
+            'name' => $image_name,
+            'location' => array()
+        );
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($root, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
@@ -148,7 +151,7 @@ class ApiHelper extends CHtml {
                 $file = $iterator->current();
                 $file = pathinfo($file->getPath() . DIRECTORY_SEPARATOR . $file->getFilename());
                 if ($file['basename'] == $image_name) {
-                    $all_parents[] = self::_trim_directory($file['dirname'], $root);
+                    $all_parents['location'][] = self::_trim_directory($file['dirname'], $root);
                 }
             }
         }
@@ -172,14 +175,36 @@ class ApiHelper extends CHtml {
         return $dirname;
     }
 
-    /**
+    /*
      * tranlsates folder directory into json array
      * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
      * @param type $dir directory to start search from
      * @param type $listDir array the append directory to
      * @return type
      */
-    public static function _ReadFolderDirectory($dir, $listDir = array()) {
+
+    public static function _ReadFolderDirectory_from_db($which_db) {
+        $db_to_array = array();
+
+
+        $cursor = $which_db->find();
+
+        foreach ($cursor as $doc) {
+
+            $db_to_array [] = $doc;
+        }
+        return $db_to_array;
+    }
+
+    /**
+     * @deprecated since version 1
+     * tranlsates folder directory into json array
+     * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
+     * @param type $dir directory to start search from
+     * @param type $listDir array the append directory to
+     * @return type
+     */
+    public static function _ReadFolderDirectory_from_local($dir, $listDir = array()) {
         $listDir = array();
         if ($handler = opendir($dir)) {
             while (($sub = readdir($handler)) !== FALSE) {
@@ -187,7 +212,7 @@ class ApiHelper extends CHtml {
                     if (is_file($dir . "/" . $sub)) {
                         $listDir[] = $sub;
                     } elseif (is_dir($dir . "/" . $sub)) {
-                        $listDir[$sub] = self::_ReadFolderDirectory($dir . "/" . $sub);
+                        $listDir[$sub] = self::_ReadFolderDirectory_from_local($dir . "/" . $sub);
                     }
                 }
             }
@@ -219,10 +244,13 @@ class ApiHelper extends CHtml {
                 $file = $iterator->current();
                 $file = pathinfo($file->getPath() . "\\" . $file->getFilename());
                 $ext = $file['extension'];
+
                 if (in_array($ext, $supported_images) && !in_array($file['basename'], $bucket_files)) {
 //echo 'Image found!</br>';
                     $bucket_files[] = $file['basename'];
                     copy($item, $bucket . DIRECTORY_SEPARATOR . $file['basename']);
+                    
+                    self::_create_thumbnail($file['basename'],$bucket, $ext);
                 } else {
 //echo 'not an image</br>';
                 }
@@ -236,7 +264,7 @@ class ApiHelper extends CHtml {
      * @param type $source
      * @param type $bucket
      */
-    public static function _add_image_to_bucket($bucket, $file) {
+    public static function _add_image_to_bucket($bucket, $file, $which_db) {
         $bucket_files = array(
         );
 
@@ -264,7 +292,7 @@ class ApiHelper extends CHtml {
             echo "Invalid file";
         }
 
-        $bucket_files['files'] = self::_ReadFolderDirectory($bucket);
+        $bucket_files['files'] = self::_ReadFolderDirectory_from_db($which_db);
 
         return $bucket_files;
     }
@@ -295,7 +323,37 @@ class ApiHelper extends CHtml {
         $delete_images['message'] = $message;
         return $delete_images;
     }
+    
+    public static function _create_thumbnail($image_name, $uploaddir, $extension){
+        $uploadedfile =$uploaddir."/" . $image_name;
 
+       //create thumbnail
+        if ($extension == "jpg" || $extension == "jpeg") {
+            $src = imagecreatefromjpeg($uploadedfile);
+        } else if ($extension == "png") {
+            $src = imagecreatefrompng($uploadedfile);
+        } else {
+            $src = imagecreatefromgif($uploadedfile);
+        }
+        
+        list($width, $height) = getimagesize($uploadedfile);
+
+        $newwidth = 120;
+        $newheight = ($height / $width) * $newwidth;
+        $tmp = imagecreatetruecolor($newwidth, $newheight);
+
+        imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+        $filename = "$uploaddir/thumb/thumb_" . $image_name;
+
+        imagegif($tmp, $filename, 100);
+
+        imagedestroy($src);
+        imagedestroy($tmp);
+        
+        return 'success';
+    }
+    
     /* #############################################
      * Save and UPdate Functions
      * ############################################# */
@@ -326,13 +384,11 @@ class ApiHelper extends CHtml {
             }
         }
 
-        array_multisort(array_keys($r), SORT_STRING, $r);
+        //array_multisort(array_keys($r), SORT_STRING, $r);
         $which_db->save($r);
 
         return $r;
     }
-
-    
 
     /**
      * TODO
@@ -343,22 +399,20 @@ class ApiHelper extends CHtml {
         
     }
 
-    /**
-     * TODO
-     * moves assets from bucket to local
-     * @param type $local
-     */
-    public static function _load_db_structure($which_db) {
-        $db_to_array = array();
+    /* #####################################
+     * GETTERS AND SETTERS
+     * #################################### */
 
+    public static function _get_bucket_files($which_service) {
+        $url = Yii::app()->createAbsoluteUrl("api/bucketfiles/$which_service");
+        $curl_response = Yii::app()->curl->get($url);
+        return json_decode($curl_response);
+    }
 
-        $cursor = $which_db->find();
-
-        foreach ($cursor as $doc) {
-
-            $db_to_array [] = $doc;
-        }
-        return $db_to_array;
+    public static function _get_bucket_url($which_service) {
+        $url = Yii::app()->createAbsoluteUrl("api/bucketdir/$which_service");
+        $curl_response = Yii::app()->curl->get($url);
+        return json_decode($curl_response);
     }
 
     /**

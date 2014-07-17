@@ -20,7 +20,6 @@ class ApiController extends Controller {
     private $wepa_local = '\\data\\wepa\\filesystem\\';
     private $wepa_bucket = "\\assets\\images\\wepa_images\\production_images";
     private $wepa_outage_bucket = "\\assets\\images\\wepa_images\\outage_images";
-    
     private $gadgets_shared_full;
     private $gadgets_local_full;
     private $gadgets_bucket_full;
@@ -28,7 +27,7 @@ class ApiController extends Controller {
     private $wepa_local_full;
     private $wepa_bucket_full;
     private $wepa_outage_bucket_full;
-    
+
     public function beforeAction($action) {
 //gadgets
         $this->gadgets_shared_full = Yii::app()->basePath . $this->gadgets_shared;
@@ -67,16 +66,15 @@ class ApiController extends Controller {
             if ($push_or_pull = CHttpRequest::getParam('push_or_pull')) {
                 switch ($push_or_pull) {
                     case 'push':
-                        $JSON_array = self::_sync_from_source($service_details['local_file'], $service_details['shared_file']);
+                        $JSON_array = self::_sync_from_source($service_details['local_file'], $service_details['shared_file'], $service_details['database']);
                         break;
                     case 'pull':
-                        $JSON_array = self::_sync_from_source($service_details['shared_file'], $service_details['local_file']);
+                        $JSON_array = self::_sync_from_source($service_details['shared_file'], $service_details['local_file'], $service_details['database']);
                         break;
 
                     default:
                         throw new CHttpException(404, "The API for 'api/sync/$service/$push_or_pull' cannot be found.");
                 }
-                $JSON_array = ApiHelper::_ProcessSync($push_or_pull, $service_details['shared_file'], $service_details['local_file']);
             }
             else
                 throw new CHttpException(404, "The sub-page you are looking for does not exist.");
@@ -157,10 +155,10 @@ class ApiController extends Controller {
 
 //if an image name is given, insert that image, else sync them all
 
-            if (isset($_FILES)) {
+            if (isset($_FILES['new_image'])) {
 
 //$image_name = CHttpRequest::getParam('image_name');
-                $JSON_array = ApiHelper::_add_image_to_bucket($service_details['bucket'], $_FILES['new_image']);
+                $JSON_array = ApiHelper::_add_image_to_bucket($service_details['bucket'], $_FILES['new_image'], $service_details['database']);
             }
             else
                 $JSON_array = ApiHelper::_fill_bucket($service_details['local_file'], $service_details['bucket']);
@@ -201,16 +199,22 @@ class ApiController extends Controller {
         if ($service = CHttpRequest::getParam('which_service')) {
             $service_details = self::_get_service($service);
 //if an image name is given, insert that image, else sync them all
-            
-            
-            $JSON_array = $service_details['bucket'];
+
+
+            if ($which_type = CHttpRequest::getParam('which_type')) {
+                if($which_type=='full')
+                $JSON_array = $service_details['bucket'];
+            }
+            else
+//removes all images from bucket
+                $JSON_array = Yii::app()->theme->baseUrl.$this->gadgets_bucket;
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
 
         ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
     }
-    
+
     /**
      * 
      */
@@ -219,14 +223,14 @@ class ApiController extends Controller {
             $service_details = self::_get_service($service);
 //if an image name is given, insert that image, else sync them all
 
-            $JSON_array = ApiHelper::_load_db_structure($service_details['database']);
+            $JSON_array = ApiHelper::_ReadFolderDirectory_from_db($service_details['database']);
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
 
         ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
     }
-    
+
     /**
      * 
      */
@@ -235,7 +239,7 @@ class ApiController extends Controller {
             $service_details = self::_get_service($service);
 //if an image name is given, insert that image, else sync them all
 
-            $JSON_array = ApiHelper::_ReadFolderDirectory($service_details['bucket']);
+            $JSON_array = ApiHelper::_ReadFolderDirectory_from_local($service_details['bucket']);
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");

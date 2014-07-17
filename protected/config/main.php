@@ -83,6 +83,7 @@ return array(
             'rules' => array(
                 'api/sync/<which_service:[\w]+>/<push_or_pull:[\w]+>' => 'api/sync',
                 'api/bucketdir/<which_service:[\w]+>' => 'api/bucketdir',
+                'api/bucketdir/<which_service:[\w]+>/<which_type:[\w]+>' => 'api/bucketdir',
                 'api/filestructure/<which_service:[\w]+>' => 'api/filestructure',
                 'api/bucketfiles/<which_service:[\w]+>' => 'api/bucketfiles',
                 'api/getdir/<which_service:[\w]+>' => 'api/getdir',

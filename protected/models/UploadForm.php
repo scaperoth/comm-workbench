@@ -35,16 +35,20 @@ class UploadForm extends CFormModel {
      * @return boolean whether login is successful
      */
     public function upload() {
-        $url = Yii::app()->createAbsoluteUrl('api/bucketdir/'.$this->service);
+        $url = Yii::app()->createAbsoluteUrl('api/bucketdir/' . $this->service.'/full');
         $uploaddir = Yii::app()->curl->get($url);
         $uploaddir = str_replace("\"", "", $uploaddir);
-        $uploaddir = trim($uploaddir)."/";
-        
+        $uploaddir = trim($uploaddir) . "/";
+
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         //C:\xampp\htdocs\comm-workbench\themes\bootstrap\assets\images\gadget_images/
         //C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
-
-
+         $extension = strtolower($this->getExtension( $_FILES['file']['name']));
+        
+        if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif")) {
+            echo ' Unknown Image extension ';
+            return false;
+        }
         if (move_uploaded_file($_FILES['file']['tmp_name'], $uploaddir . $_FILES['file']['name'])) {
 
             echo "File is valid, and was successfully uploaded.\n";
@@ -52,20 +56,23 @@ class UploadForm extends CFormModel {
 
             echo "Possible file upload attack!\n";
         }
+        
+        ApiHelper::_create_thumbnail($_FILES['file']['name'], $uploaddir, $extension);
 
-        echo '<pre>';
-
-        echo 'Here is some more debugging info:';
-
-        print_r($_FILES);
-
-        echo "\n<hr />\n";
-
-        print_r($_POST);
-
-        echo "</pre>";
 
         return true;
     }
 
+    function getExtension($str) {
+
+        $i = strrpos($str, ".");
+        if (!$i) {
+            return "";
+        }
+        $l = strlen($str) - $i;
+        $ext = substr($str, $i + 1, $l);
+        return $ext;
+    }
+
 }
+
