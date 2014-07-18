@@ -11,7 +11,8 @@ class GadgetsController extends Controller {
     }
 
     public function actionIndex() {
-        $this->render('index');
+        $model = new AddimageForm;
+        $this->render('index', array('model' => $model));
     }
 
     

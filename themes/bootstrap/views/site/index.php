@@ -27,7 +27,7 @@ $this->pageTitle = Yii::app()->name;
                     <a class="home-icons" href="<?= $this->createUrl('wepa/'); ?>">
                         <div class="row">
                             <span class="fa-stack large">
-                                <i class="fa fa-square-o buff fa-stack-2x " style="text-align:center;"></i>
+                                <i class="fa fade-bg fa-square-o buff fa-stack-2x " style="text-align:center;"></i>
                                 <i class="fa fa-print fa-stack-1x"></i>
                                 
                             </span>

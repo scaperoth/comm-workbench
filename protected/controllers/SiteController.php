@@ -112,6 +112,7 @@ class SiteController extends Controller {
      * upload document to the proper bucket directory
      */
     public function actionUpload() {
+        $errors = 0;
         $model = new UploadForm();
 // if it is ajax validation request
         if (isset($_POST['ajax']) && $_POST['ajax'] === 'login-form') {
@@ -121,14 +122,25 @@ class SiteController extends Controller {
 
 // collect user input data
         if (isset($_FILES['file'])) {
-            $model->attributes = $_FILES['file'];
-            $model->service = $_POST['service'];
-            
+            for ($i = 0; $i < count($_FILES['file']['name']); $i++) {
+
+                $model->name = $_FILES['file']['name'][$i];
+                $model->type = $_FILES['file']['type'][$i];
+                $model->tmp_name = $_FILES['file']['tmp_name'][$i];
+                $model->error = $_FILES['file']['error'][$i];
+                $model->size = $_FILES['file']['size'][$i];
+                $model->service = $_POST['service'];
+
 // validate user input and redirect to the previous page if valid
-            if ($model->validate() && $model->upload()) {
-                Yii::app()->user->setFlash('success', 'image uploaded!');
-                $this->redirect(array('site/upload'));
+                if (!$model->validate() || !$model->upload()) {
+                    $errors = 1;
+                }
             }
+            if (!$errors)
+                Yii::app()->user->setFlash('success', 'image(s) uploaded!');
+            else
+                Yii::app()->user->setFlash('warning', 'unable to upload file!');
+            $this->redirect(array('site/upload'));
         }
 // display the login form
         $this->render('upload', array('model' => $model));

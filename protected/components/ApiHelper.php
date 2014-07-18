@@ -11,6 +11,7 @@ class ApiHelper extends CHtml {
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
      */
 
+    Const TOPHOLDER = 'structure';
     Const APPLICATION_ID = 'ASCCPE';
 
     /**
@@ -186,12 +187,11 @@ class ApiHelper extends CHtml {
     public static function _ReadFolderDirectory_from_db($which_db) {
         $db_to_array = array();
 
-
         $cursor = $which_db->find();
 
         foreach ($cursor as $doc) {
 
-            $db_to_array [] = $doc;
+            $db_to_array [self::TOPHOLDER] = $doc;
         }
         return $db_to_array;
     }
@@ -222,6 +222,26 @@ class ApiHelper extends CHtml {
     }
 
     /**
+     * returns flat array of directories in specified level
+     * @param type $filestructure
+     * @param type $rootfolder
+     * @param type $subfolder
+     * @param type $bottomfolder
+     * @return type
+     */
+    public static function _ReadFolder_subdirectory($service, $subfolder = '', $bottomfolder = '', $rootfolder = 'files') {
+        $filestructure = self::_get_file_structure($service)[self::TOPHOLDER];
+
+        if (empty($subfolder))
+            return $filestructure[$rootfolder]['root'];
+        else if (empty($bottomfolder)) {
+            return $filestructure[$rootfolder][$subfolder]['subfolder'];
+        }
+        else
+            return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
+    }
+
+    /**
      * fills image bucket from source. 
      * bucket found in themes/bootstrap/images/gadget_images/
      * @param type $source
@@ -249,8 +269,8 @@ class ApiHelper extends CHtml {
 //echo 'Image found!</br>';
                     $bucket_files[] = $file['basename'];
                     copy($item, $bucket . DIRECTORY_SEPARATOR . $file['basename']);
-                    
-                    self::_create_thumbnail($file['basename'],$bucket, $ext);
+
+                    self::_create_thumbnail($file['basename'], $bucket, $ext);
                 } else {
 //echo 'not an image</br>';
                 }
@@ -323,11 +343,29 @@ class ApiHelper extends CHtml {
         $delete_images['message'] = $message;
         return $delete_images;
     }
-    
-    public static function _create_thumbnail($image_name, $uploaddir, $extension){
-        $uploadedfile =$uploaddir."/" . $image_name;
 
-       //create thumbnail
+    public static function _add_image_to_files($image_name, $dest, $source) {
+        $newpath = $image_name;
+        $image_name = basename($image_name);
+
+        if ($newpath == 'GWU' . DIRECTORY_SEPARATOR)
+            $newpath = '';
+        $return = "$source/$image_name, $dest/$newpath$image_name";
+        if (copy($source . DIRECTORY_SEPARATOR . $image_name, $dest . $newpath . $image_name)) {
+
+            return "File is valid, and was successfully uploaded.\n";
+        }
+        return $return;
+    }
+
+    public static function _remove_image_from_files($image_name, $newpath, $dest, $source) {
+        
+    }
+
+    public static function _create_thumbnail($image_name, $uploaddir, $extension) {
+        $uploadedfile = $uploaddir . "/" . $image_name;
+
+        //create thumbnail
         if ($extension == "jpg" || $extension == "jpeg") {
             $src = imagecreatefromjpeg($uploadedfile);
         } else if ($extension == "png") {
@@ -335,7 +373,7 @@ class ApiHelper extends CHtml {
         } else {
             $src = imagecreatefromgif($uploadedfile);
         }
-        
+
         list($width, $height) = getimagesize($uploadedfile);
 
         $newwidth = 120;
@@ -350,10 +388,10 @@ class ApiHelper extends CHtml {
 
         imagedestroy($src);
         imagedestroy($tmp);
-        
+
         return 'success';
     }
-    
+
     /* #############################################
      * Save and UPdate Functions
      * ############################################# */
@@ -375,7 +413,24 @@ class ApiHelper extends CHtml {
         new RecursiveDirectoryIterator($local, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
         ) {
             if ($item->getFilename() != 'Thumbs.db' && $item->getFilename() != 'Block.txt') {
-                $path = $item->isDir() ? array($item->getFilename() => array()) : array("images" => $item->getFilename());
+                if ($item->isDir()) {
+                    switch ($iterator->getDepth()) {
+                        case 0:
+                            $path = array("root" => array($item->getFilename() => array()));
+                            break;
+                        case 1:
+                            $path = array("subfolder" => array($item->getFilename() => array()));
+                            break;
+                        case 2:
+                            $path = array("bottomfolder" => array($item->getFilename() => array()));
+                            break;
+                        default:
+                            $path = array("bottomfolder" => array($item->getFilename() => array()));
+                            break;
+                    }
+                } else {
+                    $path = array("images" => $item->getFilename());
+                }
 
                 for ($depth = $iterator->getDepth() - 1; $depth >= 0; $depth--) {
                     $path = array($iterator->getSubIterator($depth)->current()->getFilename() => $path);
@@ -403,16 +458,22 @@ class ApiHelper extends CHtml {
      * GETTERS AND SETTERS
      * #################################### */
 
-    public static function _get_bucket_files($which_service) {
+    public static function _get_bucket_files($which_service, $assoc_array = true) {
         $url = Yii::app()->createAbsoluteUrl("api/bucketfiles/$which_service");
         $curl_response = Yii::app()->curl->get($url);
-        return json_decode($curl_response);
+        return json_decode($curl_response, $assoc_array);
     }
 
-    public static function _get_bucket_url($which_service) {
+    public static function _get_bucket_url($which_service, $assoc_array = true) {
         $url = Yii::app()->createAbsoluteUrl("api/bucketdir/$which_service");
         $curl_response = Yii::app()->curl->get($url);
-        return json_decode($curl_response);
+        return json_decode($curl_response, $assoc_array);
+    }
+
+    public static function _get_db_structure($which_service, $assoc_array = true) {
+        $url = Yii::app()->createAbsoluteUrl("api/dbstructure/$which_service");
+        $curl_response = Yii::app()->curl->get($url);
+        return json_decode($curl_response, $assoc_array);
     }
 
     /**

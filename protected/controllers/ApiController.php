@@ -66,10 +66,10 @@ class ApiController extends Controller {
             if ($push_or_pull = CHttpRequest::getParam('push_or_pull')) {
                 switch ($push_or_pull) {
                     case 'push':
-                        $JSON_array = self::_sync_from_source($service_details['local_file'], $service_details['shared_file'], $service_details['database']);
+                        $JSON_array = ApiHelper::_sync_from_source($service_details['local_file'], $service_details['shared_file'], $service_details['database']);
                         break;
                     case 'pull':
-                        $JSON_array = self::_sync_from_source($service_details['shared_file'], $service_details['local_file'], $service_details['database']);
+                        $JSON_array = ApiHelper::_sync_from_source($service_details['shared_file'], $service_details['local_file'], $service_details['database']);
                         break;
 
                     default:
@@ -141,12 +141,69 @@ class ApiController extends Controller {
     }
 
     /**
+     * Adds an image to a specified location
+     * @throws CHttpException
+     */
+    public function actionAddimage() {
+//first find out which service the API will be accessing and get the details of that service
+        $which_path;
+        if (CHttpRequest::getParam('which_service')) {
+            $service = CHttpRequest::getParam('which_service');
+            $service_details = self::_get_service($service);
+
+            if ($image_name = CHttpRequest::getParam('image_name')) {
+                $JSON_array = ApiHelper::_add_image_to_files($image_name, $service_details['local_file'], $service_details['bucket']);
+            } else {
+                throw new CHttpException(404, "The API for 'api/addimage/$service/$image_name' cannot be found.");
+            }
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+
+    /**
+     * Removes image from specific location
+     * @throws CHttpException
+     */
+    public function actionRemoveimage() {
+//first find out which service the API will be accessing and get the details of that service
+        if (CHttpRequest::getParam('which_service')) {
+            $service = CHttpRequest::getParam('which_service');
+            $service_details = self::_get_service($service);
+
+
+            if ($campus = CHttpRequest::getParam('campus')) {
+                if ($building = CHttpRequest::getParam('building')) {
+                    if ($room = CHttpRequest::getParam('room')) {
+                        $newpath = $campus . DIRECTORY_SEPARATOR . $building . DIRECTORY_SEPARATOR . $room . DIRECTORY_SEPARATOR;
+                        $JSON_array = ApiHelper::_remove_image_from_files($image_name, $newpath, $service_details['local_file'], $service_details['bucket']);
+                    } else {
+                        $newpath = $campus . DIRECTORY_SEPARATOR . $building . DIRECTORY_SEPARATOR;
+                        $JSON_array = ApiHelper::_remove_image_from_files($image_name, $newpath, $service_details['local_file'], $service_details['bucket']);
+                    }
+                } else {
+                    $newpath = $campus . DIRECTORY_SEPARATOR;
+                    $JSON_array = ApiHelper::_remove_image_from_files($image_name, $newpath, $service_details['local_file'], $service_details['bucket']);
+                }
+            } else {
+                throw new CHttpException(404, "The API for 'api/addimage/$service/$campus' cannot be found.");
+            }
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+
+    /**
      * copies all images from local file system to bucket of images 
      * to synchronize assets
      * if an image is specified it only adds that single image
      * @throws CHttpException
      */
-    public function actionPutimage() {
+    public function actionPutimageinbucket() {
 //first find out which service the API will be accessing and get the details of that service
 
         if (CHttpRequest::getParam('which_service')) {
@@ -174,7 +231,7 @@ class ApiController extends Controller {
      * if an image is specified it deletes that single image
      * @throws CHttpException
      */
-    public function actionDeleteimage() {
+    public function actionDeleteimageinbucket() {
 //first find out which service the API will be accessing and get the details of that service
         if ($service = CHttpRequest::getParam('which_service')) {
             $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
@@ -202,28 +259,12 @@ class ApiController extends Controller {
 
 
             if ($which_type = CHttpRequest::getParam('which_type')) {
-                if($which_type=='full')
-                $JSON_array = $service_details['bucket'];
+                if ($which_type == 'full')
+                    $JSON_array = $service_details['bucket'];
             }
             else
 //removes all images from bucket
-                $JSON_array = Yii::app()->theme->baseUrl.$this->gadgets_bucket;
-        }
-        else
-            throw new CHttpException(404, "The page you are looking for does not exist.");
-
-        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
-    }
-
-    /**
-     * 
-     */
-    public function actionFilestructure() {
-        if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service($service);
-//if an image name is given, insert that image, else sync them all
-
-            $JSON_array = ApiHelper::_ReadFolderDirectory_from_db($service_details['database']);
+                $JSON_array = Yii::app()->theme->baseUrl . $this->gadgets_bucket;
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
@@ -240,6 +281,45 @@ class ApiController extends Controller {
 //if an image name is given, insert that image, else sync them all
 
             $JSON_array = ApiHelper::_ReadFolderDirectory_from_local($service_details['bucket']);
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+
+    /**
+     * 
+     */
+    public function actionFilestructure() {
+        if ($service = CHttpRequest::getParam('which_service')) {
+            $service_details = self::_get_service($service);
+//if an image name is given, insert that image, else sync them all
+            if ($subdirectory = CHttpRequest::getParam('subdirectory')) {
+                if ($bottomdirectory = CHttpRequest::getParam('bottomdirectory')) {
+                    $JSON_array = ApiHelper::_ReadFolder_subdirectory($service, $subdirectory, $bottomdirectory);
+                }
+                else
+                    $JSON_array = ApiHelper::_ReadFolder_subdirectory($service, $subdirectory);
+            }
+            else
+                $JSON_array = ApiHelper::_ReadFolderDirectory_from_db($service_details['database']);
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+
+    /**
+     * 
+     */
+    public function actionDbstructure() {
+        if ($service = CHttpRequest::getParam('which_service')) {
+            $service_details = self::_get_service($service);
+//if an image name is given, insert that image, else sync them all
+            
+            $JSON_array = ApiHelper::_ReadFolderDirectory_from_db($service_details['database']);
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");

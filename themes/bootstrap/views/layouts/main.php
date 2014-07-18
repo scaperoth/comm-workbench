@@ -27,13 +27,14 @@
          */
         $cs->registerScriptFile($themePath . '/assets/js/jquery-migrate-1.2.1.min.js', CClientScript::POS_END);
         //$cs->registerCoreScript('jquery', CClientScript::POS_BEGIN);
-
+        $cs->registerScriptFile('//code.jquery.com/ui/1.10.4/jquery-ui.js', CClientScript::POS_END);
 
         $cs->registerScriptFile($themePath . '/assets/js/bootstrap.min.js', CClientScript::POS_END);
-        
+
         $cs->registerScriptFile($themePath . '/assets/fractionslider/jquery.fractionslider.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/nicescroll/jquery.nicescroll.min.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/js/script.js', CClientScript::POS_END);
+        $cs->registerScriptFile($themePath . '/assets/js/ajax.js', CClientScript::POS_END);
         $cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
         ?>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -46,14 +47,14 @@
         ?>"></script>
         <![endif]-->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-            <script src="//code.jquery.com/jquery-1.10.2.js"></script>
-            <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+            
     </head>
     <body>
 
         <?php
         $this->widget('bootstrap.widgets.BsNavbar', array(
             'collapse' => true,
+            'position' => BsHtml::NAVBAR_POSITION_FIXED_TOP,
             'brandLabel' => '<img src="' . Yii::app()->theme->baseUrl . '/assets/images/at_logo.png" alt="Academic Technologies\"/>',
             'brandUrl' => Yii::app()->homeUrl,
             'items' => array(
@@ -130,7 +131,7 @@
                     <legend><h2>Communications Dashboard</h2></legend>
                 </div>
                 <?php echo $content; ?>
-                    
+
                 <div class="clearfix top30"></div>
 
 
@@ -173,6 +174,10 @@
                 }
 
         );
+
+
+        
+
     </script>
     <?php
     Yii::app()->clientScript->registerScript(

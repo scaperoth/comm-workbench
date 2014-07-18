@@ -33,7 +33,7 @@
 
                                     </i>
                                 </span>
-                                <input type="file" name="file" id="file" class="form-control"  />                                 
+                                <input type="file" name="file[]" multiple id="file" class="form-control"  />                                 
                             </div>
                             <p id="UploadForm_file_em_" style="display:none" class="help-block">
 

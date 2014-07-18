@@ -39,17 +39,17 @@ class UploadForm extends CFormModel {
         $uploaddir = Yii::app()->curl->get($url);
         $uploaddir = str_replace("\"", "", $uploaddir);
         $uploaddir = trim($uploaddir) . "/";
-
+        
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         //C:\xampp\htdocs\comm-workbench\themes\bootstrap\assets\images\gadget_images/
         //C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
-         $extension = strtolower($this->getExtension( $_FILES['file']['name']));
+         $extension = strtolower($this->getExtension( $this->name));
         
         if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif")) {
             echo ' Unknown Image extension ';
             return false;
         }
-        if (move_uploaded_file($_FILES['file']['tmp_name'], $uploaddir . $_FILES['file']['name'])) {
+        if (move_uploaded_file($this->tmp_name, $uploaddir . $this->name)) {
 
             echo "File is valid, and was successfully uploaded.\n";
         } else {
@@ -57,8 +57,7 @@ class UploadForm extends CFormModel {
             echo "Possible file upload attack!\n";
         }
         
-        ApiHelper::_create_thumbnail($_FILES['file']['name'], $uploaddir, $extension);
-
+        ApiHelper::_create_thumbnail($this->name, $uploaddir, $extension);
 
         return true;
     }
