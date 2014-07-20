@@ -40,7 +40,7 @@ Array
 <!--right-->
 
 
-<div class="col-md-6">
+<div class="col-md-9">
     <?php $counter = -1; ?>
     <?php foreach ($image_locations as $item): ?>
         <div class="row bottom15 no-padding">
@@ -77,7 +77,7 @@ Array
                                 <label class="control-label sr-only" for="AddimageForm_building">Campus</label>
                                 <div>
                                     <select displaySize="4" class="location-select form-control" name="AddimageForm[building]" id="AddimageForm_building" data-script="location_load" data-group="<?= $counter ?>" data-type="building" data-target="room" >
-                                        <option value=""></option>
+                                        <option disabled selected value=""></option>
                                     </select>
 
                                 </div>
@@ -86,7 +86,7 @@ Array
                                 <label class="control-label sr-only" for="AddimageForm_room">Campus</label>
                                 <div>
                                     <select displaySize="4" class="location-select form-control" name="AddimageForm[room]" id="AddimageForm_room"  data-group="<?= $counter ?>" data-type="room" >
-                                        <option value=""></option>
+                                        <option disabled selected  value=""></option>
                                     </select>
 
                                 </div>
