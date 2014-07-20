@@ -11,9 +11,17 @@ class GadgetsController extends Controller {
     }
 
     public function actionIndex() {
-        $model = new AddimageForm;
-        $this->render('index', array('model' => $model));
+        $this->render('index');
     }
+    
+    public function action_image_section() {
+        $this->render('_image_section');
+    }
+    
+    public function action_location_section() {
+        $this->render('_location_section');
+    }
+    
 
     /**
      * 
@@ -43,7 +51,7 @@ class GadgetsController extends Controller {
             throw new CHttpException('403', 'Forbidden access.');
         }
 
-        $model = new AddimageForm;
+        $model = new AddgadgetimageForm;
 
         // collect user input data
         if (isset($_POST['AddimageForm'])) {
@@ -56,7 +64,39 @@ class GadgetsController extends Controller {
             }
         }
         // display the original form form
-        $this->redirect(array('gadgets/index'));
+        $this->redirect(array('gadgets/'));
+    }
+
+    public function actionSave() {
+        $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
+        $curl_response = Yii::app()->curl->get($url);
+        
+        Yii::app()->user->setFlash('success', 'Refreshed');
+        
+        $this->redirect(array('gadgets/'));
+    }
+
+    public function actionLoad() {
+        $url = Yii::app()->createAbsoluteUrl("api/sync/gadgets/pull"); 
+        $curl_response = Yii::app()->curl->get($url);
+        
+        $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
+        $curl_response = Yii::app()->curl->get($url);
+        
+        Yii::app()->user->setFlash('success', 'Loaded');
+        $this->redirect(array('gadgets/'));
+    }
+
+    public function actionPublish() {
+        $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
+        $curl_response = Yii::app()->curl->get($url);
+        
+        $url = Yii::app()->createAbsoluteUrl("api/sync/gadgets/push");
+        $curl_response = Yii::app()->curl->get($url);
+        
+        Yii::app()->user->setFlash('success', 'Published');
+        
+        $this->redirect(array('gadgets/'));
     }
 
 // Uncomment the following methods and override them if needed

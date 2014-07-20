@@ -22,6 +22,10 @@ class ApiHelper extends CHtml {
 
     const LOGIN_ERROR = "You have insufficient permissions to continue";
 
+    /* #############################################
+     * File manipulation
+     * ############################################# */
+
     /**
      * abstracts the delete and copy functions
      * returns array of the files in the destination directory
@@ -112,6 +116,74 @@ class ApiHelper extends CHtml {
     }
 
     /**
+     * shrinks large directory name to only relevant data
+     * @param type $dirname
+     * @param type $root
+     * @return type
+     */
+    public static function _trim_directory($dirname, $root) {
+
+        if ($dirname . "\\" == $root) {
+            $dirname = 'GWU';
+        } else {
+            $dirname = preg_replace('/^' . preg_quote($root, '/') . '/', '', $dirname);
+        }
+        return $dirname;
+    }
+
+    /**
+     * @deprecated since version 1
+     * tranlsates folder directory into json array
+     * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
+     * @param type $dir directory to start search from
+     * @param type $listDir array the append directory to
+     * @return type
+     */
+    public static function _ReadFolderDirectory_from_local($dir, $listDir = array()) {
+        $listDir = array();
+        if ($handler = opendir($dir)) {
+            while (($sub = readdir($handler)) !== FALSE) {
+                if ($sub != "." && $sub != ".." && $sub != "Thumb.db") {
+                    if (is_file($dir . "/" . $sub)) {
+                        $listDir[] = $sub;
+                    } elseif (is_dir($dir . "/" . $sub)) {
+                        $listDir[$sub] = self::_ReadFolderDirectory_from_local($dir . "/" . $sub);
+                    }
+                }
+            }
+            closedir($handler);
+        }
+        if (empty($listDir)) {
+            return "No database connection";
+        }
+        return $listDir;
+    }
+
+    /**
+     * returns flat array of directories in specified level
+     * @param type $filestructure
+     * @param type $rootfolder
+     * @param type $subfolder
+     * @param type $bottomfolder
+     * @return type
+     */
+    public static function _ReadFolder_subdirectory($service, $subfolder = '', $bottomfolder = '', $rootfolder = 'files') {
+        $filestructure = self::_get_db_structure($service);
+
+        if (empty($subfolder))
+            return $filestructure[$rootfolder]['root'];
+        else if (empty($bottomfolder)) {
+            return $filestructure[$rootfolder][$subfolder]['subfolder'];
+        }
+        else
+            return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
+    }
+
+    /* #############################################
+     * Image manipulation
+     * ############################################# */
+    
+    /**
      * returns every parent of all images 
      * could be optimized!!!!
      * @param type $image_name
@@ -160,88 +232,63 @@ class ApiHelper extends CHtml {
         return $all_parents;
     }
 
-    /**
-     * shrinks large directory name to only relevant data
-     * @param type $dirname
-     * @param type $root
-     * @return type
-     */
-    public static function _trim_directory($dirname, $root) {
+    public static function _add_image_to_files($image_name, $dest, $source) {
+        $newpath = $image_name;
+        $image_name = basename($image_name);
 
-        if ($dirname . "\\" == $root) {
-            $dirname = 'GWU';
+        if ($newpath == 'GWU' . DIRECTORY_SEPARATOR)
+            $newpath = '';
+        $return = "$source/$image_name, $dest/$newpath";
+        if (copy($source . DIRECTORY_SEPARATOR . $image_name, $dest . $newpath)) {
+
+            return "File is valid, and was successfully uploaded.\n";
         } else {
-            $dirname = preg_replace('/^' . preg_quote($root, '/') . '/', '', $dirname);
+            return false;
         }
-        return $dirname;
+        return $return;
     }
 
-    /*
-     * tranlsates folder directory into json array
-     * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
-     * @param type $dir directory to start search from
-     * @param type $listDir array the append directory to
-     * @return type
-     */
-
-    public static function _ReadFolderDirectory_from_db($which_db) {
-        $db_to_array = array();
-
-        $cursor = $which_db->find();
-
-        foreach ($cursor as $doc) {
-
-            $db_to_array [self::TOPHOLDER] = $doc;
-        }
-        return $db_to_array;
+    public static function _remove_image_from_files($image_name, $newpath, $dest, $source) {
+        
     }
 
-    /**
-     * @deprecated since version 1
-     * tranlsates folder directory into json array
-     * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
-     * @param type $dir directory to start search from
-     * @param type $listDir array the append directory to
-     * @return type
-     */
-    public static function _ReadFolderDirectory_from_local($dir, $listDir = array()) {
-        $listDir = array();
-        if ($handler = opendir($dir)) {
-            while (($sub = readdir($handler)) !== FALSE) {
-                if ($sub != "." && $sub != ".." && $sub != "Thumb.db") {
-                    if (is_file($dir . "/" . $sub)) {
-                        $listDir[] = $sub;
-                    } elseif (is_dir($dir . "/" . $sub)) {
-                        $listDir[$sub] = self::_ReadFolderDirectory_from_local($dir . "/" . $sub);
-                    }
-                }
-            }
-            closedir($handler);
+    public static function _create_thumbnail($image_name, $uploaddir, $extension) {
+        $uploadedfile = $uploaddir . "/" . $image_name;
+
+        //create thumbnail
+        if ($extension == "jpg" || $extension == "jpeg") {
+            $src = imagecreatefromjpeg($uploadedfile);
+        } else if ($extension == "png") {
+            $src = imagecreatefrompng($uploadedfile);
+        } else {
+            $src = imagecreatefromgif($uploadedfile);
         }
-        if(empty($listDir)){
-            return "No database connection";
-        }
-        return $listDir;
+
+        list($width, $height) = getimagesize($uploadedfile);
+
+        $newwidth = 120;
+        $newheight = ($height / $width) * $newwidth;
+        $tmp = imagecreatetruecolor($newwidth, $newheight);
+
+        imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+        $filename = "$uploaddir/thumb/thumb_" . $image_name;
+
+        imagegif($tmp, $filename, 100);
+
+        imagedestroy($src);
+        imagedestroy($tmp);
+
+        return 'success';
     }
-
-    /**
-     * returns flat array of directories in specified level
-     * @param type $filestructure
-     * @param type $rootfolder
-     * @param type $subfolder
-     * @param type $bottomfolder
-     * @return type
-     */
-    public static function _ReadFolder_subdirectory($service, $subfolder = '', $bottomfolder = '', $rootfolder = 'files') {
-        $filestructure = self::_get_db_structure($service)[self::TOPHOLDER];
-
-        if (empty($subfolder))
-            return $filestructure[$rootfolder]['root'];
-        else if (empty($bottomfolder)) {
-            return $filestructure[$rootfolder][$subfolder]['subfolder'];
-        }
-        else
-            return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
+    
+    /* #############################################
+     * Bucket manipulation
+     * ############################################# */
+    
+    public static function _get_bucket_files($which_db, $assoc_array = true) {
+        $db = self::_ReadFolderDirectory_from_db(Yii::app()->mongodb->$which_db);
+        return $db['bucket'];
     }
 
     /**
@@ -346,68 +393,43 @@ class ApiHelper extends CHtml {
         $delete_images['message'] = $message;
         return $delete_images;
     }
-
-    public static function _add_image_to_files($image_name, $dest, $source) {
-        $newpath = $image_name;
-        $image_name = basename($image_name);
-
-        if ($newpath == 'GWU' . DIRECTORY_SEPARATOR)
-            $newpath = '';
-        $return = "$source/$image_name, $dest/$newpath$image_name";
-        if (copy($source . DIRECTORY_SEPARATOR . $image_name, $dest . $newpath . $image_name)) {
-
-            return "File is valid, and was successfully uploaded.\n";
-        }
-        return $return;
-    }
-
-    public static function _remove_image_from_files($image_name, $newpath, $dest, $source) {
-        
-    }
-
-    public static function _create_thumbnail($image_name, $uploaddir, $extension) {
-        $uploadedfile = $uploaddir . "/" . $image_name;
-
-        //create thumbnail
-        if ($extension == "jpg" || $extension == "jpeg") {
-            $src = imagecreatefromjpeg($uploadedfile);
-        } else if ($extension == "png") {
-            $src = imagecreatefrompng($uploadedfile);
-        } else {
-            $src = imagecreatefromgif($uploadedfile);
-        }
-
-        list($width, $height) = getimagesize($uploadedfile);
-
-        $newwidth = 120;
-        $newheight = ($height / $width) * $newwidth;
-        $tmp = imagecreatetruecolor($newwidth, $newheight);
-
-        imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-
-        $filename = "$uploaddir/thumb/thumb_" . $image_name;
-
-        imagegif($tmp, $filename, 100);
-
-        imagedestroy($src);
-        imagedestroy($tmp);
-
-        return 'success';
-    }
+    
+    
 
     /* #############################################
-     * Save and UPdate Functions
+     * Dataase manipulation
      * ############################################# */
 
+    /*
+     * tranlsates folder directory into json array
+     * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
+     * @param type $dir directory to start search from
+     * @param type $listDir array the append directory to
+     * @return type
+     */
+
+    public static function _ReadFolderDirectory_from_db($which_db) {
+        $db_to_array = array();
+
+        $cursor = $which_db->find()->sort(array('timestamp'=>-1))->limit(1);
+
+        foreach ($cursor as $doc) {
+
+            $db_to_array  = $doc;
+        }
+        return $db_to_array;
+    }
+    
     /**
      * translates the file system into a mongo db
      * @param type $local
      */
-    public static function _save_to_db_load_from_local($local, $which_db) {
+    public static function _save_to_db_load_from_local($local, $which_db, $bucket) {
 
         $which_db->remove();
 
         $r = array(
+            "bucket" => self::_ReadFolderDirectory_from_local($bucket),
             "timestamp" => date('m-d-y h:i:s'),
             "files" => array(),
         );
@@ -461,11 +483,7 @@ class ApiHelper extends CHtml {
      * GETTERS AND SETTERS
      * #################################### */
 
-    public static function _get_bucket_files($which_service, $assoc_array = true) {
-        $url = Yii::app()->createAbsoluteUrl("api/bucketfiles/$which_service");
-        $curl_response = Yii::app()->curl->get($url);
-        return json_decode($curl_response, $assoc_array);
-    }
+    
 
     public static function _get_bucket_url($which_service, $assoc_array = true) {
         $url = Yii::app()->createAbsoluteUrl("api/bucketdir/$which_service");

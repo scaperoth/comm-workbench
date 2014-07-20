@@ -101,7 +101,7 @@ class ApiController extends Controller {
                         $JSON_array = ApiHelper::_load_from_db_save_to_local($service_details['local_file'], $service_details['database']);
                         break;
                     case 'save':
-                        $JSON_array = ApiHelper::_save_to_db_load_from_local($service_details['local_file'], $service_details['database']);
+                        $JSON_array = ApiHelper::_save_to_db_load_from_local($service_details['local_file'], $service_details['database'],$service_details['bucket']);
                         break;
                     default:
                         throw new CHttpException(404, "The API for 'api/update/$service/$load_or_save' cannot be found.");
@@ -153,7 +153,6 @@ class ApiController extends Controller {
 
             if ($image_name = CHttpRequest::getParam('image_name')) {
                 $JSON_array = ApiHelper::_add_image_to_files($image_name, $service_details['local_file'], $service_details['bucket']);
-                ApiHelper::_save_to_db_load_from_local($service_details['local_file'], $service_details['database']);
             } else {
                 throw new CHttpException(404, "The API for 'api/addimage/$service/$image_name' cannot be found.");
             }
