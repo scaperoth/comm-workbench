@@ -34,8 +34,14 @@
         $cs->registerScriptFile($themePath . '/assets/fractionslider/jquery.fractionslider.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/nicescroll/jquery.nicescroll.min.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/js/script.js', CClientScript::POS_END);
-        $cs->registerScriptFile($themePath . '/assets/js/ajax.js', CClientScript::POS_END);
         $cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
+        //variables used for javascript calls
+        $cs->registerScript('images', 'var images = "' . $themePath . '/assets/images/";');
+        $cs->registerScript('gadget_ajax_url', ' var ajaxurl ="' . $this->createUrl('locationajax') . '";');
+        
+        //script for gadgets page
+        $cs->registerScript('gadget_script', file_get_contents('themes/bootstrap/assets/js/gadget_script.js'));
+        $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap/assets/js/gadget_ajax.js'));
         ?>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -47,7 +53,7 @@
         ?>"></script>
         <![endif]-->
         <link rel="stylesheet" href="//code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.css">
-            
+
     </head>
     <body>
 
@@ -152,8 +158,11 @@
 
     </body>
     <script>
+
+
         $(document).ready(
                 function() {
+
                     $("html").niceScroll({
                         cursorwidth: '8px',
                         cursorborder: 'none',
@@ -176,7 +185,6 @@
         );
 
 
-        
 
     </script>
     <?php

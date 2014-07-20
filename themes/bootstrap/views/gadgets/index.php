@@ -7,7 +7,6 @@ $bucket_files = ApiHelper::_get_bucket_files('gadgets');
 $bucket_dir = ApiHelper::_get_bucket_url('gadgets');
 $dbstructure = ApiHelper::_get_db_structure('gadgets')[ApiHelper::TOPHOLDER];
 
-
 foreach ($bucket_files as $image) {
     if (!is_array($image)) {
         $image = urlencode($image);
@@ -33,20 +32,24 @@ foreach ($bucket_files as $image) {
                 </label>
             </div>
         </div>
+
+        <div id="ajax_panel"></div>
     </div>
     <!--left-->
     <div class="col-md-3 leftCol image-section ">
         <ul class="nav nav-stacked nav-collapse sidebar droptrue sortable" id="image_sidebar">
             <!--<?php foreach ($dbstructure['files'] as $folder => $item): ?>
-                                                                                                                                <li class="bottom10 right15 label label-primary"><?= $folder ?></li>
+                                                                                                                                                        <li class="bottom10 right15 label label-primary"><?= $folder ?></li>
                 <?php //ApiHelper_Gadgets::_generate_sidebar_nav($item); ?>
             <?php endforeach; ?>-->
         </ul>
     </div><!--/left-->
 
     <!--right-->
+
+
     <div class="col-md-9 image-section">
-        <?php $counter = -1;?>
+        <?php $counter = -1; ?>
         <?php foreach ($image_locations as $item): ?>
             <div class="row bottom15 no-padding">
                 <div class="col-sm-12">
@@ -60,16 +63,18 @@ foreach ($bucket_files as $image) {
                         <img src='<?= $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
                     </div>
                     <div class="col-sm-10">
-                        <form class="bs-example form-inline" action="/comm-workbench/index.php/gadgets" method="post">                                       <fieldset>
+                        <form class="bs-example form-inline" action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
                                 <legend>Add new</legend>
+
                                 <div class="form-group">
+                                    <input hidden name="AddimageForm[image_name]" value="<?= $item['name'] ?>"/>
                                     <label class="control-label sr-only" for="AddimageForm_campus">Campus</label>
                                     <div>
-                                        <select displaySize="4" name="AddimageForm[campus]" id="AddimageForm_campus" data-group="<?=$counter?>"data-type="gadgetcampus">
+                                        <select displaySize="4" class="location-select form-control" name="AddimageForm[campus]" id="AddimageForm_campus" data-script="location_load" data-group="<?= $counter ?>"data-type="campus" data-target="building">
                                             <option value=""></option>
                                             <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
 
-                                            <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
+                                                <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
 
                                             <?php endforeach; ?>
                                         </select>
@@ -79,13 +84,8 @@ foreach ($bucket_files as $image) {
                                 <div class="form-group">
                                     <label class="control-label sr-only" for="AddimageForm_building">Campus</label>
                                     <div>
-                                        <select displaySize="4" name="AddimageForm[building]" id="AddimageForm_building" data-group="<?=$counter?>" data-type="gadgetbuilding">
+                                        <select displaySize="4" class="location-select form-control" name="AddimageForm[building]" id="AddimageForm_building" data-script="location_load" data-group="<?= $counter ?>" data-type="building" data-target="room" >
                                             <option value=""></option>
-                                            <?php foreach ($dbstructure['files']['FB']['subfolder'] as $foldername => $folder_array): ?>
-
-                                                <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
-
-                                            <?php endforeach; ?>
                                         </select>
 
                                     </div>
@@ -93,13 +93,8 @@ foreach ($bucket_files as $image) {
                                 <div class="form-group">
                                     <label class="control-label sr-only" for="AddimageForm_room">Campus</label>
                                     <div>
-                                        <select displaySize="4" name="AddimageForm[room]" id="AddimageForm_room" data-group="<?=$counter?>" data-type="gadgetroom">
+                                        <select displaySize="4" class="location-select form-control" name="AddimageForm[room]" id="AddimageForm_room"  data-group="<?= $counter ?>" data-type="room" >
                                             <option value=""></option>
-                                            <?php foreach ($dbstructure['files']['FB']['AC0']['bottomfolder'] as $foldername => $folder_array): ?>
-
-                                                <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
-
-                                            <?php endforeach; ?>
                                         </select>
 
                                     </div>
@@ -113,7 +108,7 @@ foreach ($bucket_files as $image) {
                             <ul class="bottom10 sortable droptrue no-padding" id="list_<?= urlencode($item['name']); ?>">
                                 <?php foreach ($item['location'] as $location): ?>
 
-                                    <li class="col-sm-3 bottom10 right15 label label-warning " name="Locations['<?= urlencode($item['name']); ?>']" value ='<?= $location; ?>'><?=
+                                    <li class="col-sm-3 bottom10 right15 label label-warning " name="Locations['<? = urlencode($item['name']); ?>']" value ='<?= $location; ?>'><?=
                                         $location;
                                         $counter++;
                                         ?></li>
@@ -142,3 +137,5 @@ foreach ($bucket_files as $image) {
 
 </div><!--end row-->
 
+<?
+?>

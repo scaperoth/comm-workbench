@@ -1,11 +1,3 @@
-$('#image-view-button').click(function(e){
-    $('.image-section').show();
-    $('.location-section').hide();
-});
-$('#location-view-button').click(function(e){
-    $('.location-section').show();
-    $('.image-section').hide();
-});
 
 /********************************
  * AFFIXED SIDEBAR
@@ -41,19 +33,3 @@ $('a[href*=#]:not([href=#])').click(function() {
 });
 
 
-/************************
- * Drag and Drop Stuff
- ***********************/
-$(function() {
-    $( "ul.droptrue" ).sortable({
-      connectWith: "ul",
-      placeholder: "ui-state-highlight"
-    });
- 
-    $( "ul.dropfalse" ).sortable({
-      connectWith: "ul",
-      dropOnEmpty: false
-    });
-    
-    $( ".sortable" ).disableSelection();
-  });

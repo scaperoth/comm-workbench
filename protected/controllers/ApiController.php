@@ -141,7 +141,7 @@ class ApiController extends Controller {
     }
 
     /**
-     * Adds an image to a specified location
+     * Adds an image to a specified location in local file system
      * @throws CHttpException
      */
     public function actionAddimage() {
@@ -153,6 +153,7 @@ class ApiController extends Controller {
 
             if ($image_name = CHttpRequest::getParam('image_name')) {
                 $JSON_array = ApiHelper::_add_image_to_files($image_name, $service_details['local_file'], $service_details['bucket']);
+                ApiHelper::_save_to_db_load_from_local($service_details['local_file'], $service_details['database']);
             } else {
                 throw new CHttpException(404, "The API for 'api/addimage/$service/$image_name' cannot be found.");
             }
@@ -164,7 +165,7 @@ class ApiController extends Controller {
     }
 
     /**
-     * Removes image from specific location
+     * Removes image from specific location in local file system
      * @throws CHttpException
      */
     public function actionRemoveimage() {

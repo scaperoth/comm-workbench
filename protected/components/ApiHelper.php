@@ -218,6 +218,9 @@ class ApiHelper extends CHtml {
             }
             closedir($handler);
         }
+        if(empty($listDir)){
+            return "No database connection";
+        }
         return $listDir;
     }
 
@@ -230,7 +233,7 @@ class ApiHelper extends CHtml {
      * @return type
      */
     public static function _ReadFolder_subdirectory($service, $subfolder = '', $bottomfolder = '', $rootfolder = 'files') {
-        $filestructure = self::_get_file_structure($service)[self::TOPHOLDER];
+        $filestructure = self::_get_db_structure($service)[self::TOPHOLDER];
 
         if (empty($subfolder))
             return $filestructure[$rootfolder]['root'];
