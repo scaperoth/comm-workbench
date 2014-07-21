@@ -21,6 +21,8 @@ class ApiHelper_Gadgets extends CHtml {
 
     const LOGIN_ERROR = "You have insufficient permissions to continue";
 
+    
+
     /**
      * 
      * @param type $status
@@ -71,16 +73,16 @@ class ApiHelper_Gadgets extends CHtml {
             $body = '
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
-<head>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
-    <title>' . $status . ' ' . self::_getStatusCodeMessage($status) . '</title>
-</head>
-<body>
-    <h1>' . self::_getStatusCodeMessage($status) . '</h1>
-    <p>' . $message . '</p>
-    <hr />
-    <address>' . $signature . '</address>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <title>' . $status . ' ' . self::_getStatusCodeMessage($status) . '</title>
+    </head>
+    <body>
+        <h1>' . self::_getStatusCodeMessage($status) . '</h1>
+        <p>' . $message . '</p>
+        <hr />
+        <address>' . $signature . '</address>
+    </body>
 </html>';
 
             echo $body;
@@ -106,5 +108,4 @@ class ApiHelper_Gadgets extends CHtml {
     }
 
 }
-
 ?>

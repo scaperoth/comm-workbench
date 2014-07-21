@@ -21,7 +21,7 @@ return array(
     'name' => 'AT Comm Workbench',
     'theme' => 'bootstrap',
     // requires you to copy the theme under your themes directory
-    // preloading 'log' component
+// preloading 'log' component
     'preload' => array(
         'log',
         'bootstrap'
@@ -61,12 +61,15 @@ return array(
     ),
     // application components
     'components' => array(
+        'curl' => array(
+            'class' => 'ext.curl.Curl',
+        ),
         'session' => array
             (
             'class' => 'HttpSession'
         ),
         'user' => array(
-            // enable cookie-based authentication
+// enable cookie-based authentication
             'allowAutoLogin' => true,
             'class' => 'WebUser',
         ),
@@ -79,13 +82,36 @@ return array(
             'urlFormat' => 'path',
             'rules' => array(
                 'api/sync/<which_service:[\w]+>/<push_or_pull:[\w]+>' => 'api/sync',
+                ///
+                'api/bucketdir/<which_service:[\w]+>' => 'api/bucketdir',
+                'api/bucketdir/<which_service:[\w]+>/<which_type:[\w]+>' => 'api/bucketdir',
+                ///
+                'api/dbstructure/<which_service:[\w]+>' => 'api/dbstructure',
+                ///
+                'api/filestructure/<which_service:[\w]+>' => 'api/filestructure',
+                'api/filestructure/<which_service:[\w]+>/<subdirectory:[\w\-]+>' => 'api/filestructure',
+                'api/filestructure/<which_service:[\w]+>/<subdirectory:[\w\-]+>/<bottomdirectory:[\w\-]+>' => 'api/filestructure',
+                ///
+                'api/bucketfiles/<which_service:[\w]+>' => 'api/bucketfiles',
+                ///
                 'api/getdir/<which_service:[\w]+>' => 'api/getdir',
                 'api/getdir/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/getdir',
+                ///
                 'api/update/<which_service:[\w]+>/<load_or_save:[\w]+>' => 'api/update',
-                'api/putimage/<which_service:[\w]+>' => 'api/putimage',
-                'api/putimage/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/putimage',
-                'api/deleteimage/<which_service:[\w]+>' => 'api/deleteimage',
-                'api/deleteimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/deleteimage',
+                ///
+                'api/putimageinbucket/<which_service:[\w]+>' => 'api/putimageinbucket',
+                'api/putimageinbucket/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/putimageinbucket',
+                ///
+                'api/deleteimageinbucket/<which_service:[\w]+>' => 'api/deleteimageinbucket',
+                'api/deleteimageinbucket/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/deleteimageinbucket',
+                ///
+                'api/addimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimage',
+                ///
+                'api/removeimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
+                'api/removeimage/<which_service:[\w]+>/<campus:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
+                'api/removeimage/<which_service:[\w]+>/<campus:[\w]+>/<building:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
+                'api/removeimage/<which_service:[\w]+>/<campus:[\w]+>/<building:[\w]+>/<room:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
+                ///
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',
                 '<controller:\w+>/<action:\w+>' => '<controller>/<action>',
@@ -107,7 +133,7 @@ return array(
             'db' => 'super_test'
         ),
         'errorHandler' => array(
-            // use 'site/error' action to display errors
+// use 'site/error' action to display errors
             'errorAction' => 'site/error',
         ),
         'log' => array(
@@ -123,14 +149,13 @@ return array(
               'class'=>'CWebLogRoute',
               ),
              */
-                
             ),
         ),
     ),
     // application-level parameters that can be accessed
-    // using Yii::app()->params['paramName']
+// using Yii::app()->params['paramName']
     'params' => array(
-        // this is used in contact page
+// this is used in contact page
         'adminEmail' => 'webmaster@example.com',
     ),
 );
