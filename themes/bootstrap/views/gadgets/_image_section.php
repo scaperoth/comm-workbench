@@ -11,36 +11,71 @@ foreach ($bucket_files as $image) {
         $image_locations[] = (json_decode($curl_response, true));
     }
 }
-/*$image_locations Returns structure like the following:
-Array
-(
-    ...
-    [3] => Array
-        (
-            [name] => 13110130p9-widget-Lecture Capture.jpg
-            [location] => Array
-                (
-                    [0] => FB\AC0\B152
-                    [1] => FB\AC0\B156
-                    [2] => FB\CO0\0101
-                    [3] => FB\DUQ\0151
+/* $image_locations Returns structure like the following:
+  Array
+  (
+  ...
+  [3] => Array
+  (
+  [name] => 13110130p9-widget-Lecture Capture.jpg
+  [location] => Array
+  (
+  [0] => FB\AC0\B152
+  [1] => FB\AC0\B156
+  [2] => FB\CO0\0101
+  [3] => FB\DUQ\0151
  */
-
-
 ?>
-<div class="col-md-3 leftCol">
-    <ul class="nav nav-stacked nav-collapse sidebar droptrue sortable" id="image_sidebar">
-        <!--<?php foreach ($dbstructure['files'] as $folder => $item): ?>
-                                                                                                                                                                                            <li class="bottom10 right15 label label-primary"><?= $folder ?></li>
-            <?php //ApiHelper_Gadgets::_generate_sidebar_nav($item);  ?>
-        <?php endforeach; ?>-->
+<script>
+    function allowDrop(ev) {
+        ev.preventDefault();
+    }
+
+    function drag(ev, id) {
+        ev.dataTransfer.setData("Text", ev.target.id);
+        ev.dataTransfer.setData("root", id);
+        
+
+    }
+
+    function drop(ev) {
+
+        ev.stopPropagation();
+        ev.preventDefault();
+        
+        var data = ev.dataTransfer.getData("Text");
+        var parent = $(ev.target).parent();
+        $(parent).append(document.getElementById(data).cloneNode(true));
+        
+        //add reaction script
+    }
+</script>
+<div class="col-md-3 leftCol" id="bucket">
+    <span id="drag_GWU" class="col-sm-2 bottom10 right5 label label-primary " value ='GWU' draggable="true" ondragstart="drag(event, $(this).attr('id'))">GWU</span>
+    <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
+
+        <span id="drag_<?= $foldername ?>" class="col-sm-2 bottom10 right5 label label-primary " value ='<?= $foldername; ?>' draggable="true" ondragstart="drag(event, $(this).attr('id'))"><?= $foldername; ?></span>
+
+
+        <?php foreach ($dbstructure['files'][$foldername]['subfolder'] as $subfoldername => $subfolder_array): ?>
+
+            <span id="drag_<?= $subfoldername ?>"  class="col-sm-2 bottom10 right5 label label-primary " value ='<?= $subfoldername; ?>' draggable="true" ondragstart="drag(event, $(this).attr('id'))"><?= $subfoldername; ?></span>
+
+            <?php foreach ($dbstructure['files'][$foldername][$subfoldername]['bottomfolder'] as $bottomfoldername => $bottomfolder_array): ?>
+
+                <span id="drag_<?= $bottomfoldername ?>" class="col-sm-2 bottom10 right15 label label-primary " value ='<?= $bottomfoldername; ?>' draggable="true" ondragstart="drag(event, $(this).attr('id'))"><?= $bottomfoldername; ?></span>
+
+            <?php endforeach; ?>
+        <?php endforeach; ?>
     </ul>
+<?php endforeach; ?>
+</ul
+</ul>
 </div><!--/left-->
 
 <!--right-->
 
-
-<div class="col-md-9">
+<div class="col-md-6">
     <?php $counter = -1; ?>
     <?php foreach ($image_locations as $item): ?>
         <div class="row bottom15 no-padding">
@@ -51,7 +86,7 @@ Array
                     $counter+=1;
                     ?>
                 </h2>
-                <div class="col-sm-2 no-padding">
+                <div class="col-sm-2 no-padding bottom15">
                     <img src='<?= $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
                 </div>
                 <div class="col-sm-10">
@@ -95,19 +130,17 @@ Array
                         </fieldset>
                     </form>
                 </div>
-                <div class="col-sm-12 no-padding">
-                    <h3>
-                        <ul class="bottom10 sortable droptrue no-padding" id="list_<?= urlencode($item['name']); ?>">
-                            <?php foreach ($item['location'] as $location): ?>
+                <div class="col-sm-12 bottom10 no-padding location" id="list_<?= urlencode($item['name']); ?>" ondrop="drop(event)" ondragover="allowDrop(event)">
 
-                                <li class="col-sm-3 bottom10 right15 label label-warning " name="Locations['<? = urlencode($item['name']); ?>']" value ='<?= $location; ?>'><?=
-                                    $location;
-                                    $counter++;
-                                    ?></li>
+                    <?php foreach ($item['location'] as $location): ?>
+                        <span class="col-sm-2 right15 bottom10 label label-warning " id="$item['location']" name="Locations['<? = urlencode($item['name']); ?>']" value ='<?= $location; ?>'><?=
+                            $location;
+                            $counter++;
+                            ?>
+                        </span>
 
-                            <?php endforeach ?>
-                        </ul>
-                    </h3>
+                    <?php endforeach ?>
+
                 </div>
             </div>
         </div>

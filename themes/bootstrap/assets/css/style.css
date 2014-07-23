@@ -270,6 +270,9 @@ footer{
 .location-select{
     min-width:150px;
 }
+.location span{
+    font-size:1.2em;
+}
 /*******************/
 /* LOADING GIF
 ------------------- */
