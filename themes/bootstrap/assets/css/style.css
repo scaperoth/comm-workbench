@@ -270,6 +270,10 @@ footer{
 .location-select{
     min-width:150px;
 }
+
+.location{
+    min-height:30px
+}
 .location span{
     font-size:1.2em;
 }

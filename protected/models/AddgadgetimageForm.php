@@ -25,7 +25,7 @@ class AddgadgetimageForm extends CFormModel {
     }
 
     /**
-     * Logs in the user using the given username and password in the model.
+     * adds an image to the file system
      * @return boolean whether login is successful
      */
     public function addimage() {
@@ -33,10 +33,37 @@ class AddgadgetimageForm extends CFormModel {
         $room = $this->room ? $this->room . DIRECTORY_SEPARATOR : '';
         $image = urlencode($this->image_name);
         $location = $this->campus . DIRECTORY_SEPARATOR . $building . $room . $image;
-
+        
+            
         $url = Yii::app()->createAbsoluteUrl("api/addimage/gadgets/$location");
         $curl_response = Yii::app()->curl->get($url);
+        echo $curl_response;
+        if (!$curl_response) {
+            return false;
+        }
         
+        $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
+        $curl_response = Yii::app()->curl->get($url);
+       
+        if (!$curl_response) {
+            return false;
+        }
+
+        return true;
+    }
+    
+     /**
+     * removes an image from the file system
+     * @return boolean whether login is successful
+     */
+    public function removeimage() {
+        $image = $this->image_name;
+            
+        $url = Yii::app()->createAbsoluteUrl("api/removeimage/gadgets/$image");
+        
+        $curl_response = Yii::app()->curl->get($url);
+        
+           echo $curl_response;
         if (!$curl_response) {
             return false;
         }

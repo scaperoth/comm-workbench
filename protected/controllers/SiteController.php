@@ -136,8 +136,11 @@ class SiteController extends Controller {
                     $errors = 1;
                 }
             }
-            if (!$errors)
+            if (!$errors) {
+                $url = Yii::app()->createAbsoluteUrl("api/update/{$_POST['service']}/save");
+                $curl_response = Yii::app()->curl->get($url);
                 Yii::app()->user->setFlash('success', 'image(s) uploaded!');
+            }
             else
                 Yii::app()->user->setFlash('warning', 'unable to upload file!');
             $this->redirect(array('site/upload'));

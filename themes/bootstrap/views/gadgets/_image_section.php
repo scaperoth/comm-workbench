@@ -11,6 +11,7 @@ foreach ($bucket_files as $image) {
         $image_locations[] = (json_decode($curl_response, true));
     }
 }
+
 /* $image_locations Returns structure like the following:
   Array
   (
@@ -27,43 +28,21 @@ foreach ($bucket_files as $image) {
  */
 ?>
 <script>
-    function allowDrop(ev) {
-        ev.preventDefault();
-    }
-
-    function drag(ev, id) {
-        ev.dataTransfer.setData("Text", ev.target.id);
-        ev.dataTransfer.setData("root", id);
-        
-
-    }
-
-    function drop(ev) {
-
-        ev.stopPropagation();
-        ev.preventDefault();
-        
-        var data = ev.dataTransfer.getData("Text");
-        var parent = $(ev.target).parent();
-        $(parent).append(document.getElementById(data).cloneNode(true));
-        
-        //add reaction script
-    }
 </script>
 <div class="col-md-3 leftCol" id="bucket">
-    <span id="drag_GWU" class="col-sm-2 bottom10 right5 label label-primary " value ='GWU' draggable="true" ondragstart="drag(event, $(this).attr('id'))">GWU</span>
+    <span id="drag_GWU" class="col-sm-2 bottom10 right5 label label-primary" data-campus ='' draggable="true" >GWU</span>
     <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
 
-        <span id="drag_<?= $foldername ?>" class="col-sm-2 bottom10 right5 label label-primary " value ='<?= $foldername; ?>' draggable="true" ondragstart="drag(event, $(this).attr('id'))"><?= $foldername; ?></span>
+        <span id="drag_<?= $foldername ?>" class="col-sm-2 bottom10 right5 label label-primary" data-campus='<?= $foldername ?>'  draggable="true" ><?= $foldername; ?></span>
 
 
         <?php foreach ($dbstructure['files'][$foldername]['subfolder'] as $subfoldername => $subfolder_array): ?>
 
-            <span id="drag_<?= $subfoldername ?>"  class="col-sm-2 bottom10 right5 label label-primary " value ='<?= $subfoldername; ?>' draggable="true" ondragstart="drag(event, $(this).attr('id'))"><?= $subfoldername; ?></span>
+            <span id="drag_<?= $subfoldername ?>"  class="col-sm-2 bottom10 right5 label label-primary" data-campus='<?= $foldername ?>' data-building="<?=$subfoldername?>" draggable="true" ><?= $subfoldername; ?></span>
 
             <?php foreach ($dbstructure['files'][$foldername][$subfoldername]['bottomfolder'] as $bottomfoldername => $bottomfolder_array): ?>
 
-                <span id="drag_<?= $bottomfoldername ?>" class="col-sm-2 bottom10 right15 label label-primary " value ='<?= $bottomfoldername; ?>' draggable="true" ondragstart="drag(event, $(this).attr('id'))"><?= $bottomfoldername; ?></span>
+                <span id="drag_<?= $bottomfoldername ?>" class="col-sm-2 bottom10 right15 label label-primary" data-campus ='<?= $foldername ?>' data-building="<?=$subfoldername?>" data-room="<?=$bottomfoldername?>"  draggable="true"><?= $bottomfoldername; ?></span>
 
             <?php endforeach; ?>
         <?php endforeach; ?>
@@ -89,56 +68,16 @@ foreach ($bucket_files as $image) {
                 <div class="col-sm-2 no-padding bottom15">
                     <img src='<?= $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
                 </div>
-                <div class="col-sm-10">
-                    <form class="bs-example form-inline" action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
-                            <legend>Add new</legend>
-
-                            <div class="form-group">
-                                <input hidden name="AddimageForm[image_name]" value="<?= $item['name'] ?>"/>
-                                <label class="control-label sr-only" for="AddimageForm_campus">Campus</label>
-                                <div>
-                                    <select displaySize="4" class="location-select form-control" name="AddimageForm[campus]" id="AddimageForm_campus" data-script="location_load" data-group="<?= $counter ?>"data-type="campus" data-target="building">
-                                        <option value=""></option>
-                                        <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
-
-                                            <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
-
-                                        <?php endforeach; ?>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label sr-only" for="AddimageForm_building">Campus</label>
-                                <div>
-                                    <select displaySize="4" class="location-select form-control" name="AddimageForm[building]" id="AddimageForm_building" data-script="location_load" data-group="<?= $counter ?>" data-type="building" data-target="room" >
-                                        <option disabled selected value=""></option>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label sr-only" for="AddimageForm_room">Campus</label>
-                                <div>
-                                    <select displaySize="4" class="location-select form-control" name="AddimageForm[room]" id="AddimageForm_room"  data-group="<?= $counter ?>" data-type="room" >
-                                        <option disabled selected  value=""></option>
-                                    </select>
-
-                                </div>
-                            </div>
-                            <button class="btn btn-primary" type="submit" name="yt0">Submit</button>    
-                        </fieldset>
-                    </form>
-                </div>
-                <div class="col-sm-12 bottom10 no-padding location" id="list_<?= urlencode($item['name']); ?>" ondrop="drop(event)" ondragover="allowDrop(event)">
+                
+                <div class="col-sm-12 bottom10 no-padding location" data-image ="<?=$item['name'];?>" >
 
                     <?php foreach ($item['location'] as $location): ?>
-                        <span class="col-sm-2 right15 bottom10 label label-warning " id="$item['location']" name="Locations['<? = urlencode($item['name']); ?>']" value ='<?= $location; ?>'><?=
+                        <?php $image_location = ($location=="GWU"?"":$location.DIRECTORY_SEPARATOR).urlencode($item['name'])?>
+                        <span data-toggle="tooltip" data-placement="top" title="Click to delete" class="col-sm-2 right15 bottom10 label label-warning image-location" data-image='<?=$image_location?>'><?=
                             $location;
                             $counter++;
                             ?>
                         </span>
-
                     <?php endforeach ?>
 
                 </div>

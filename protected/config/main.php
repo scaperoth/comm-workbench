@@ -108,9 +108,6 @@ return array(
                 'api/addimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimage',
                 ///
                 'api/removeimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
-                'api/removeimage/<which_service:[\w]+>/<campus:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
-                'api/removeimage/<which_service:[\w]+>/<campus:[\w]+>/<building:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
-                'api/removeimage/<which_service:[\w]+>/<campus:[\w]+>/<building:[\w]+>/<room:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
                 ///
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

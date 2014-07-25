@@ -179,10 +179,15 @@ class ApiHelper extends CHtml {
             return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
     }
 
+    public static function _remove_image_from_files( $source,$image_name) {
+        self::_delete_files($source . $image_name);
+        return $source.$image_name;
+    }
+
     /* #############################################
      * Image manipulation
      * ############################################# */
-    
+
     /**
      * returns every parent of all images 
      * could be optimized!!!!
@@ -248,10 +253,6 @@ class ApiHelper extends CHtml {
         return $return;
     }
 
-    public static function _remove_image_from_files($image_name, $newpath, $dest, $source) {
-        
-    }
-
     public static function _create_thumbnail($image_name, $uploaddir, $extension) {
         $uploadedfile = $uploaddir . "/" . $image_name;
 
@@ -281,11 +282,11 @@ class ApiHelper extends CHtml {
 
         return 'success';
     }
-    
+
     /* #############################################
      * Bucket manipulation
      * ############################################# */
-    
+
     public static function _get_bucket_files($which_db, $assoc_array = true) {
         $db = self::_ReadFolderDirectory_from_db(Yii::app()->mongodb->$which_db);
         return $db['bucket'];
@@ -393,8 +394,6 @@ class ApiHelper extends CHtml {
         $delete_images['message'] = $message;
         return $delete_images;
     }
-    
-    
 
     /* #############################################
      * Dataase manipulation
@@ -411,15 +410,15 @@ class ApiHelper extends CHtml {
     public static function _ReadFolderDirectory_from_db($which_db) {
         $db_to_array = array();
 
-        $cursor = $which_db->find()->sort(array('timestamp'=>-1))->limit(1);
+        $cursor = $which_db->find()->sort(array('timestamp' => -1))->limit(1);
 
         foreach ($cursor as $doc) {
 
-            $db_to_array  = $doc;
+            $db_to_array = $doc;
         }
         return $db_to_array;
     }
-    
+
     /**
      * translates the file system into a mongo db
      * @param type $local
@@ -482,8 +481,6 @@ class ApiHelper extends CHtml {
     /* #####################################
      * GETTERS AND SETTERS
      * #################################### */
-
-    
 
     public static function _get_bucket_url($which_service, $assoc_array = true) {
         $url = Yii::app()->createAbsoluteUrl("api/bucketdir/$which_service");

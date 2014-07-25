@@ -37,8 +37,9 @@
         $cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
         //variables used for javascript calls
         $cs->registerScript('images', 'var images = "' . $themePath . '/assets/images/";');
-        $cs->registerScript('gadget_ajax_url', ' var ajaxurl ="' . $this->createUrl('locationajax') . '";');
-        
+        $cs->registerScript('gadget_get_ajax_url', ' var getlocationajaxurl ="' . $this->createUrl('getlocationDataajax') . '";');
+        $cs->registerScript('gadget_add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('Addlocationtoimageajax') . '";');
+        $cs->registerScript('gadget_remove_ajax_url', ' var removelocationajaxurl ="' . $this->createUrl('Removelocationfromimageajax') . '";');
         //script for gadgets page
         $cs->registerScript('gadget_script', file_get_contents('themes/bootstrap/assets/js/gadget_script.js'));
         $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap/assets/js/gadget_ajax.js'));

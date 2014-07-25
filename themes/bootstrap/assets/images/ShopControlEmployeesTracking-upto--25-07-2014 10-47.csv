@@ -1,0 +1,75 @@
+lct_id,lct_location,lct_user,lct_action,lct_early_or_late,lct_message,lct_timestamp
+61,Gelman,Matt Scaperoth,closed,early,Matt Scaperoth closed the Gelman shop early. Latest closing time is 18:10pm. Early by: 7 hours 18 minutes and 56 seconds,2013/10/17 10:51:04 AM
+62,localhost,Matt mscapero-user,open,late,Matt mscapero-user opened the localhost shop late. Latest closing time is 08:10am. Late by: 3 hours 18 minutes and 40 seconds,2013/10/18 11:28:40 AM
+63,localhost,Matt mscapero-user,closed,early,Matt mscapero-user closed the localhost shop early. Latest closing time is 18:10pm. Early by: 5 hours 25 minutes and 42 seconds,2013/10/18 12:44:18 PM
+64,E-Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the E-Street shop early. Latest closing time is 18:10pm. Early by: 5 hours 24 minutes and 8 seconds,2013/10/18 12:45:52 PM
+65,E-Street,Matt Scaperoth,open,late,Matt Scaperoth opened the E-Street shop late. Latest closing time is 08:10am. Late by: 4 hours 35 minutes and 56 seconds,2013/10/18 12:45:56 PM
+66,Gelman,Matt Scaperoth,open,late,Matt Scaperoth opened the Gelman shop late. Latest closing time is 08:10am. Late by: 4 hours 36 minutes and 23 seconds,2013/10/18 12:46:23 PM
+67,Gelman,Matt Scaperoth,closed,early,Matt Scaperoth closed the Gelman shop early. Latest closing time is 18:10pm. Early by: 5 hours 23 minutes and 1 seconds,2013/10/18 12:46:59 PM
+68,Gelman,Matt Scaperoth,open,late,Matt Scaperoth opened the Gelman shop late. Latest closing time is 08:10am. Late by: 4 hours 37 minutes and 38 seconds,2013/10/18 12:47:38 PM
+69,Gelman,Matt Scaperoth,closed,early,Matt Scaperoth closed the Gelman shop early. Latest closing time is 18:10pm. Early by: 5 hours 21 minutes and 20 seconds,2013/10/18 12:48:39 PM
+70,E-Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the E-Street shop early. Latest closing time is 18:10pm. Early by: 5 hours 20 minutes and 43 seconds,2013/10/18 12:49:17 PM
+71,Gelman,Matt Scaperoth,open,late,Matt Scaperoth opened the Gelman Control Center late. Latest closing time is 08:10am. Late by: 4 hours 42 minutes and 13 seconds,2013/10/18 12:52:13 PM
+72,Gelman,Matt Scaperoth,closed,early,Matt Scaperoth closed the Gelman Support Center early. Latest closing time is 18:10pm. Early by: 5 hours 17 minutes and 25 seconds,2013/10/18 12:52:35 PM
+73,Localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the Localhost Support Center late. Latest closing time is 08:10am. Late by: 4 hours 43 minutes and 25 seconds,2013/10/18 12:53:25 PM
+74,E-Street,Matt Scaperoth,open,late,Matt Scaperoth opened the E-Street Support Center late. Latest closing time is 08:10am. Late by: 5 hours 16 minutes and 6 seconds,2013/10/18 01:26:06 PM
+75,Gelman,Matt Scaperoth,open,late,Matt Scaperoth opened the Gelman Support Center late. Latest closing time is 08:10am. Late by: 6 hours 26 minutes and 31 seconds,2013/10/18 02:36:31 PM
+76,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. Latest closing time is 18:10pm. Early by: 3 hours 32 minutes and 21 seconds,2013/10/18 02:37:39 PM
+77,E-Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the E-Street Support Center early. Latest closing time is 18:10pm. Early by: 3 hours 32 minutes and 19 seconds,2013/10/18 02:37:41 PM
+78,Gelman,Matt Scaperoth,closed,early,Matt Scaperoth closed the Gelman Support Center early. Latest closing time is 18:10pm. Early by: 3 hours 32 minutes and 17 seconds,2013/10/18 02:37:43 PM
+79,Funger,Matt Scaperoth,closed,early,Matt Scaperoth closed the Funger Support Center early. Latest closing time is 18:10pm. Early by: 3 hours 32 minutes and 16 seconds,2013/10/18 02:37:44 PM
+80,Localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the Localhost Support Center late. Latest closing time is 08:10am. Late by: 1 hours 23 minutes and 59 seconds,2013/10/22 06:46:01 AM
+81,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. Latest closing time is 18:10pm. Early by: 11 hours 23 minutes and 30 seconds,2013/10/22 06:46:30 AM
+82,Localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the Localhost Support Center late. Latest closing time is 08:10am. Late by: 1 hours 23 minutes and 26 seconds,2013/10/22 06:46:34 AM
+83,E-Street,Matt Scaperoth,open,late,Matt Scaperoth opened the E-Street Support Center late. Latest closing time is 08:10am. Late by: 1 hours 23 minutes and 7 seconds,2013/10/22 06:46:53 AM
+84,Gelman,Matt Scaperoth,open,late,Matt Scaperoth opened the Gelman Support Center late. Latest closing time is 08:10am. Late by: 1 hours 23 minutes and 2 seconds,2013/10/22 06:46:58 AM
+85,Funger,Matt Scaperoth,open,late,Matt Scaperoth opened the Funger Support Center late. Latest closing time is 07:40am. Late by: 0 hours 53 minutes and 1 seconds,2013/10/22 06:46:59 AM
+86,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. Latest closing time is 18:10pm. Early by: 11 hours 21 minutes and 3 seconds,2013/10/22 06:48:57 AM
+87,Localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the Localhost Support Center late. Latest closing time is 08:10am. Late by: 1 hours 21 minutes and 1 seconds,2013/10/22 06:48:59 AM
+88,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. Latest closing time is 18:10pm. Early by: 11 hours 20 minutes and 48 seconds,2013/10/22 06:49:12 AM
+89,Localhost,Matt Scaperoth,open,early,Matt Scaperoth opened the Localhost Support Center early. by 0 hours 57 minutes and 18 seconds,2013/10/22 06:52:42 AM
+90,Localhost,Matt Scaperoth,closed,late,Matt Scaperoth closed the Localhost Support Center late. by 10 hours 56 minutes and 52 seconds,2013/10/22 06:53:08 AM
+91,localhost,Matt Scaperoth,open,-,,2013/10/22 06:55:36 AM
+92,Localhost,Matt Scaperoth,closed,late,Matt Scaperoth closed the Localhost Support Center late. by 10 hours 54 minutes and 11 seconds,2013/10/22 06:55:49 AM
+93,Localhost,Matt Scaperoth,open,-,,2013/10/22 06:55:51 AM
+94,Localhost,Matt Scaperoth,closed,late,Matt Scaperoth closed the Localhost Support Center late. by 10 hours 53 minutes and 59 seconds,2013/10/22 06:56:01 AM
+95,Localhost,Matt Scaperoth,open,-,,2013/10/22 06:56:03 AM
+96,Matt&#039;s location,Matt Scaperoth,open,late,Matt Scaperoth opened the Matt&#039;s location Support Center late. Latest closing time is 08:10am. Late by: 2 hours 14 minutes and 52 seconds,2013/10/22 10:24:52 AM
+97,Matt&#039;s location,Matt Scaperoth,closed,late,Matt Scaperoth closed the Matt&#039;s location Support Center late. by 7 hours 25 minutes and 5 seconds,2013/10/22 10:24:55 AM
+98,localhost,Matt Scaperoth,closed,late,Matt Scaperoth closed the localhost Support Center late. by 7 hours 24 minutes and 0 seconds,2013/10/22 10:26:00 AM
+99,localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the localhost Support Center late. Latest closing time is 08:10am. Late by: 2 hours 16 minutes and 3 seconds,2013/10/22 10:26:03 AM
+100,K Street,Matt Scaperoth,open,late,Matt Scaperoth opened the K Street Support Center late. Latest closing time is 08:10am. Late by: 8 hours 12 minutes and 25 seconds,2013/10/27 04:22:25 PM
+101,K Street,Matt Scaperoth,closed,late,Matt Scaperoth closed the K Street Support Center late. by 1 hours 27 minutes and 22 seconds,2013/10/27 04:22:38 PM
+102,K Street,Matt Scaperoth,open,late,Matt Scaperoth opened the K Street Support Center late. Latest closing time is 08:10am. Late by: 8 hours 12 minutes and 56 seconds,2013/10/27 04:22:56 PM
+103,K Street,Matt Scaperoth,closed,late,Matt Scaperoth closed the K Street Support Center late. by 1 hours 27 minutes and 1 seconds,2013/10/27 04:22:59 PM
+104,Gelman,Matt Scaperoth,closed,late,Matt Scaperoth closed the Gelman Support Center late. by 1 hours 26 minutes and 49 seconds,2013/10/27 04:23:11 PM
+105,K Street,Matt Scaperoth,open,late,Matt Scaperoth opened the K Street Support Center late. Latest closing time is 08:10am. Late by: 8 hours 16 minutes and 26 seconds,2013/10/27 04:26:26 PM
+106,K Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the K Street Support Center early. by 1 hours 23 minutes and 31 seconds,2013/10/27 04:26:29 PM
+107,Matt&#039;s location,Matt Scaperoth,open,late,Matt Scaperoth opened the Matt&#039;s location Support Center late. Latest closing time is 08:10am. Late by: 8 hours 16 minutes and 50 seconds,2013/10/27 04:26:50 PM
+108,Matt&#039;s location,Matt Scaperoth,closed,early,Matt Scaperoth closed the Matt&#039;s location Support Center early. by 1 hours 23 minutes and 2 seconds,2013/10/27 04:26:58 PM
+109,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. by 11 hours 35 minutes and 12 seconds,2013/10/30 10:14:48 AM
+110,Localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the Localhost Support Center late. Latest closing time is 07:40am. Late by: 2 hours 34 minutes and 53 seconds,2013/10/30 10:14:53 AM
+111,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. by 11 hours 33 minutes and 23 seconds,2013/10/30 10:16:37 AM
+112,Localhost,Matt Scaperoth,open,early,Matt Scaperoth opened the Localhost Support Center early. by 0 hours 3 minutes and 19 seconds,2013/10/30 10:16:41 AM
+113,E-Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the E-Street Support Center early. by 11 hours 3 minutes and 34 seconds,2013/12/02 06:41:26 AM
+114,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. by 11 hours 3 minutes and 31 seconds,2013/12/02 06:41:28 AM
+115,Funger,Matt Scaperoth,closed,early,Matt Scaperoth closed the Funger Support Center early. by 11 hours 3 minutes and 30 seconds,2013/12/02 06:41:30 AM
+116,Funger,Matt Scaperoth,open,early,Matt Scaperoth opened the Funger Support Center early. by 0 hours 36 minutes and 25 seconds,2013/12/02 07:08:35 AM
+117,Localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the Localhost Support Center late. Latest opening time is 10:45am. Late by: 3 hours 36 minutes and 37 seconds,2013/12/11 02:21:37 PM
+118,Gelman,Matt Scaperoth,open,late,Matt Scaperoth opened the Gelman Support Center late. Latest opening time is 08:15am. Late by: 6 hours 7 minutes and 17 seconds,2013/12/11 02:22:17 PM
+119,K Street,Matt Scaperoth,open,late,Matt Scaperoth opened the K Street Support Center late. Latest opening time is 08:15am. Late by: 6 hours 7 minutes and 23 seconds,2013/12/11 02:22:23 PM
+120,E-Street,Matt Scaperoth,open,late,Matt Scaperoth opened the E-Street Support Center late. Latest opening time is 08:15am. Late by: 6 hours 8 minutes and 46 seconds,2013/12/11 02:23:46 PM
+121,E-Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the E-Street Support Center early. by 3 hours 20 minutes and 57 seconds,2013/12/11 02:24:03 PM
+122,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. by 7 hours 20 minutes and 36 seconds,2013/12/11 02:24:24 PM
+123,Localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the Localhost Support Center late. Latest opening time is 10:45am. Late by: 3 hours 39 minutes and 26 seconds,2013/12/11 02:24:26 PM
+124,Localhost,Matt Scaperoth,closed,early,Matt Scaperoth closed the Localhost Support Center early. by 7 hours 18 minutes and 21 seconds,2013/12/11 02:26:39 PM
+125,E-Street,Matt Scaperoth,open,late,Matt Scaperoth opened the E-Street Support Center late. Latest opening time is 08:15am. Late by: 1 hours 58 minutes and 12 seconds,2014/01/06 10:13:12 AM
+126,Localhost,Matt Scaperoth,open,late,Matt Scaperoth opened the Localhost Support Center late. Latest opening time is 08:15am. Late by: 1 hours 58 minutes and 16 seconds,2014/01/06 10:13:16 AM
+127,K Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the K Street Support Center early. by 7 hours 31 minutes and 42 seconds,2014/01/06 10:13:18 AM
+128,E-Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the E-Street Support Center early. by 7 hours 31 minutes and 2 seconds,2014/01/06 10:13:58 AM
+129,K Street,Matt Scaperoth,open,late,Matt Scaperoth opened the K Street Support Center late. Latest opening time is 08:15am. Late by: 2 hours 20 minutes and 23 seconds,2014/01/06 10:35:23 AM
+130,E-Street,Matt Scaperoth,open,late,Matt Scaperoth opened the E-Street Support Center late. Latest opening time is 08:15am. Late by: 2 hours 20 minutes and 43 seconds,2014/01/06 10:35:43 AM
+131,K Street,Matt Scaperoth,closed,early,Matt Scaperoth closed the K Street Support Center early. by 5 hours 56 minutes and 21 seconds,2014/01/06 11:48:39 AM
+132,K Street,Matt Scaperoth,open,late,Matt Scaperoth opened the K Street Support Center late. Latest opening time is 08:15am. Late by: 3 hours 33 minutes and 42 seconds,2014/01/06 11:48:42 AM
+133,Funger,Matt Scaperoth,open,late,Matt Scaperoth opened the Funger Support Center late. Latest opening time is 08:15am. Late by: 4 hours 35 minutes and 22 seconds,2014/01/06 12:50:22 PM
+134,Gelman,Matt Scaperoth,open,late,Matt Scaperoth opened the Gelman Support Center late. Latest opening time is 08:15am. Late by: 2 hours 21 minutes and 34 seconds,2014/06/23 10:36:34 AM

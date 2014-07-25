@@ -13,21 +13,20 @@ class GadgetsController extends Controller {
     public function actionIndex() {
         $this->render('index');
     }
-    
+
     public function action_image_section() {
         $this->render('_image_section');
     }
-    
+
     public function action_location_section() {
         $this->render('_location_section');
     }
-    
 
     /**
      * 
      * @throws CHttpException
      */
-    public function actionLocationajax() {
+    public function actionGetlocationdataajax() {
         if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
             throw new CHttpException('403', 'Forbidden access.');
         }
@@ -46,6 +45,66 @@ class GadgetsController extends Controller {
         Yii::app()->end();
     }
 
+    /**
+     * 
+     * @throws CHttpException
+     */
+    public function actionAddlocationtoimageajax() {
+        if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
+            throw new CHttpException('403', 'Forbidden access.');
+        }
+        if (empty($_POST['args'])) {
+            throw new CHttpException('404', 'Missing "group" POST parameter.');
+        }
+
+        $model = new AddgadgetimageForm;
+
+        // collect user input data
+        if (isset($_POST['args'])) {
+            
+            $model->attributes = $_POST['args'];
+            $image = urldecode($_POST['args']['image_name']);
+            $model->image_name = $image;
+            // validate user input and redirect to the previous page if valid
+            if ($model->addimage()) {
+                
+            } else {
+                Yii::app()->user->setFlash('warning', 'Request Failed');
+            }
+        }
+    }
+
+    /**
+     * 
+     * @throws CHttpException
+     */
+    public function actionRemovelocationfromimageajax() {
+        if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
+            throw new CHttpException('403', 'Forbidden access.');
+        }
+        if (empty($_POST['image_name'])) {
+            throw new CHttpException('404', 'Missing "image_name" POST parameter.');
+        }
+
+        $model = new AddgadgetimageForm;
+
+        // collect user input data
+        if (isset($_POST['image_name'])) {
+            $model->image_name = $_POST['image_name'];
+            
+            // validate user input and redirect to the previous page if valid
+            if ($model->removeimage()) {
+                
+            } else {
+                Yii::app()->user->setFlash('warning', 'Request Failed');
+            }
+        }
+    }
+
+    /**
+     * 
+     * @throws CHttpException
+     */
     public function actionAddlocation() {
         if (!YII_DEBUG && !Yii::app()->request->isPostRequest) {
             throw new CHttpException('403', 'Forbidden access.');
@@ -70,19 +129,19 @@ class GadgetsController extends Controller {
     public function actionSave() {
         $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
         $curl_response = Yii::app()->curl->get($url);
-        
+
         Yii::app()->user->setFlash('success', 'Refreshed');
-        
+
         $this->redirect(array('gadgets/'));
     }
 
     public function actionLoad() {
-        $url = Yii::app()->createAbsoluteUrl("api/sync/gadgets/pull"); 
+        $url = Yii::app()->createAbsoluteUrl("api/sync/gadgets/pull");
         $curl_response = Yii::app()->curl->get($url);
-        
+
         $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
         $curl_response = Yii::app()->curl->get($url);
-        
+
         Yii::app()->user->setFlash('success', 'Loaded');
         $this->redirect(array('gadgets/'));
     }
@@ -90,12 +149,12 @@ class GadgetsController extends Controller {
     public function actionPublish() {
         $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
         $curl_response = Yii::app()->curl->get($url);
-        
+
         $url = Yii::app()->createAbsoluteUrl("api/sync/gadgets/push");
         $curl_response = Yii::app()->curl->get($url);
-        
+
         Yii::app()->user->setFlash('success', 'Published');
-        
+
         $this->redirect(array('gadgets/'));
     }
 
