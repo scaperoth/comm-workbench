@@ -40,7 +40,7 @@ class GadgetsController extends Controller {
         $url = Yii::app()->createAbsoluteUrl("api/filestructure/gadgets/$location");
         $curl_response = Yii::app()->curl->get($url);
         header('Content-Type: application/json; charset="UTF-8"');
-
+        
         echo $curl_response;
         Yii::app()->end();
     }

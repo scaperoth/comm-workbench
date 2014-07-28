@@ -27,36 +27,62 @@ foreach ($bucket_files as $image) {
   [3] => FB\DUQ\0151
  */
 ?>
+
 <script>
 </script>
-<div class="col-md-3 leftCol" id="bucket">
-    <span id="drag_GWU" class="col-sm-2 bottom10 right5 label label-primary" data-campus ='' draggable="true" >GWU</span>
-    <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
+<div class="col-xs-3 leftCol left15" id="bucket">
+    <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12" id="bucket-affix">
+        <div class="bottom30 ">
+            <form class="bs-example form-inline " action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
+                    <legend>Filter Campus/Building</legend>
 
-        <span id="drag_<?= $foldername ?>" class="col-sm-2 bottom10 right5 label label-primary" data-campus='<?= $foldername ?>'  draggable="true" ><?= $foldername; ?></span>
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="AddimageForm_campus">Campus</label>
+                        <div>
+                            <select data-toggle="tooltip" data-placement="top" title="Campus" displaySize="4" class="location-select sidebar-select form-control" name="AddimageForm[campus]" id="AddimageForm_campus" data-script="location_load" data-group="0" data-type="campus" data-target="building">
+                                <option value=""></option>
+                                <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
 
+                                    <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
 
-        <?php foreach ($dbstructure['files'][$foldername]['subfolder'] as $subfoldername => $subfolder_array): ?>
+                                <?php endforeach; ?>
+                            </select>
 
-            <span id="drag_<?= $subfoldername ?>"  class="col-sm-2 bottom10 right5 label label-primary" data-campus='<?= $foldername ?>' data-building="<?=$subfoldername?>" draggable="true" ><?= $subfoldername; ?></span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="AddimageForm_building">Building</label>
+                        <div>
+                            <select displaySize="4" data-toggle="tooltip" data-placement="top" title="Building" class="location-select sidebar-select form-control" name="AddimageForm[building]" id="AddimageForm_building" data-script="location_load" data-group="0" data-type="building" data-target="room" >
+                                <option disabled selected value=""></option>
+                            </select>
 
-            <?php foreach ($dbstructure['files'][$foldername][$subfoldername]['bottomfolder'] as $bottomfoldername => $bottomfolder_array): ?>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div><!--end filter form-->
+        <div class="">
+             <legend>Drag and Drop</legend>
+            <div id="bucket_list" data-type="bucket_list" >
 
-                <span id="drag_<?= $bottomfoldername ?>" class="col-sm-2 bottom10 right15 label label-primary" data-campus ='<?= $foldername ?>' data-building="<?=$subfoldername?>" data-room="<?=$bottomfoldername?>"  draggable="true"><?= $bottomfoldername; ?></span>
+                <span id="drag_GWU" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus ='' draggable="true" >GWU</span>
+                <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
 
-            <?php endforeach; ?>
-        <?php endforeach; ?>
-    </ul>
-<?php endforeach; ?>
-</ul
-</ul>
+                    <span id="drag_<?= $foldername ?>" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus='<?= $foldername ?>'  draggable="true" ><?= $foldername; ?></span>
+
+                <?php endforeach; ?>
+            </div><!--end bucket-->
+        </div> <!--end bucket container-->
+    </div><!-- end affix container-->
 </div><!--/left-->
 
 <!--right-->
 
-<div class="col-md-6">
+<div class="col-sm-7 col-xs-10 col-xs-offset-1 col-sm-offset-0">
     <?php $counter = -1; ?>
     <?php foreach ($image_locations as $item): ?>
+
         <div class="row bottom15 no-padding">
             <div class="col-sm-12">
                 <h2>
@@ -68,12 +94,12 @@ foreach ($bucket_files as $image) {
                 <div class="col-sm-2 no-padding bottom15">
                     <img src='<?= $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
                 </div>
-                
-                <div class="col-sm-12 bottom10 no-padding location" data-image ="<?=$item['name'];?>" >
+
+                <div class="col-sm-12 bottom10 no-padding location " data-image ="<?= $item['name']; ?>" >
 
                     <?php foreach ($item['location'] as $location): ?>
-                        <?php $image_location = ($location=="GWU"?"":$location.DIRECTORY_SEPARATOR).urlencode($item['name'])?>
-                        <span data-toggle="tooltip" data-placement="top" title="Click to delete" class="col-sm-2 right15 bottom10 label label-warning image-location" data-image='<?=$image_location?>'><?=
+                        <?php $image_location = ($location == "GWU" ? "" : $location . DIRECTORY_SEPARATOR) . urlencode($item['name']) ?>
+                        <span data-toggle="tooltip" data-placement="top" title="Click to delete" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 right15 bottom10 label label-warning image-location medium-font" data-image='<?= $image_location ?>'><?=
                             $location;
                             $counter++;
                             ?>

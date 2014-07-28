@@ -81,6 +81,18 @@
                             'icon' => 'home fw',
                         ),
                         array(
+                            'label' => 'Gadgets',
+                            //'icon' => 'dashboard fw',
+                            'url' => array('gadgets/index'),
+                            'icon' => 'gears fw',
+                        ),
+                        array(
+                            'label' => 'WEPA',
+                            //'icon' => 'dashboard fw',
+                            'url' => array('wepa/index'),
+                            'icon' => 'print fw',
+                        ),
+                        array(
                             'label' => 'Upload',
                             //'icon' => 'dashboard fw',
                             'url' => array('site/upload'),
@@ -170,6 +182,7 @@
                         overflow: 'hidden',
                         cursoropacitymin: 1,
                         scrollspeed: 70,
+                        zindex: 1031,
                     });
                     $('.slider').fractionSlider({
                         'fullWidth': true,
