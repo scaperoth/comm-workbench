@@ -59,7 +59,7 @@
 
     </div><!--end image-section-->
 
-    <div class="location-section">
+    <div class="location-section" hidden>
         <?php $this->renderPartial('_location_section'); ?>
     </div><!--end location-section-->
 

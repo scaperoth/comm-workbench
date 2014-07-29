@@ -1,6 +1,6 @@
 //start by binding elements
 bind_drag_and_drop()
-bind_location_removal()
+bind_location_pre_removal()
 /*##############################
  * Drag and Drop Events
  ##############################*/
@@ -19,7 +19,7 @@ function bind_drag_and_drop() {
         allowDrop(ev)
     })
     /**/
-    $('span[draggable=true]').on('dragstart', function(event) {
+    $('a[draggable=true]').on('dragstart', function(event) {
         drag(event, $(this).attr('id'))
     })
 
@@ -97,7 +97,7 @@ function drop(ev) {
         ajaxsubmitnewlocation(values).done(function(ajax_data) {
             $(parent).append(newchild);
             $(parent).removeClass('well');
-            bind_location_removal() //add events to newly created object
+            bind_location_pre_removal() //add events to newly created object
             //console.log(ajax_data);
         }).fail(function(data) {
             console.log("NEW LOCATION FAIL")
@@ -111,21 +111,44 @@ function drop(ev) {
 /*##############################
  * Form and Click Events
  ##############################*/
-function bind_location_removal() {
-    var length
 
-    $('.image-location').unbind('click')
-    $('.image-location').on('click', function() {
-        var image = $(this).attr('data-image')
+/**
+ * binds the element to a transitional click step
+ * this step lets the user know they are about to delete the element
+ * @returns {undefined}  
+ */
+function bind_location_pre_removal() {
+    $('.pre-delete').unbind('click')
+    $('.pre-delete').on('click', function() {
         $this = $(this)
+        var location = $this.attr('data-location')
+        $this.text("delete " + location + "?")
+        $this.addClass('image-location')
+        $this.removeClass('pre-delete')
+        $('.pre-delete').unbind('click')
+        bind_close_removal($this)
+        bind_location_removal($this)
+    })
+}
+/**
+ * binds the div to the removal function to remove a
+ * location from an image (but in the db it is vice versa)
+ * @returns {undefined}
+ */
+function bind_location_removal(obj) {
+
+    obj.on('click', function() {
+        var image = $(this).attr('data-image')
+        $this = obj
+        console.log('test');
         ajaxremovelocation({image_name: image}).done(function(data) {
-            //console.log(data);
+
             $this.fadeOut('', function() {
                 $parent = $(this).parent('.location')
                 $this.remove()
                 check_is_empty($parent)
             });
-
+            obj.off('click')
         }).fail(function(data) {
             console.log("REMOVAL FAIL")
             //console.log(data)
@@ -133,9 +156,31 @@ function bind_location_removal() {
 
 
     })
-
-
 }
+
+/**
+ * fires event once "delete ..." message appears
+ * if and only if the user selects any area outside of the 
+ * delete box to allow the user to cancel their actions
+ * @param {type} obj
+ * @returns {undefined} 
+ */
+function bind_close_removal(obj) {
+    $('body').on("mouseup", function(event) {
+        if (!obj.is(event.target)) {
+            console.log('test');
+            $this = obj
+            var location = $this.attr('data-location')
+            $this.text(location)
+            $this.removeClass('image-location')
+            $this.addClass('pre-delete')
+            obj.unbind('click')
+            bind_location_pre_removal()
+            $('body').off("mouseup")
+        }
+    });
+}
+
 
 /**
  * bind change function to sidebar select boxes
@@ -190,7 +235,7 @@ $('select[data-script=location_load].sidebar-select').each(function() {
 
                     //build out select options
                     selectitems.push("<option value='" + i + "'>" + i + "</option>");
-                    draganddropitems.push('<span id="drag_' + i + '"  class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus="' + campus + '" data-building="' + building_data + '" data-room="' + room_data + '" draggable="true" >' + i + '</span>')
+                    draganddropitems.push('<a href="#?javascript:void(0)" id="drag_' + i + '"  class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus="' + campus + '" data-building="' + building_data + '" data-room="' + room_data + '" draggable="true" >' + i + '</a>')
 
                 });
 

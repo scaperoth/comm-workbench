@@ -66,10 +66,10 @@ foreach ($bucket_files as $image) {
              <legend>Drag and Drop</legend>
             <div id="bucket_list" data-type="bucket_list" >
 
-                <span id="drag_GWU" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus ='' draggable="true" >GWU</span>
+                <a href="#?javascript:void(0)"  id="drag_GWU" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus ='' draggable="true" >GWU</a>
                 <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
 
-                    <span id="drag_<?= $foldername ?>" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus='<?= $foldername ?>'  draggable="true" ><?= $foldername; ?></span>
+                    <a href="#?javascript:void(0)"  id="drag_<?= $foldername ?>" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus='<?= $foldername ?>'  draggable="true" ><?= $foldername; ?></a>
 
                 <?php endforeach; ?>
             </div><!--end bucket-->
@@ -99,11 +99,11 @@ foreach ($bucket_files as $image) {
 
                     <?php foreach ($item['location'] as $location): ?>
                         <?php $image_location = ($location == "GWU" ? "" : $location . DIRECTORY_SEPARATOR) . urlencode($item['name']) ?>
-                        <span data-toggle="tooltip" data-placement="top" title="Click to delete" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 right15 bottom10 label label-warning image-location medium-font" data-image='<?= $image_location ?>'><?=
+                        <a href="#?javascript:void(0);"  class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 right15 bottom10 label label-warning pre-delete medium-font" data-image='<?= $image_location ?>' data-location="<?=$location?>"><?=
                             $location;
-                            $counter++;
                             ?>
-                        </span>
+                        </a>
+                    <?php $counter++;?>
                     <?php endforeach ?>
 
                 </div>
