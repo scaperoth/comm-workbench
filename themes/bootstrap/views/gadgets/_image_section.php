@@ -1,33 +1,3 @@
-<?php
-$bucket_files = ApiHelper::_get_bucket_files('gadgets');
-$bucket_dir = ApiHelper::_get_bucket_url('gadgets');
-$dbstructure = ApiHelper::_get_db_structure('gadgets');
-
-foreach ($bucket_files as $image) {
-    if (!is_array($image)) {
-        $image = urlencode($image);
-        $url = Yii::app()->createAbsoluteUrl("api/getdir/gadgets/$image");
-        $curl_response = Yii::app()->curl->get($url);
-        $image_locations[] = (json_decode($curl_response, true));
-    }
-}
-
-/* $image_locations Returns structure like the following:
-  Array
-  (
-  ...
-  [3] => Array
-  (
-  [name] => 13110130p9-widget-Lecture Capture.jpg
-  [location] => Array
-  (
-  [0] => FB\AC0\B152
-  [1] => FB\AC0\B156
-  [2] => FB\CO0\0101
-  [3] => FB\DUQ\0151
- */
-?>
-
 <script>
 </script>
 <div class="col-xs-3 leftCol left15" id="bucket">

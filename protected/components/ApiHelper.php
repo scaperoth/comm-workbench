@@ -447,13 +447,15 @@ class ApiHelper extends CHtml {
                             break;
                         case 2:
                             $path = array("bottomfolder" => array($item->getFilename() => array()));
+                            $path[$item->getFilename()]= array( );
                             break;
                         default:
                             $path = array("bottomfolder" => array($item->getFilename() => array()));
+                            $path[$item->getFilename()]= array( );
                             break;
                     }
                 } else {
-                    $path = array("images" => $item->getFilename());
+                    $path = array("images" => array($item->getFilename()));
                 }
 
                 for ($depth = $iterator->getDepth() - 1; $depth >= 0; $depth--) {

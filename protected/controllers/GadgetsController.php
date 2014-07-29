@@ -11,7 +11,19 @@ class GadgetsController extends Controller {
     }
 
     public function actionIndex() {
-        $this->render('index');
+        $bucket_files = ApiHelper::_get_bucket_files('gadgets');
+        $bucket_dir = ApiHelper::_get_bucket_url('gadgets');
+        $dbstructure = ApiHelper::_get_db_structure('gadgets');
+
+        foreach ($bucket_files as $image) {
+            if (!is_array($image)) {
+                $image = urlencode($image);
+                $url = Yii::app()->createAbsoluteUrl("api/getdir/gadgets/$image");
+                $curl_response = Yii::app()->curl->get($url);
+                $image_locations[] = (json_decode($curl_response, true));
+            }
+        }
+        $this->render('index', array('image_locations' => $image_locations, 'dbstructure' => $dbstructure,'bucket_dir'=>$bucket_dir,'bucket_files'=>$bucket_files ));
     }
 
     public function action_image_section() {
@@ -40,7 +52,7 @@ class GadgetsController extends Controller {
         $url = Yii::app()->createAbsoluteUrl("api/filestructure/gadgets/$location");
         $curl_response = Yii::app()->curl->get($url);
         header('Content-Type: application/json; charset="UTF-8"');
-        
+
         echo $curl_response;
         Yii::app()->end();
     }
@@ -61,7 +73,7 @@ class GadgetsController extends Controller {
 
         // collect user input data
         if (isset($_POST['args'])) {
-            
+
             $model->attributes = $_POST['args'];
             $image = urldecode($_POST['args']['image_name']);
             $model->image_name = $image;
@@ -91,7 +103,7 @@ class GadgetsController extends Controller {
         // collect user input data
         if (isset($_POST['image_name'])) {
             $model->image_name = $_POST['image_name'];
-            
+
             // validate user input and redirect to the previous page if valid
             if ($model->removeimage()) {
                 

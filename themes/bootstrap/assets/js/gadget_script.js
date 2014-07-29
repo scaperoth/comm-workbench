@@ -1,6 +1,5 @@
 /**
  * javascript that only relates directly to the gadget section(s)
- */
 
 $('#image-view-button').click(function(e) {
     $('.image-section').show();
@@ -11,6 +10,7 @@ $('#location-view-button').click(function(e) {
     $('.image-section').hide();
 });
 
+ */
 
 /************************
  * Drag and Drop Stuff

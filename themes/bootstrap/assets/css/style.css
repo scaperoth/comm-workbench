@@ -271,7 +271,7 @@ footer{
 }
 
 /*******************/
-/* Gadgets Image Form
+/* Gadgets Image page
 ------------------- */
 
 .location-select{
@@ -285,6 +285,20 @@ footer{
     font-size:1.2em;
 }
 
+/*******************/
+/* Gadgets Location Page
+------------------- */
+/******
+ * Animate image preview
+ ******/
+/* expanding input CSS only */
+.imager	{
+-webkit-transition:width 0.1s ease-in-out;
+}
+.imager:hover {
+    width:10%;
+    -webkit-transition:width 0.1s ease-in-out;
+}
 
 /*******************/
 /* LOADING GIF

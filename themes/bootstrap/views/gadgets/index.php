@@ -3,7 +3,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
+$args = array('image_locations' => $image_locations, 'dbstructure' => $dbstructure, 'bucket_dir' => $bucket_dir, 'bucket_files' => $bucket_files);
 
+$whichpage = 'image';
+if (isset($_GET['page_id']))
+    $whichpage = $_GET['page_id'];
 ?>
 
 
@@ -41,29 +45,41 @@
     </div><!--/controls-->
     <div class="col-md-12">
         <div class="center">
-            <div class="btn-group " data-toggle="buttons">
-                <label class="btn btn-lg btn-primary active"  id="image-view-button">
-                    <input type="radio" name="options"  checked> Image View
-                </label>
-                <label class="btn btn-lg btn-primary" hidden id="location-view-button" >
-                    <input type="radio" name="options" > Location View
-                </label>
-            </div>
+            <?php
+            echo BsHtml::buttonGroup(array(
+                array(
+                    'label' => 'Image View',
+                    'url' => '?page_id=image',
+                    'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'image') ? "active" : ""),
+                    'name' => 'options',
+                    'type' => BsHtml::BUTTON_TYPE_LINK,
+                ),
+                array(
+                    'label' => 'Location View',
+                    'url' => '?page_id=location',
+                    'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'location') ? "active" : ""),
+                    'name' => 'options',
+                    'type' => BsHtml::BUTTON_TYPE_LINK,
+                ),
+                    ), array(
+            ));
+            ?>
         </div>
 
         <div id="ajax_panel"></div>
     </div>
     <!--left-->
-    <div class=" image-section">
-        <?php $this->renderPartial('_image_section'); ?>
+    <?php if ($whichpage != 'location'): ?>
+        <div class=" image-section" <?= (($whichpage == 'location') ? "hidden" : ""); ?>>
+            <?php $this->renderPartial('_image_section', $args); ?>
+        </div><!--end image-section-->
+    <?php endif; ?>
 
-    </div><!--end image-section-->
-
-    <div class="location-section" hidden>
-        <?php $this->renderPartial('_location_section'); ?>
-    </div><!--end location-section-->
-
+    <?php if ($whichpage == 'location'): ?>
+        <div class="location-section" <?= (($whichpage == 'image') ? "hidden" : ""); ?> >
+            <?php $this->renderPartial('_location_section', $args); ?>
+        </div><!--end location-section-->
+    <?php endif; ?>
 </div><!--end row-->
 
-<?
-?>
+<? ?>
