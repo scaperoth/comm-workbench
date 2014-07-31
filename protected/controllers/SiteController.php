@@ -112,6 +112,7 @@ class SiteController extends Controller {
      * upload document to the proper bucket directory
      */
     public function actionUpload() {
+        
         $errors = 0;
         $model = new UploadForm();
 // if it is ajax validation request
@@ -148,5 +149,59 @@ class SiteController extends Controller {
 // display the login form
         $this->render('upload', array('model' => $model));
     }
+    
+    /**
+     * 
+     */
+    public function actionSave() {
+        if (!isset($_GET['service'])) {
+            throw new CHttpException('403', 'Invalid access.');
+        }
+        $service = $_GET['service'];
+        $url = Yii::app()->createAbsoluteUrl("api/update/$service/save");
+        $curl_response = Yii::app()->curl->get($url);
 
+        Yii::app()->user->setFlash('success', 'Refreshed');
+
+        $this->redirect(Yii::app()->user->returnUrl);
+    }
+    
+    /**
+     * 
+     */
+    public function actionLoad() {
+        if (!isset($_GET['service'])) {
+            throw new CHttpException('403', 'Invalid access.');
+        }
+        $service = $_GET['service'];
+        $url = Yii::app()->createAbsoluteUrl("api/sync/$service/pull");
+        $curl_response = Yii::app()->curl->get($url);
+
+        $url = Yii::app()->createAbsoluteUrl("api/update/$service/save");
+        $curl_response = Yii::app()->curl->get($url);
+
+        Yii::app()->user->setFlash('success', 'Loaded');
+        $this->redirect(Yii::app()->user->returnUrl);
+    }
+    
+    /**
+     * 
+     */
+    public function actionPublish() {
+        if (!isset($_GET['service'])) {
+            throw new CHttpException('403', 'Invalid access.');
+        }
+        
+        $service = $_GET['service'];
+        $url = Yii::app()->createAbsoluteUrl("api/update/$service/save");
+        $curl_response = Yii::app()->curl->get($url);
+
+        $url = Yii::app()->createAbsoluteUrl("api/sync/$service/push");
+        $curl_response = Yii::app()->curl->get($url);
+
+        Yii::app()->user->setFlash('success', 'Published');
+
+        $this->redirect(Yii::app()->user->returnUrl);
+    }
+    
 }

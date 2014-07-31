@@ -1,6 +1,7 @@
 //start by binding elements
 bind_drag_and_drop()
 bind_location_pre_removal()
+
 /*##############################
  * Drag and Drop Events
  ##############################*/
@@ -256,7 +257,60 @@ $('select[data-script=location_load].sidebar-select').each(function() {
         }
     })
 });
+$('.ajax-drilldown').live('click', function(ev) {
+    navigate_drilldown($(this))
+});
 
+$('#location-nav').live('click',function(){
+    navigate_drilldown($(this))
+});
+
+/**
+ * 
+ */
+function navigate_drilldown(obj) {
+    $this = obj
+    var parent = $('.show-locations')
+    var root = $this.attr('data-root')
+    var location = $this.attr('data-location')
+    var campus = $this.attr('data-campus')
+    var building = $this.attr('data-building')
+    var db = dbstructure
+    var hidden = ""
+    
+    
+    switch (root) {
+        case 'files':
+            params = {dbstructure: JSON.stringify(db.files), bucketdir: bucketdir, root: 'root', campus: campus, building: building}
+            $('#location-nav').attr('data-root','GWU')
+            break;
+        case 'root':
+            params = {dbstructure: JSON.stringify(db.files[location]), bucketdir: bucketdir, root: 'subfolder', campus: location, building: building}
+            $('#location-nav').attr('data-root','files')
+            break;
+        case 'subfolder':
+            params = {dbstructure: JSON.stringify(db.files[campus][location]), bucketdir: bucketdir, root: 'bottomfolder', campus: campus, building: location}
+            $('#location-nav').attr('data-root','root')
+            $('#location-nav').attr('data-location',campus)
+            break;
+        default:
+            params = {dbstructure: JSON.stringify(db), bucketdir: bucketdir, root: 'files', campus: campus, building: location}
+            hidden = "hidden";
+            break;
+
+    }
+    
+    document.getElementById('location-nav').className = hidden;
+
+    ajaxdrilldownlocations(params).done(function(data) {
+        console.log(data)
+        parent.html(data)
+    }).fail(function(data) {
+        console.log(data)
+    });
+    event.preventDefault();
+    event.stopPropagation();
+}
 
 /*##############################
  * Ajax Calls
@@ -345,6 +399,41 @@ function ajaxgetlocations(params) {
         }, error: function(data) {
             $('#ajax_panel').html('');
 
+        }
+    });
+}
+
+/**
+ * Makes call for drilldown on select of each location
+ * @param {type} params in ajax format of {dbstructure:var, subdir:var, bucketdir:var}
+ * @returns {@exp;$@call;ajax} */
+function ajaxdrilldownlocations(params) {
+    /*
+     * format of api call.
+     * //for images in GWU
+     * ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure, 'files', $bucket_dir); 
+     * //for images in each under gwu
+     ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure['files'], 'root', $bucket_dir); 
+     //for images in each under fb building
+     ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure['files']['FB'], 'subfolder', $bucket_dir); 
+     //for images in each under fb and building ac0
+     ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure['files']['FB']['AC0'], 'bottomfolder', $bucket_dir); 
+     */
+    return $.ajax({
+        type: 'POST',
+        url: drilldownajaxurl,
+        data: {args: params},
+        beforeSend: function() {
+// this is where we append a loading image
+            $('#ajax_panel').html('<div  id="ajax_background"><div id="loading"><img src="' + images + 'loading.gif" alt="Loading..." /></div></div>');
+        },
+        success: function(data) {
+            // successful request; do something with the data
+            $('#ajax_background').fadeOut();
+            $('#ajax_panel').html('');
+        },
+        error: function(data) {
+            $('#ajax_panel').html('');
         }
     });
 }

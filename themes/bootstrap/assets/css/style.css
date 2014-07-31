@@ -254,6 +254,7 @@ footer{
         color .40s ease-in-out;
     -webkit-transition: background .50s ease-in-out, 
         color .40s ease-in-out;
+    cursor:pointer;
 }
 .fade-bg.white{
     background:transparent;
@@ -263,6 +264,16 @@ footer{
     background:transparent;
     color:#000;
 }
+.fade-bg:hover.gwblue{
+    background:transparent;
+    color:#c8b18b;
+}
+
+.fade-bg:hover.buff{
+    background:transparent;
+    color:#004065;
+}
+
 .fade-bg.small-font{
     font-size:20px;
 }
@@ -293,12 +304,20 @@ footer{
  ******/
 /* expanding input CSS only */
 .imager	{
--webkit-transition:width 0.1s ease-in-out;
-}
-.imager:hover {
-    width:10%;
     -webkit-transition:width 0.1s ease-in-out;
 }
+.imager:active {
+    width:130px;
+    -webkit-transition:width 0.1s ease-in-out;
+}
+.imager:hover {
+    width:130px;
+    -webkit-transition:width 0.1s ease-in-out;
+}
+
+/***********
+* Drilldown
+************/
 
 /*******************/
 /* LOADING GIF

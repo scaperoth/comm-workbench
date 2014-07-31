@@ -8,8 +8,19 @@ $args = array('image_locations' => $image_locations, 'dbstructure' => $dbstructu
 $whichpage = 'image';
 if (isset($_GET['page_id']))
     $whichpage = $_GET['page_id'];
-?>
 
+$cs = Yii::app()->clientScript;
+//gadgets ajax variables
+$cs->registerScript('dbstructure_script', "var dbstructure = " .json_encode($dbstructure) . ";");
+$cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucket_dir) . ";");
+$cs->registerScript('gadget_get_ajax_url', ' var getlocationajaxurl ="' . $this->createUrl('getlocationdataajax') . '";');
+$cs->registerScript('gadget_add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('addlocationtoimageajax') . '";');
+$cs->registerScript('gadget_remove_ajax_url', ' var removelocationajaxurl ="' . $this->createUrl('removelocationfromimageajax') . '";');
+$cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $this->createUrl('drawlocationsajax') . '";');
+$cs->registerScript('gadget_script', file_get_contents('themes/bootstrap/assets/js/gadget_script.js'));
+$cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap/assets/js/gadget_ajax.js'));
+
+?>
 
 
 <div class="row">
@@ -20,25 +31,23 @@ if (isset($_GET['page_id']))
             echo BsHtml::buttonGroup(array(
                 array(
                     'label' => 'Save',
-                    'url' => Yii::app()->createAbsoluteUrl('gadgets/save'),
+                    'url' => Yii::app()->createAbsoluteUrl('site/save') . '?service=gadgets',
                     'icon' => 'save fw',
-                    'type' => BsHtml::BUTTON_TYPE_LINK
+                    'type' => BsHtml::BUTTON_TYPE_LINK,
                 ),
                 array(
                     'label' => 'Load',
-                    'url' => Yii::app()->createAbsoluteUrl('gadgets/load'),
+                    'url' => Yii::app()->createAbsoluteUrl('site/load') . '?service=gadgets',
                     'icon' => 'download fw',
-                    'type' => BsHtml::BUTTON_TYPE_LINK
+                    'type' => BsHtml::BUTTON_TYPE_LINK,
                 ),
                 array(
                     'label' => 'Publish',
-                    'url' => Yii::app()->createAbsoluteUrl('gadgets/publish'),
+                    'url' => Yii::app()->createAbsoluteUrl('site/publish') . '?service=gadgets',
                     'icon' => 'check fw',
-                    'type' => BsHtml::BUTTON_TYPE_LINK
+                    'type' => BsHtml::BUTTON_TYPE_LINK,
                 )
                     ), array(
-                'color' => BsHtml::BUTTON_COLOR_WARNING,
-                'type' => BsHtml::BUTTON_TYPE_LINK
             ));
             ?>
         </div>
@@ -53,6 +62,7 @@ if (isset($_GET['page_id']))
                     'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'image') ? "active" : ""),
                     'name' => 'options',
                     'type' => BsHtml::BUTTON_TYPE_LINK,
+                    'color' => BSHtml::BUTTON_COLOR_PRIMARY,
                 ),
                 array(
                     'label' => 'Location View',
@@ -60,6 +70,7 @@ if (isset($_GET['page_id']))
                     'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'location') ? "active" : ""),
                     'name' => 'options',
                     'type' => BsHtml::BUTTON_TYPE_LINK,
+                    'color' => BSHtml::BUTTON_COLOR_PRIMARY,
                 ),
                     ), array(
             ));
