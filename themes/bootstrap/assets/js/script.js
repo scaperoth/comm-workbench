@@ -24,15 +24,20 @@ function isEmpty(el) {
 
 }
 
+function get(name){
+   if(name=(new RegExp('[?&]'+encodeURIComponent(name)+'=([^&]*)')).exec(location.search))
+      return decodeURIComponent(name[1]);
+}
+
 /******************************
  * Affixed sidebar
  ******************************/
-$("#bucket-affix").on("affix.bs.affix", (function() {
+$("#sidebar-affix").on("affix.bs.affix", (function() {
     $(this).addClass("col-xs-3")
     $(this).removeClass("col-sm-12")
 }))
 
-$("#bucket-affix").on("affixed-top.bs.affix", (function() {
+$("#sidebar-affix").on("affixed-top.bs.affix", (function() {
     $(this).removeClass("col-xs-3")
     $(this).addClass("col-sm-12")
 }))
@@ -56,3 +61,5 @@ function findBootstrapEnvironment() {
         }
     };
 }
+
+

@@ -1,7 +1,7 @@
 <script>
 </script>
-<div class="col-xs-3 leftCol left15" id="bucket">
-    <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12" id="bucket-affix">
+<div class="col-xs-3 leftCol left15" id="sidebar">
+    <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12" id="sidebar-affix">
         <div class="bottom30 ">
             <form class="bs-example form-inline " action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
                     <legend>Filter Campus/Building</legend>
@@ -33,7 +33,7 @@
             </form>
         </div><!--end filter form-->
         <div class="">
-             <legend>Drag and Drop</legend>
+            <legend>Drag and Drop</legend>
             <div id="bucket_list" data-type="bucket_list" >
 
                 <a href="#?javascript:void(0)"  id="drag_GWU" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus ='' draggable="true" >GWU</a>
@@ -65,15 +65,23 @@
                     <img src='<?= $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
                 </div>
 
-                <div class="col-sm-12 bottom10 no-padding location " data-image ="<?= $item['name']; ?>" >
+                <div class="col-sm-12 bottom10 no-padding dropper <?= ((count($item['location']) == 0) ? 'well' : ''); ?>" data-image ="<?= $item['name']; ?>" >
 
                     <?php foreach ($item['location'] as $location): ?>
-                        <?php $image_location = ($location == "GWU" ? "" : $location . DIRECTORY_SEPARATOR) . urlencode($item['name']) ?>
-                        <a href="#?javascript:void(0);"  class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 right15 bottom10 label label-warning pre-delete medium-font" data-image='<?= $image_location ?>' data-location="<?=$location?>"><?=
-                            $location;
-                            ?>
-                        </a>
-                    <?php $counter++;?>
+                        <?php
+                        $image_location = ($location == "GWU" ? "" : $location . DIRECTORY_SEPARATOR) . urlencode($item['name']);
+                        $linkOptions = array(
+                            'href' => "#?javascript:void(0);",
+                            'draggable' => "true",
+                            'id' => "trashable_" . $location . "_" . urlencode($item['name']),
+                            'class' => "col-lg-2 col-md-4 col-sm-4 col-xs-10 right15 bottom10 label label-warning pre-delete medium-font",
+                            'data-image' => $image_location,
+                            'data-location' => $location,
+                        );
+                        echo BSHtml::tag('a', $linkOptions, $location);
+
+                        $counter++;
+                        ?>
                     <?php endforeach ?>
 
                 </div>

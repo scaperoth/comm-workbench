@@ -1,22 +1,28 @@
 //start by binding elements
 bind_drag_and_drop()
 bind_location_pre_removal()
-
 /*##############################
  * Drag and Drop Events
  ##############################*/
 
+/**********************\
+ |*Image section Events*|
+ \**********************/
 /**
  * 
  * @returns {undefined}
  */
 function bind_drag_and_drop() {
+    var page = get('page_id');
     /**/
-    $('.location').on('drop', function(ev) {
-        drop(ev)
+    $('.dropper').on('drop', function(ev) {
+        if (page == 'location') {
+            drop_image_onto_location(ev)
+        } else
+            drop_location_onto_image(ev)
     })
     /**/
-    $('.location').on('dragover', function(ev) {
+    $('.dropper').on('dragover', function(ev) {
         allowDrop(ev)
     })
     /**/
@@ -30,12 +36,13 @@ function bind_drag_and_drop() {
  * @returns {undefined}
  */
 function unbind_drag_and_drop() {
-    $('.location').unbind('drop')
+    $('.dropper').unbind('drop')
     /**/
-    $('.location').unbind('dragover')
+    $('.dropper').unbind('dragover')
     /**/
-    $('.location').unbind('dragstart')
+    $('.dropper').unbind('dragstart')
 }
+
 
 /**
  * 
@@ -63,7 +70,7 @@ function drag(ev, id) {
  * @param {type} ev
  * @returns {drop}
  */
-function drop(ev) {
+function drop_location_onto_image(ev) {
 
     ev.stopPropagation()
     ev.preventDefault()
@@ -78,19 +85,23 @@ function drop(ev) {
     var location
 
     //make sure it's dropped on the right parent
-    if ($(parent).hasClass('location')) {
+    if ($(parent).hasClass('dropper')) {
 
         newchild.id = ''
         campus = newchild.getAttribute('data-campus') ? newchild.getAttribute('data-campus') : ''
         building = newchild.getAttribute('data-building') ? newchild.getAttribute('data-building') : ''
         room = newchild.getAttribute('data-room') ? newchild.getAttribute('data-room') : ''
         location = (building ? campus + "/" : campus) + (room ? building + "/" : building) + room
+        
+        newchild.id = "trashable_"+newchild.innerHTML
         newchild.innerHTML = location ? location : "GWU"
         newchild.className = newchild.className + " image-location";
+        newchild.setAttribute("draggable", true)
 
         //fix the child's image name and make sure it is formatted properly
         image_name = encodeURIComponent($(parent).attr('data-image'))
-
+        newchild.id = newchild.id+"_"+image_name
+        
         $(newchild).attr('data-image', location + "/" + image_name)
         //time to update...
         values = {campus: campus, building: building, room: room, image_name: image_name}
@@ -109,6 +120,83 @@ function drop(ev) {
     }
 }
 
+function drop_image_onto_location(ev) {
+    ev.stopPropagation()
+    ev.preventDefault()
+
+    var data = ev.originalEvent.dataTransfer.getData("Text")
+
+    var parent = $(ev.target)
+    var newchild = document.getElementById(data).cloneNode(true)
+    var db
+    var root
+    var campus
+    var building
+    var room
+    var image_name
+    var location
+
+    //make sure it's dropped on the right parent
+    if ($(parent).hasClass('dropper')) {
+        root = parent.attr('data-root')
+        location = parent.attr('data-location')
+        campus = parent.attr('data-campus')
+        building = parent.attr('data-building')
+        room = ''
+        db = dbstructure
+        image_name = encodeURIComponent($(newchild).attr('data-image'))
+
+        var newitem = [];
+
+        newchild.id = ''
+        switch (root) {
+            case 'root':
+                params = {campus: location, building: building, room: room, image_name: image_name}
+                location = (building ? location + "/" : location) + (room ? building + "/" + room + "/" : building)
+                break;
+            case 'subfolder':
+                params = {campus: campus, building: location, room: room, image_name: image_name}
+                location = (location ? location + "/" : location) + (room ? location + "/" : location) + room
+                break;
+            case 'bottomfolder':
+                params = {campus: campus, building: building, room: location, image_name: image_name}
+                location = (building ? campus + "/" : campus) + (location ? building + "/" : building) + location
+                break;
+            default:
+                params = {campus: campus, building: building, room: room, image_name: image_name}
+                location = (building ? campus + "/" : campus) + (room ? building + "/" : building) + room
+                break;
+
+        }
+
+
+        $(parent).attr('data-image', location + image_name)
+
+        var data_image = location + image_name
+
+        ajaxsubmitnewlocation(params).done(function(ajax_data) {
+            console.log(ajax_data)
+
+            newitem.push("<div>")
+            newitem.push('<a class="col-xs-1 pre-delete imager trashable dropper" draggble="true" data-image="' + data_image + '" href="#?javascript:void(0)">')
+            newitem.push(newchild.outerHTML)
+            newitem.push('<h2 class="image-overlay"><span>Delete?</span></h2>')
+            newitem.push('</a>')
+            newitem.push('</div>')
+            $(parent).append(newitem.join(""));
+            $(parent).removeClass('well');
+            bind_location_pre_removal() //add events to newly created object
+            //console.log(ajax_data);
+        }).fail(function(data) {
+            console.log(data);
+            console.log("NEW LOCATION FAIL")
+            //console.log(data);
+        })
+
+        //bind the new child to the click event just in case the user wants to delete it before a refresh
+    }
+}
+
 /*##############################
  * Form and Click Events
  ##############################*/
@@ -119,16 +207,29 @@ function drop(ev) {
  * @returns {undefined}  
  */
 function bind_location_pre_removal() {
-    $('.pre-delete').unbind('click')
+    $('.pre-delete').off('click')
     $('.pre-delete').on('click', function() {
+        console.log('clicker');
         $this = $(this)
-        var location = $this.attr('data-location')
-        $this.text("delete " + location + "?")
+        $canceller = $this
+
+        if ($this.hasClass('imager')) {
+            $canceller = $this.children('img')
+            $this.children('.image-overlay').animate({
+                opacity: 1,
+            });
+        } else {
+            $this.text("delete?")
+        }
+
         $this.addClass('image-location')
         $this.removeClass('pre-delete')
-        $('.pre-delete').unbind('click')
-        bind_close_removal($this)
+        $this.off('click')
+
+        bind_close_removal($canceller)
         bind_location_removal($this)
+
+
     })
 }
 /**
@@ -137,13 +238,13 @@ function bind_location_pre_removal() {
  * @returns {undefined}
  */
 function bind_location_removal(obj) {
-
+    
     obj.on('click', function() {
         var image = $(this).attr('data-image')
         $this = obj
-        console.log('test');
+        console.log('deleting...');
         ajaxremovelocation({image_name: image}).done(function(data) {
-
+            console.log(data)
             $this.fadeOut('', function() {
                 $parent = $(this).parent('.location')
                 $this.remove()
@@ -168,9 +269,16 @@ function bind_location_removal(obj) {
  */
 function bind_close_removal(obj) {
     $('body').on("mouseup", function(event) {
-        if (!obj.is(event.target)) {
-            console.log('test');
+        if (!obj.is(event.target) && !$('.image-overlay').is(event.target)) {
+
             $this = obj
+            if ($this.parent('a').hasClass('imager')) {
+                $this.parent('a').children('.image-overlay').animate({
+                    opacity: 0,
+                });
+                $this = obj.parent('a')
+            }
+
             var location = $this.attr('data-location')
             $this.text(location)
             $this.removeClass('image-location')
@@ -261,7 +369,7 @@ $('.ajax-drilldown').live('click', function(ev) {
     navigate_drilldown($(this))
 });
 
-$('#location-nav').live('click',function(){
+$('#location-nav').live('click', function() {
     navigate_drilldown($(this))
 });
 
@@ -277,41 +385,50 @@ function navigate_drilldown(obj) {
     var building = $this.attr('data-building')
     var db = dbstructure
     var hidden = ""
-    
-    
+
     switch (root) {
         case 'files':
             params = {dbstructure: JSON.stringify(db.files), bucketdir: bucketdir, root: 'root', campus: campus, building: building}
-            $('#location-nav').attr('data-root','GWU')
+            $('#location-nav').attr('data-root', 'GWU')
+
             break;
         case 'root':
             params = {dbstructure: JSON.stringify(db.files[location]), bucketdir: bucketdir, root: 'subfolder', campus: location, building: building}
-            $('#location-nav').attr('data-root','files')
+            $('#location-nav').attr('data-root', 'files')
+
             break;
         case 'subfolder':
             params = {dbstructure: JSON.stringify(db.files[campus][location]), bucketdir: bucketdir, root: 'bottomfolder', campus: campus, building: location}
-            $('#location-nav').attr('data-root','root')
-            $('#location-nav').attr('data-location',campus)
+            $('#location-nav').attr('data-root', 'root')
+            $('#location-nav').attr('data-location', campus)
+
             break;
         default:
             params = {dbstructure: JSON.stringify(db), bucketdir: bucketdir, root: 'files', campus: campus, building: location}
-            hidden = "hidden";
+            hidden = "hidden"
             break;
 
     }
-    
+
     document.getElementById('location-nav').className = hidden;
 
     ajaxdrilldownlocations(params).done(function(data) {
-        console.log(data)
-        parent.html(data)
+        $(parent).html(data)
+        bind_drag_and_drop()
+        bind_location_pre_removal()
     }).fail(function(data) {
         console.log(data)
     });
     event.preventDefault();
     event.stopPropagation();
 }
+function delete_cookie(name) {
+    document.cookie = name + '=; expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+}
 
+function check_cookie_unhide_navigation() {
+
+}
 /*##############################
  * Ajax Calls
  ##############################*/

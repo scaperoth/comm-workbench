@@ -24,6 +24,7 @@ class ApiHelper extends CHtml {
 
     /* #############################################
      * File manipulation
+     * COULD BE OPTIMIZED
      * ############################################# */
 
     /**

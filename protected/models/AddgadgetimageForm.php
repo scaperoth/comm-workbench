@@ -34,13 +34,14 @@ class AddgadgetimageForm extends CFormModel {
         $image = urlencode($this->image_name);
         $location = $this->campus . DIRECTORY_SEPARATOR . $building . $room . $image;
         
-            
+         
         $url = Yii::app()->createAbsoluteUrl("api/addimage/gadgets/$location");
         $curl_response = Yii::app()->curl->get($url);
         echo $curl_response;
         if (!$curl_response) {
             return false;
         }
+        
         
         $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
         $curl_response = Yii::app()->curl->get($url);

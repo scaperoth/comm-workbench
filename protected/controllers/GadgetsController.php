@@ -47,6 +47,7 @@ class GadgetsController extends Controller {
         if (!YII_DEBUG && !Yii::app()->request->isPostRequest) {
             throw new CHttpException('403', 'Forbidden access.');
         }
+        
 
         $model = new AddgadgetimageForm;
 

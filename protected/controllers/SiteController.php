@@ -163,7 +163,7 @@ class SiteController extends Controller {
 
         Yii::app()->user->setFlash('success', 'Refreshed');
 
-        $this->redirect(Yii::app()->user->returnUrl);
+        $this->redirect("../".$service);
     }
     
     /**
@@ -181,7 +181,7 @@ class SiteController extends Controller {
         $curl_response = Yii::app()->curl->get($url);
 
         Yii::app()->user->setFlash('success', 'Loaded');
-        $this->redirect(Yii::app()->user->returnUrl);
+        $this->redirect("../".$service);
     }
     
     /**
@@ -201,7 +201,7 @@ class SiteController extends Controller {
 
         Yii::app()->user->setFlash('success', 'Published');
 
-        $this->redirect(Yii::app()->user->returnUrl);
+        $this->redirect("../".$service);
     }
     
 }

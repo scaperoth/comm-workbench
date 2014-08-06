@@ -71,25 +71,72 @@ class ApiHelper_Gadgets extends CHtml {
      * @param type $foldername
      */
     function draw_location_section($image_location, $bucket_dir, $foldername, $root_child = NULL, $campus = NULL, $building = NULL) {
+
+        $datalocation = $foldername;
+        $dataroot = ($root_child ? $root_child : '');
+        $datacampus = ($campus ? $campus : '');
+        $databuilding = ($building ? $building : '');
+        $location = '';
+        $next_step = 'root';
+
+        if ($foldername != 'GWU') {
+            switch ($dataroot) {
+                case 'root':
+                    $campus = $datalocation;
+                    $building = $databuilding;
+                    $room = '';
+                    $next_step = 'subfolder';
+                    break;
+                case 'subfolder':
+                    $campus = $datacampus;
+                    $building = $datalocation;
+                    $room = '';
+                    $next_step = 'bottomfolder';
+                    break;
+                case 'bottomfolder':
+                    $campus = $datacampus;
+                    $building = $databuilding;
+                    $room = $datalocation;
+                    $next_step = '#';
+                    break;
+                default:
+                    $campus = $datalocation;
+                    $building = $databuilding;
+                    $room = '';
+                    break;
+            }
+
+            $location = ($building ? $campus . DIRECTORY_SEPARATOR : $campus) . ($room ? $building . DIRECTORY_SEPARATOR : $building) . $room . DIRECTORY_SEPARATOR;
+        }
+
         $linkOptions = array(
-            'class' => " col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font " 
+            'class' => " col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font "
             . (($root_child == 'bottomfolder') ? '' : 'ajax-drilldown'),
             'href' => "#?javascript:void(0)",
-            'data-location' => $foldername,
-            'data-root' => ($root_child ? $root_child : ''),
-            'data-campus' => ($campus ? $campus : ''),
-            'data-building' => ($building ? $building : ''),
+            'data-drilldown'=>$next_step,
+            'data-location' => $datalocation,
+            'data-root' => $dataroot,
+            'data-campus' => $datacampus,
+            'data-building' => $databuilding,
         );
         $rowDivOptions = array(
             'class' => "row bottom30 ",
         );
 
         $innerDivOptions = array(
-            'class' => "col-xs-12 ",
+            'class' => "col-xs-12 dropper",
+            'data-location' => $foldername,
+            'data-root' => ($root_child ? $root_child : ''),
+            'data-campus' => ($campus ? $campus : ''),
+            'data-building' => ($building ? $building : ''),
         );
 
         $imageDivOptions = array(
-            'class' => "col-xs-1 imager",
+        );
+
+        $imageLinkOptions = array(
+            'class' => "col-xs-1 imager pre-delete",
+            'href' => '#?javascript:void(0)'
         );
 
         echo BSHtml::openTag("div", $rowDivOptions);
@@ -102,13 +149,17 @@ class ApiHelper_Gadgets extends CHtml {
 
         if (isset($image_location['images'])) {
             foreach ($image_location['images'] as $image_index => $value) {
-                echo BSHtml::openTag("div", $imageDivOptions);
+                $imageLinkOptions['data-image']= $location . urlencode($value);
 
+                echo BSHtml::openTag("div", $imageDivOptions);
+                echo BSHtml::openTag("a", $imageLinkOptions);
                 echo BSHtml::tag("img", array(
                     "src" => $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $value,
-                    "alt" => $value
+                    "alt" => $value,
+                    'class'=>'image'
                 ));
-
+                echo "<h2 class='image-overlay'><span>Delete?</span></h2>";
+                echo BSHtml::closeTag("a");
                 echo BSHtml::closeTag("div");
                 echo "<!--close imager-->";
             }
