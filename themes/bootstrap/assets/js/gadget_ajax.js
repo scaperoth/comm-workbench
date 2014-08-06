@@ -18,11 +18,16 @@ function bind_drag_and_drop() {
     $('.dropper').on('drop', function(ev) {
         if (page == 'location') {
             drop_image_onto_location(ev)
-        } else
+        } else {
             drop_location_onto_image(ev)
+            console.log('wowowooa')
+        }
+    })
+    $('.trashcan').on('drop', function(ev) {
+        drop_to_trash(ev);
     })
     /**/
-    $('.dropper').on('dragover', function(ev) {
+    $('.dropper, .trashcan').on('dragover', function(ev) {
         allowDrop(ev)
     })
     /**/
@@ -92,16 +97,16 @@ function drop_location_onto_image(ev) {
         building = newchild.getAttribute('data-building') ? newchild.getAttribute('data-building') : ''
         room = newchild.getAttribute('data-room') ? newchild.getAttribute('data-room') : ''
         location = (building ? campus + "/" : campus) + (room ? building + "/" : building) + room
-        
-        newchild.id = "trashable_"+newchild.innerHTML
+
+        newchild.id = "trashable_" + newchild.innerHTML
         newchild.innerHTML = location ? location : "GWU"
         newchild.className = newchild.className + " image-location";
         newchild.setAttribute("draggable", true)
 
         //fix the child's image name and make sure it is formatted properly
         image_name = encodeURIComponent($(parent).attr('data-image'))
-        newchild.id = newchild.id+"_"+image_name
-        
+        newchild.id = newchild.id + "_" + image_name
+
         $(newchild).attr('data-image', location + "/" + image_name)
         //time to update...
         values = {campus: campus, building: building, room: room, image_name: image_name}
@@ -197,6 +202,37 @@ function drop_image_onto_location(ev) {
     }
 }
 
+/**
+ *
+ * @param {type} ev
+ * @returns {undefined} 
+ */
+function drop_to_trash(ev) {
+    var data = ev.originalEvent.dataTransfer.getData("Text")
+    $this = $(document.getElementById(data))
+    $parent = $this.parent('div')
+    var image = $this.attr('data-image')
+    
+    if($this.parent('a').hasClass('imager')){
+        image = $this.parent('a').attr('data-image')
+        alert(image)
+        $this = $this.parent('a');
+        $parent = '';
+    }
+    
+    ajaxremovelocation({image_name: image}).done(function(data) {
+        console.log(data)
+        $this.fadeOut('', function() {
+            $this.remove()
+            check_is_empty($parent)
+        });
+    }).fail(function(data) {
+        console.log(data)
+        console.log("REMOVAL FAIL")
+        //console.log(data)
+    });
+}
+
 /*##############################
  * Form and Click Events
  ##############################*/
@@ -238,7 +274,7 @@ function bind_location_pre_removal() {
  * @returns {undefined}
  */
 function bind_location_removal(obj) {
-    
+
     obj.on('click', function() {
         var image = $(this).attr('data-image')
         $this = obj

@@ -2,7 +2,7 @@
 </script>
 <div class="col-xs-3 leftCol left15" id="sidebar">
     <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12" id="sidebar-affix">
-        <div class="bottom30 ">
+        <div class="bottom30 row">
             <form class="bs-example form-inline " action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
                     <legend>Filter Campus/Building</legend>
 
@@ -32,7 +32,7 @@
                 </fieldset>
             </form>
         </div><!--end filter form-->
-        <div class="">
+        <div class="row">
             <legend>Drag and Drop</legend>
             <div id="bucket_list" data-type="bucket_list" >
 
@@ -44,6 +44,9 @@
                 <?php endforeach; ?>
             </div><!--end bucket-->
         </div> <!--end bucket container-->
+        
+        <div class="trashcan well row col-sm-10" style="height:300px;">
+        </div>
     </div><!-- end affix container-->
 </div><!--/left-->
 
@@ -74,7 +77,7 @@
                             'href' => "#?javascript:void(0);",
                             'draggable' => "true",
                             'id' => "trashable_" . $location . "_" . urlencode($item['name']),
-                            'class' => "col-lg-2 col-md-4 col-sm-4 col-xs-10 right15 bottom10 label label-warning pre-delete medium-font",
+                            'class' => "col-lg-2 col-md-4 col-sm-4 col-xs-10 right15 bottom10 label label-warning pre-delete medium-font trashable",
                             'data-image' => $image_location,
                             'data-location' => $location,
                         );

@@ -136,7 +136,8 @@ class ApiHelper_Gadgets extends CHtml {
 
         $imageLinkOptions = array(
             'class' => "col-xs-1 imager pre-delete",
-            'href' => '#?javascript:void(0)'
+            'href' => '#?javascript:void(0)',
+            'draggable'=>'true'
         );
 
         echo BSHtml::openTag("div", $rowDivOptions);
@@ -150,7 +151,7 @@ class ApiHelper_Gadgets extends CHtml {
         if (isset($image_location['images'])) {
             foreach ($image_location['images'] as $image_index => $value) {
                 $imageLinkOptions['data-image']= $location . urlencode($value);
-
+                $imageLinkOptions['id'] = 'trashable_'.urlencode($value);
                 echo BSHtml::openTag("div", $imageDivOptions);
                 echo BSHtml::openTag("a", $imageLinkOptions);
                 echo BSHtml::tag("img", array(

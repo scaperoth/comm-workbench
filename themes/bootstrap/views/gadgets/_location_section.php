@@ -31,6 +31,8 @@
                 </fieldset>
             </form>
         </div><!--end filter form-->
+        <div class="trashcan well row col-sm-10" style="height:300px;">
+        </div>
     </div><!-- end affix container-->
 </div><!--/left-->
 
