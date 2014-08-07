@@ -30,13 +30,13 @@ function bind_drag_and_drop() {
 
     $('.trashcan').on('dragenter dragover', function(ev) {
         allowDrop(ev)
-        toggle_icon($(this).children('i'), true)
+        toggle_icon($(this), true)
         console.log('woooah')
     })
 
     $('.trashcan').on('dragleave dragexit', function(ev) {
         console.log("SPloUSH")
-        toggle_icon($(this).children('i'), false)
+        toggle_icon($(this), false)
     })
 
     /**/
@@ -48,11 +48,11 @@ function bind_drag_and_drop() {
 
 function toggle_icon(obj, dragover) {
     if (dragover) {
-        obj.removeClass('fa-folder-o')
-        obj.addClass('fa-folder-open-o')
+        obj.removeClass('trash')
+        obj.addClass('trash_open')
     } else {
-        obj.removeClass('fa-folder-open-o')
-        obj.addClass('fa-folder-o')
+        obj.removeClass('trash_open')
+        obj.addClass('trash')
     }
 }
 /**
@@ -208,6 +208,7 @@ function drop_image_onto_location(ev) {
             newitem.push('</div>')
             $(parent).append(newitem.join(""));
             $(parent).removeClass('well');
+
             unbind_drag_and_drop()
             bind_drag_and_drop()
             //
@@ -228,6 +229,7 @@ function drop_image_onto_location(ev) {
  * @returns {undefined} 
  */
 function drop_to_trash(ev) {
+    toggle_icon($(ev.target), false)
     var data = ev.originalEvent.dataTransfer.getData("Text")
     $this = $(document.getElementById(data))
     console.log("data: " + data)
@@ -248,6 +250,9 @@ function drop_to_trash(ev) {
             $this.remove()
             if (!is_location_page())
                 check_is_empty($parent)
+
+
+
         });
     }).fail(function(data) {
         console.log(data)

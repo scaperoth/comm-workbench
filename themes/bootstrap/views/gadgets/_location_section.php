@@ -31,11 +31,8 @@
                 </fieldset>
             </form>
         </div><!--end filter form-->
-        <div class="row">
-            <legend >Delete</legend>
-            <div class="trashcan  row col-sm-4 " >
-
-                <i class="fa fa-folder-o fa-border fa-lg fa-5x"></i> 
+        <div class="row top30">
+            <div class="trashcan trash" >
             </div>
         </div>
     </div><!-- end affix container-->
