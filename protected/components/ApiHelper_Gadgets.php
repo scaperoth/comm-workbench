@@ -153,16 +153,17 @@ class ApiHelper_Gadgets extends CHtml {
                 $imageLinkOptions['data-image']= $location . urlencode($value);
                 $imageLinkOptions['id'] = 'trashable_'.urlencode($value);
                 
-                echo BSHtml::openTag("div", $imageDivOptions);
+                //echo BSHtml::openTag("div", $imageDivOptions);
                 echo BSHtml::openTag("a", $imageLinkOptions);
                 echo BSHtml::tag("img", array(
                     "src" => $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $value,
                     "alt" => $value,
                     'class'=>'image',
+                    'draggable'=>'true',
                     'id'=>$foldername."_".urlencode($value)
                 ));
                 echo BSHtml::closeTag("a");
-                echo BSHtml::closeTag("div");
+                //echo BSHtml::closeTag("div");
                 echo "<!--close imager-->";
             }
         }

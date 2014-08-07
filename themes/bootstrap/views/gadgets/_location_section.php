@@ -12,13 +12,14 @@
                             <?php foreach ($bucket_files as $image): ?>
                                 <?php if (!is_array($image)): ?>
                                     <div class="col-sm-5 no-padding bottom15 ">
-                                        <a href="#?javascript:void(0)" class="col-xs-1 imager" draggable="true">
+                                        <a href="#?javascript:void(0)" data-image="<?=$image?>" class="col-xs-1 imager" id="link_<?=$image?>" draggable="true">
                                             <?php
                                             $imageHtmlOptions = array(
-                                                'data-image' => $image,
+                                                'data-image' => urlencode($image),
                                                 'id' => "drag_" . $image,
                                                 'src' => $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $image,
                                                 'alt' => $image,
+                                                'draggable'=>'true',
                                             );
                                             echo BSHtml::tag('img', $imageHtmlOptions);
                                             ?>

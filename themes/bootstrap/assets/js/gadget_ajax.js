@@ -169,7 +169,7 @@ function drop_image_onto_location(ev) {
         building = parent.attr('data-building')
         room = ''
         db = dbstructure
-        image_name = encodeURIComponent($(newchild).attr('data-image'))
+        image_name = $(newchild).attr('data-image')
 
         var newitem = [];
 
@@ -194,9 +194,9 @@ function drop_image_onto_location(ev) {
 
         }
 
-        $(parent).attr('data-image', location + image_name)
-
         var data_image = location + image_name
+        $(parent).attr('data-image', data_image)
+
 
         ajaxsubmitnewlocation(params).done(function(ajax_data) {
             console.log(ajax_data)
@@ -231,16 +231,16 @@ function drop_image_onto_location(ev) {
 function drop_to_trash(ev) {
     toggle_icon($(ev.target), false)
     var data = ev.originalEvent.dataTransfer.getData("Text")
-    $this = $(document.getElementById(data))
-    console.log("data: " + data)
-    $parent = $this.parent('div')
-    var image = $this.attr('data-image')
-
-    if (is_location_page()) {
+    var item = document.getElementById(data)
+    $this = $(item)
+    var image
+    if (item.tagName == 'A' || item.tagName == 'DIV') {
+        $parent = $this.parent('div')
+        image = $this.attr('data-image')
+        console.log("it's an a, boss")
+    } else {
         image = $this.parent('a').attr('data-image')
-
         $this = $this.parent('a');
-        $parent = '';
     }
 
     ajaxremovelocation({image_name: image}).done(function(data) {
@@ -250,9 +250,6 @@ function drop_to_trash(ev) {
             $this.remove()
             if (!is_location_page())
                 check_is_empty($parent)
-
-
-
         });
     }).fail(function(data) {
         console.log(data)
