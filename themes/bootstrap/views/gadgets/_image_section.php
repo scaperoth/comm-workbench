@@ -44,8 +44,12 @@
                 <?php endforeach; ?>
             </div><!--end bucket-->
         </div> <!--end bucket container-->
-        
-        <div class="trashcan well row col-sm-10" style="height:300px;">
+        <div class="row">
+            <legend >Delete</legend>
+            <div class="trashcan  row col-sm-4 " >
+
+                <i class="fa fa-folder-o fa-border fa-lg fa-5x"></i> 
+            </div>
         </div>
     </div><!-- end affix container-->
 </div><!--/left-->

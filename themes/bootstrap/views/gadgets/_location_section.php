@@ -7,7 +7,7 @@
             <form class="bs-example form-inline " action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
                     <legend>Bucket Images</legend>
 
-                    <div class="form-group">
+                    <div class="form-group" id="bucket_list">
                         <div>
                             <?php foreach ($bucket_files as $image): ?>
                                 <?php if (!is_array($image)): ?>
@@ -18,7 +18,7 @@
                                                 'data-image' => $image,
                                                 'id' => "drag_" . $image,
                                                 'src' => $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $image,
-                                                'alt' => $image
+                                                'alt' => $image,
                                             );
                                             echo BSHtml::tag('img', $imageHtmlOptions);
                                             ?>
@@ -31,7 +31,12 @@
                 </fieldset>
             </form>
         </div><!--end filter form-->
-        <div class="trashcan well row col-sm-10" style="height:300px;">
+        <div class="row">
+            <legend >Delete</legend>
+            <div class="trashcan  row col-sm-4 " >
+
+                <i class="fa fa-folder-o fa-border fa-lg fa-5x"></i> 
+            </div>
         </div>
     </div><!-- end affix container-->
 </div><!--/left-->

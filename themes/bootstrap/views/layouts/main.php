@@ -37,7 +37,6 @@
         $cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
         //variables used for javascript calls
         $cs->registerScript('images', 'var images = "' . $themePath . '/assets/images/";');
-        
         ?>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -165,6 +164,30 @@
         </footer> <!--footer -->
 
     </body>
+    <script>
+        $(document).ready(
+                function() {
+                    $("#bucket_list").niceScroll({
+                        cursorwidth: '8px',
+                        cursorborder: 'none',
+                        overflow: 'hidden',
+                        cursoropacitymin: 1,
+                        scrollspeed: 70,
+                    });
+                    $('.slider').fractionSlider({
+                        'fullWidth': true,
+                        'controls': true,
+                        'responsive': true,
+                        'dimensions': '1700, 300',
+                        'slideTransitionSpeed': 0,
+                        'increase': true,
+                    });
+
+
+                }
+
+        );
+    </script>
     <?php
     Yii::app()->clientScript->registerScript(
             'myHideEffect', '$(".alert").animate({opacity: 0.20}, 6000).fadeOut("slow");', CClientScript::POS_READY

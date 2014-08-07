@@ -293,6 +293,10 @@ footer{
     font-size:1.2em;
 }
 
+#bucket_list{
+    max-height:120px;
+}
+
 /*******************/
 /* Gadgets Location Page
 ------------------- */

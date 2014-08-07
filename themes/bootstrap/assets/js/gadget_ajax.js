@@ -1,6 +1,5 @@
 //start by binding elements
 bind_drag_and_drop()
-bind_location_pre_removal()
 /*##############################
  * Drag and Drop Events
  ##############################*/
@@ -13,39 +12,59 @@ bind_location_pre_removal()
  * @returns {undefined}
  */
 function bind_drag_and_drop() {
-    var page = get('page_id');
     /**/
     $('.dropper').on('drop', function(ev) {
-        if (page == 'location') {
+        if (is_location_page()) {
             drop_image_onto_location(ev)
         } else {
             drop_location_onto_image(ev)
-            console.log('wowowooa')
         }
     })
     $('.trashcan').on('drop', function(ev) {
         drop_to_trash(ev);
     })
     /**/
-    $('.dropper, .trashcan').on('dragover', function(ev) {
+    $('.dropper').on('dragenter dragover', function(ev) {
         allowDrop(ev)
     })
+
+    $('.trashcan').on('dragenter dragover', function(ev) {
+        allowDrop(ev)
+        toggle_icon($(this).children('i'), true)
+        console.log('woooah')
+    })
+
+    $('.trashcan').on('dragleave dragexit', function(ev) {
+        console.log("SPloUSH")
+        toggle_icon($(this).children('i'), false)
+    })
+
     /**/
     $('a[draggable=true]').on('dragstart', function(event) {
         drag(event, $(this).attr('id'))
     })
 
 }
+
+function toggle_icon(obj, dragover) {
+    if (dragover) {
+        obj.removeClass('fa-folder-o')
+        obj.addClass('fa-folder-open-o')
+    } else {
+        obj.removeClass('fa-folder-open-o')
+        obj.addClass('fa-folder-o')
+    }
+}
 /**
  * 
  * @returns {undefined}
  */
 function unbind_drag_and_drop() {
-    $('.dropper').unbind('drop')
+    $('.dropper, .trashcan').unbind('drop')
     /**/
-    $('.dropper').unbind('dragover')
+    $('.dropper, .trashcan').unbind('dragover')
     /**/
-    $('.dropper').unbind('dragstart')
+    $('a[draggable=true]').unbind('dragstart')
 }
 
 
@@ -114,7 +133,8 @@ function drop_location_onto_image(ev) {
         ajaxsubmitnewlocation(values).done(function(ajax_data) {
             $(parent).append(newchild);
             $(parent).removeClass('well');
-            bind_location_pre_removal() //add events to newly created object
+            unbind_drag_and_drop()
+            bind_drag_and_drop()
             //console.log(ajax_data);
         }).fail(function(data) {
             console.log("NEW LOCATION FAIL")
@@ -153,7 +173,7 @@ function drop_image_onto_location(ev) {
 
         var newitem = [];
 
-        newchild.id = ''
+        newchild.id = root + "_" + image_name
         switch (root) {
             case 'root':
                 params = {campus: location, building: building, room: room, image_name: image_name}
@@ -174,7 +194,6 @@ function drop_image_onto_location(ev) {
 
         }
 
-
         $(parent).attr('data-image', location + image_name)
 
         var data_image = location + image_name
@@ -183,14 +202,15 @@ function drop_image_onto_location(ev) {
             console.log(ajax_data)
 
             newitem.push("<div>")
-            newitem.push('<a class="col-xs-1 pre-delete imager trashable dropper" draggble="true" data-image="' + data_image + '" href="#?javascript:void(0)">')
+            newitem.push('<a class="col-xs-1 imager pre-delete" href="#?javascript:void(0)" draggable="true" data-image="' + data_image + '" id="trashable_' + data_image + '">')
             newitem.push(newchild.outerHTML)
-            newitem.push('<h2 class="image-overlay"><span>Delete?</span></h2>')
             newitem.push('</a>')
             newitem.push('</div>')
             $(parent).append(newitem.join(""));
             $(parent).removeClass('well');
-            bind_location_pre_removal() //add events to newly created object
+            unbind_drag_and_drop()
+            bind_drag_and_drop()
+            //
             //console.log(ajax_data);
         }).fail(function(data) {
             console.log(data);
@@ -210,21 +230,24 @@ function drop_image_onto_location(ev) {
 function drop_to_trash(ev) {
     var data = ev.originalEvent.dataTransfer.getData("Text")
     $this = $(document.getElementById(data))
+    console.log("data: " + data)
     $parent = $this.parent('div')
     var image = $this.attr('data-image')
-    
-    if($this.parent('a').hasClass('imager')){
+
+    if (is_location_page()) {
         image = $this.parent('a').attr('data-image')
-        alert(image)
+
         $this = $this.parent('a');
         $parent = '';
     }
-    
+
     ajaxremovelocation({image_name: image}).done(function(data) {
         console.log(data)
+        console.log("SUCCESS")
         $this.fadeOut('', function() {
             $this.remove()
-            check_is_empty($parent)
+            if (!is_location_page())
+                check_is_empty($parent)
         });
     }).fail(function(data) {
         console.log(data)
@@ -233,98 +256,18 @@ function drop_to_trash(ev) {
     });
 }
 
+function is_location_page() {
+    var page = get('page_id');
+    if (page === 'location')
+        return true;
+    else
+        return false
+}
+
 /*##############################
  * Form and Click Events
  ##############################*/
 
-/**
- * binds the element to a transitional click step
- * this step lets the user know they are about to delete the element
- * @returns {undefined}  
- */
-function bind_location_pre_removal() {
-    $('.pre-delete').off('click')
-    $('.pre-delete').on('click', function() {
-        console.log('clicker');
-        $this = $(this)
-        $canceller = $this
-
-        if ($this.hasClass('imager')) {
-            $canceller = $this.children('img')
-            $this.children('.image-overlay').animate({
-                opacity: 1,
-            });
-        } else {
-            $this.text("delete?")
-        }
-
-        $this.addClass('image-location')
-        $this.removeClass('pre-delete')
-        $this.off('click')
-
-        bind_close_removal($canceller)
-        bind_location_removal($this)
-
-
-    })
-}
-/**
- * binds the div to the removal function to remove a
- * location from an image (but in the db it is vice versa)
- * @returns {undefined}
- */
-function bind_location_removal(obj) {
-
-    obj.on('click', function() {
-        var image = $(this).attr('data-image')
-        $this = obj
-        console.log('deleting...');
-        ajaxremovelocation({image_name: image}).done(function(data) {
-            console.log(data)
-            $this.fadeOut('', function() {
-                $parent = $(this).parent('.location')
-                $this.remove()
-                check_is_empty($parent)
-            });
-            obj.off('click')
-        }).fail(function(data) {
-            console.log("REMOVAL FAIL")
-            //console.log(data)
-        });
-
-
-    })
-}
-
-/**
- * fires event once "delete ..." message appears
- * if and only if the user selects any area outside of the 
- * delete box to allow the user to cancel their actions
- * @param {type} obj
- * @returns {undefined} 
- */
-function bind_close_removal(obj) {
-    $('body').on("mouseup", function(event) {
-        if (!obj.is(event.target) && !$('.image-overlay').is(event.target)) {
-
-            $this = obj
-            if ($this.parent('a').hasClass('imager')) {
-                $this.parent('a').children('.image-overlay').animate({
-                    opacity: 0,
-                });
-                $this = obj.parent('a')
-            }
-
-            var location = $this.attr('data-location')
-            $this.text(location)
-            $this.removeClass('image-location')
-            $this.addClass('pre-delete')
-            obj.unbind('click')
-            bind_location_pre_removal()
-            $('body').off("mouseup")
-        }
-    });
-}
 
 
 /**
@@ -451,7 +394,6 @@ function navigate_drilldown(obj) {
     ajaxdrilldownlocations(params).done(function(data) {
         $(parent).html(data)
         bind_drag_and_drop()
-        bind_location_pre_removal()
     }).fail(function(data) {
         console.log(data)
     });
