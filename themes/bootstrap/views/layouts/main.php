@@ -165,28 +165,7 @@
 
     </body>
     <script>
-        $(document).ready(
-                function() {
-                    $("#bucket_list").niceScroll({
-                        cursorwidth: '8px',
-                        cursorborder: 'none',
-                        overflow: 'hidden',
-                        cursoropacitymin: 1,
-                        scrollspeed: 70,
-                    });
-                    $('.slider').fractionSlider({
-                        'fullWidth': true,
-                        'controls': true,
-                        'responsive': true,
-                        'dimensions': '1700, 300',
-                        'slideTransitionSpeed': 0,
-                        'increase': true,
-                    });
-
-
-                }
-
-        );
+        
     </script>
     <?php
     Yii::app()->clientScript->registerScript(

@@ -78,6 +78,7 @@ class ApiHelper_Gadgets extends CHtml {
         $databuilding = ($building ? $building : '');
         $location = '';
         $next_step = 'root';
+        $well = ((empty($image_location['images']))?'well':'');
 
         if ($foldername != 'GWU') {
             switch ($dataroot) {
@@ -124,7 +125,7 @@ class ApiHelper_Gadgets extends CHtml {
         );
 
         $innerDivOptions = array(
-            'class' => "col-xs-12 dropper",
+            'class' => "col-xs-12 dropper no-padding $well",
             'data-location' => $foldername,
             'data-root' => ($root_child ? $root_child : ''),
             'data-campus' => ($campus ? $campus : ''),
@@ -135,7 +136,7 @@ class ApiHelper_Gadgets extends CHtml {
         );
 
         $imageLinkOptions = array(
-            'class' => "col-xs-1 imager pre-delete",
+            'class' => "col-xs-2 imager pre-delete no-padding",
             'href' => '#?javascript:void(0)',
             'draggable'=>'true',
         );

@@ -25,7 +25,10 @@ function bind_drag_and_drop() {
     })
     /**/
     $('.dropper').on('dragenter dragover', function(ev) {
+
         allowDrop(ev)
+    })
+    $('.dropper').on('dragleave dragexit', function(ev) {
     })
 
     $('.trashcan').on('dragenter dragover', function(ev) {
@@ -42,6 +45,7 @@ function bind_drag_and_drop() {
     /**/
     $('a[draggable=true]').on('dragstart', function(event) {
         drag(event, $(this).attr('id'))
+
     })
 
 }
@@ -100,7 +104,7 @@ function drop_location_onto_image(ev) {
     ev.preventDefault()
 
     var data = ev.originalEvent.dataTransfer.getData("Text")
-    var parent = $(ev.target)
+    var target = ev.target
     var newchild = document.getElementById(data).cloneNode(true)
     var campus
     var building
@@ -108,8 +112,20 @@ function drop_location_onto_image(ev) {
     var image_name
     var location
 
-    //make sure it's dropped on the right parent
-    if ($(parent).hasClass('dropper')) {
+    //allow the image to dropped on anything that is a child of the drop container
+    if (!$(target).hasClass('dropper')) {
+        while (target) {
+            if ($(target).hasClass('dropper')) {
+                break;
+            }
+            target = target.parentNode
+        }
+    }
+
+    target = $(target);
+
+    //make sure it's dropped on the right target
+    if ($(target).hasClass('dropper')) {
 
         newchild.id = ''
         campus = newchild.getAttribute('data-campus') ? newchild.getAttribute('data-campus') : ''
@@ -120,10 +136,12 @@ function drop_location_onto_image(ev) {
         newchild.id = "trashable_" + newchild.innerHTML
         newchild.innerHTML = location ? location : "GWU"
         newchild.className = newchild.className + " image-location";
+        $(newchild).removeClass('col-lg-4 col-md-5 col-sm-5')
+        $(newchild).addClass('col-lg-3 col-md-4 col-sm-5')
         newchild.setAttribute("draggable", true)
 
         //fix the child's image name and make sure it is formatted properly
-        image_name = encodeURIComponent($(parent).attr('data-image'))
+        image_name = encodeURIComponent($(target).attr('data-image'))
         newchild.id = newchild.id + "_" + image_name
 
         $(newchild).attr('data-image', location + "/" + image_name)
@@ -131,8 +149,8 @@ function drop_location_onto_image(ev) {
         values = {campus: campus, building: building, room: room, image_name: image_name}
 
         ajaxsubmitnewlocation(values).done(function(ajax_data) {
-            $(parent).append(newchild);
-            $(parent).removeClass('well');
+            $(target).append(newchild);
+            $(target).removeClass('well');
             unbind_drag_and_drop()
             bind_drag_and_drop()
             //console.log(ajax_data);
@@ -151,7 +169,7 @@ function drop_image_onto_location(ev) {
 
     var data = ev.originalEvent.dataTransfer.getData("Text")
 
-    var parent = $(ev.target)
+    var target = ev.target
     var newchild = document.getElementById(data).cloneNode(true)
     var db
     var root
@@ -161,12 +179,26 @@ function drop_image_onto_location(ev) {
     var image_name
     var location
 
-    //make sure it's dropped on the right parent
-    if ($(parent).hasClass('dropper')) {
-        root = parent.attr('data-root')
-        location = parent.attr('data-location')
-        campus = parent.attr('data-campus')
-        building = parent.attr('data-building')
+
+    //allow the image to dropped on anything that is a child of the drop container
+    if (!$(target).hasClass('dropper')) {
+        while (target) {
+            if ($(target).hasClass('dropper')) {
+                break;
+            }
+            target = target.parentNode
+        }
+
+    }
+
+    target = $(target);
+
+    //make sure it's dropped on the right target
+    if ($(target).hasClass('dropper')) {
+        root = target.attr('data-root')
+        location = target.attr('data-location')
+        campus = target.attr('data-campus')
+        building = target.attr('data-building')
         room = ''
         db = dbstructure
         image_name = $(newchild).attr('data-image')
@@ -195,7 +227,7 @@ function drop_image_onto_location(ev) {
         }
 
         var data_image = location + image_name
-        $(parent).attr('data-image', data_image)
+        $(target).attr('data-image', data_image)
 
 
         ajaxsubmitnewlocation(params).done(function(ajax_data) {
@@ -206,8 +238,8 @@ function drop_image_onto_location(ev) {
             newitem.push(newchild.outerHTML)
             newitem.push('</a>')
             newitem.push('</div>')
-            $(parent).append(newitem.join(""));
-            $(parent).removeClass('well');
+            $(target).append(newitem.join(""));
+            $(target).removeClass('well');
 
             unbind_drag_and_drop()
             bind_drag_and_drop()
@@ -325,7 +357,7 @@ $('select[data-script=location_load].sidebar-select').each(function() {
 
                     //build out select options
                     selectitems.push("<option value='" + i + "'>" + i + "</option>");
-                    draganddropitems.push('<a href="#?javascript:void(0)" id="drag_' + i + '"  class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus="' + campus + '" data-building="' + building_data + '" data-room="' + room_data + '" draggable="true" >' + i + '</a>')
+                    draganddropitems.push('<a href="#?javascript:void(0)" id="drag_' + i + '"  class=" col-lg-4 col-md-5 col-sm-5 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus="' + campus + '" data-building="' + building_data + '" data-room="' + room_data + '" draggable="true" >' + i + '</a>')
 
                 });
 

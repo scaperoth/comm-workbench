@@ -1,7 +1,7 @@
 <script>
 </script>
-<div class="col-xs-3 leftCol left15" id="sidebar">
-    <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12" id="sidebar-affix">
+<div class="col-xs-3  " id="">
+    <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12 left5" id="sidebar-affix">
         <div class="bottom30 row">
             <form class="bs-example form-inline " action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
                     <legend>Filter Campus/Building</legend>
@@ -36,24 +36,21 @@
             <legend>Drag and Drop</legend>
             <div id="bucket_list" data-type="bucket_list" >
 
-                <a href="#?javascript:void(0)"  id="drag_GWU" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus ='' draggable="true" >GWU</a>
+                <a href="#?javascript:void(0)"  id="drag_GWU" class=" col-lg-4 col-md-5 col-sm-5 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus ='' draggable="true" >GWU</a>
                 <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
 
-                    <a href="#?javascript:void(0)"  id="drag_<?= $foldername ?>" class=" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus='<?= $foldername ?>'  draggable="true" ><?= $foldername; ?></a>
+                    <a href="#?javascript:void(0)"  id="drag_<?= $foldername ?>" class=" col-lg-4 col-md-5 col-sm-5 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus='<?= $foldername ?>'  draggable="true" ><?= $foldername; ?></a>
 
                 <?php endforeach; ?>
             </div><!--end bucket-->
         </div> <!--end bucket container-->
-        <div class="row top30">
-            <div class="trashcan trash" >
-            </div>
-        </div>
+        
     </div><!-- end affix container-->
 </div><!--/left-->
 
 <!--right-->
 
-<div class="col-sm-7 col-xs-10 col-xs-offset-1 col-sm-offset-0">
+<div class="col-sm-5 col-xs-10 col-xs-offset-1 col-sm-offset-1">
     <?php $counter = -1; ?>
     <?php foreach ($image_locations as $item): ?>
 
@@ -78,7 +75,7 @@
                             'href' => "#?javascript:void(0);",
                             'draggable' => "true",
                             'id' => "trashable_" . $location . "_" . urlencode($item['name']),
-                            'class' => "col-lg-2 col-md-4 col-sm-4 col-xs-10 right15 bottom10 label label-warning pre-delete medium-font trashable",
+                            'class' => "col-lg-3 col-md-4 col-sm-5 col-xs-10 right15 bottom10 label label-warning pre-delete medium-font trashable",
                             'data-image' => $image_location,
                             'data-location' => $location,
                         );

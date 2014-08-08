@@ -11,7 +11,7 @@ if (isset($_GET['page_id']))
 
 $cs = Yii::app()->clientScript;
 //gadgets ajax variables
-$cs->registerScript('dbstructure_script', "var dbstructure = " .json_encode($dbstructure) . ";");
+$cs->registerScript('dbstructure_script', "var dbstructure = " . json_encode($dbstructure) . ";");
 $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucket_dir) . ";");
 $cs->registerScript('gadget_get_ajax_url', ' var getlocationajaxurl ="' . $this->createUrl('getlocationdataajax') . '";');
 $cs->registerScript('gadget_add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('addlocationtoimageajax') . '";');
@@ -19,7 +19,6 @@ $cs->registerScript('gadget_remove_ajax_url', ' var removelocationajaxurl ="' . 
 $cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $this->createUrl('drawlocationsajax') . '";');
 $cs->registerScript('gadget_script', file_get_contents('themes/bootstrap/assets/js/gadget_script.js'));
 $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap/assets/js/gadget_ajax.js'));
-
 ?>
 
 
@@ -91,6 +90,11 @@ $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap
             <?php $this->renderPartial('_location_section', $args); ?>
         </div><!--end location-section-->
     <?php endif; ?>
+    <div class="col-sm-3 hidden-xs center pull-right ">
+        <legend>Trash</legend>
+        <div class="trashcan trash center" data-spy="affix" data-offset-top="300" >
+        </div>
+    </div>
 </div><!--end row-->
 
 <? ?>
