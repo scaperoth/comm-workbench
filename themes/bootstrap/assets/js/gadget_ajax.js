@@ -34,11 +34,11 @@ function bind_drag_and_drop() {
     $('.trashcan').on('dragenter dragover', function(ev) {
         allowDrop(ev)
         toggle_icon($(this), true)
-        console.log('woooah')
+        //console.log('woooah')
     })
 
     $('.trashcan').on('dragleave dragexit', function(ev) {
-        console.log("SPloUSH")
+        //console.log("SPloUSH")
         toggle_icon($(this), false)
     })
 
@@ -179,7 +179,11 @@ function drop_image_onto_location(ev) {
     var image_name
     var location
 
+    if (newchild.tagName == 'A') {
+        newchild = $(newchild).children('img')
+        console.log($(newchild)[0].outerHTML);
 
+    }
     //allow the image to dropped on anything that is a child of the drop container
     if (!$(target).hasClass('dropper')) {
         while (target) {
@@ -213,7 +217,7 @@ function drop_image_onto_location(ev) {
                 break;
             case 'subfolder':
                 params = {campus: campus, building: location, room: room, image_name: image_name}
-                location = (location ? location + "/" : location) + (room ? location + "/" : location) + room
+                location = (location ? campus + "/" : campus) + (room ? location + "/" : location) + room
                 break;
             case 'bottomfolder':
                 params = {campus: campus, building: building, room: location, image_name: image_name}
@@ -226,18 +230,17 @@ function drop_image_onto_location(ev) {
 
         }
 
-        var data_image = location + image_name
+        $(newchild).removeAttr('data-image')
+        var data_image = location + "/" + image_name
         $(target).attr('data-image', data_image)
 
 
         ajaxsubmitnewlocation(params).done(function(ajax_data) {
-            console.log(ajax_data)
+            //console.log(ajax_data)
 
-            newitem.push("<div>")
-            newitem.push('<a class="col-xs-1 imager pre-delete" href="#?javascript:void(0)" draggable="true" data-image="' + data_image + '" id="trashable_' + data_image + '">')
-            newitem.push(newchild.outerHTML)
+            newitem.push('<a class="col-xs-2 imager pre-delete no-padding" href="#?javascript:void(0)" draggable="true" data-image="' + data_image + '" id="trashable_' + data_image + '">')
+            newitem.push($(newchild)[0].outerHTML)
             newitem.push('</a>')
-            newitem.push('</div>')
             $(target).append(newitem.join(""));
             $(target).removeClass('well');
 
@@ -246,7 +249,7 @@ function drop_image_onto_location(ev) {
             //
             //console.log(ajax_data);
         }).fail(function(data) {
-            console.log(data);
+            //console.log(data);
             console.log("NEW LOCATION FAIL")
             //console.log(data);
         })
@@ -261,33 +264,38 @@ function drop_image_onto_location(ev) {
  * @returns {undefined} 
  */
 function drop_to_trash(ev) {
+
+    
     toggle_icon($(ev.target), false)
     var data = ev.originalEvent.dataTransfer.getData("Text")
     var item = document.getElementById(data)
     $this = $(item)
     var image
     if (item.tagName == 'A' || item.tagName == 'DIV') {
-        $parent = $this.parent('div')
+
         image = $this.attr('data-image')
-        console.log("it's an a, boss")
+        //console.log("it's an a, boss")
     } else {
         image = $this.parent('a').attr('data-image')
         $this = $this.parent('a');
     }
-
+    $parent = $this.parent('.dropper')
+    console.log($parent);
     ajaxremovelocation({image_name: image}).done(function(data) {
-        console.log(data)
-        console.log("SUCCESS")
+        // console.log(data)
+        //console.log("SUCCESS")
         $this.fadeOut('', function() {
             $this.remove()
-            if (!is_location_page())
-                check_is_empty($parent)
+            //checks if parent container is empty
+            //if the container is empty, add a "well" class
+            check_is_empty($parent)
         });
     }).fail(function(data) {
         console.log(data)
         console.log("REMOVAL FAIL")
         //console.log(data)
     });
+    
 }
 
 function is_location_page() {
@@ -401,23 +409,20 @@ function navigate_drilldown(obj) {
 
     switch (root) {
         case 'files':
-            params = {dbstructure: JSON.stringify(db.files), bucketdir: bucketdir, root: 'root', campus: campus, building: building}
+            params = {hierarchy: 'files', bucketdir: bucketdir, root: 'root', campus: campus, building: building}
             $('#location-nav').attr('data-root', 'GWU')
-
             break;
         case 'root':
-            params = {dbstructure: JSON.stringify(db.files[location]), bucketdir: bucketdir, root: 'subfolder', campus: location, building: building}
+            params = {hierarchy: 'root', bucketdir: bucketdir, root: 'subfolder', campus: location, building: building}
             $('#location-nav').attr('data-root', 'files')
-
             break;
         case 'subfolder':
-            params = {dbstructure: JSON.stringify(db.files[campus][location]), bucketdir: bucketdir, root: 'bottomfolder', campus: campus, building: location}
+            params = {hierarchy: 'subfolder', bucketdir: bucketdir, root: 'bottomfolder', campus: campus, building: location}
             $('#location-nav').attr('data-root', 'root')
             $('#location-nav').attr('data-location', campus)
-
             break;
         default:
-            params = {dbstructure: JSON.stringify(db), bucketdir: bucketdir, root: 'files', campus: campus, building: location}
+            params = {hierarchy: 'default', bucketdir: bucketdir, root: 'files', campus: campus, building: location}
             hidden = "hidden"
             break;
 
@@ -427,6 +432,7 @@ function navigate_drilldown(obj) {
 
     ajaxdrilldownlocations(params).done(function(data) {
         $(parent).html(data)
+        unbind_drag_and_drop()
         bind_drag_and_drop()
     }).fail(function(data) {
         console.log(data)
@@ -493,7 +499,7 @@ function ajaxremovelocation(params) {
             // successful request; do something with the data
             $('#ajax_background').fadeOut();
             $('#ajax_panel').html('');
-            console.log(data);
+            //console.log(data);
         },
         error: function(data) {
             $('#ajax_panel').html('');

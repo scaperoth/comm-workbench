@@ -123,11 +123,10 @@ class ApiHelper extends CHtml {
      * @return type
      */
     public static function _trim_directory($dirname, $root) {
-
-        if ($dirname . "\\" == $root) {
+        if ($dirname . "/" == $root) {
             $dirname = 'GWU';
         } else {
-            $dirname = preg_replace('/^' . preg_quote($root, '/') . '/', '', $dirname);
+            $dirname = substr_replace($dirname, '', 0, strlen($root));
         }
         return $dirname;
     }
@@ -314,7 +313,7 @@ class ApiHelper extends CHtml {
         ) {
             if (!$item->isDir()) {
                 $file = $iterator->current();
-                $file = pathinfo($file->getPath() . "\\" . $file->getFilename());
+                $file = pathinfo($file->getPath() . "/" . $file->getFilename());
                 $ext = $file['extension'];
 
                 if (in_array($ext, $supported_images) && !in_array($file['basename'], $bucket_files)) {

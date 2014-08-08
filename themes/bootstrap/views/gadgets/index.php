@@ -14,7 +14,7 @@ $cs = Yii::app()->clientScript;
 $cs->registerScript('dbstructure_script', "var dbstructure = " . json_encode($dbstructure) . ";");
 $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucket_dir) . ";");
 $cs->registerScript('gadget_get_ajax_url', ' var getlocationajaxurl ="' . $this->createUrl('getlocationdataajax') . '";');
-$cs->registerScript('gadget_add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('addlocationtoimageajax') . '";');
+$cs->registerScript('gadget_add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('addlocationajax') . '";');
 $cs->registerScript('gadget_remove_ajax_url', ' var removelocationajaxurl ="' . $this->createUrl('removelocationfromimageajax') . '";');
 $cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $this->createUrl('drawlocationsajax') . '";');
 $cs->registerScript('gadget_script', file_get_contents('themes/bootstrap/assets/js/gadget_script.js'));
@@ -91,8 +91,11 @@ $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap
         </div><!--end location-section-->
     <?php endif; ?>
     <div class="col-sm-3 hidden-xs center pull-right ">
-        <legend>Trash</legend>
-        <div class="trashcan trash center" data-spy="affix" data-offset-top="300" >
+        
+        <div class="col-sm-12  sidebar-affix" data-spy="affix" data-offset-top="300">
+            <legend>Trash</legend>
+            <div class="trashcan center trash "  >
+            </div>
         </div>
     </div>
 </div><!--end row-->

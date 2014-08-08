@@ -1,7 +1,7 @@
 <script>
 </script>
 <div class="col-xs-3  " id="">
-    <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12 left5" id="sidebar-affix">
+    <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12 left5 sidebar-affix" >
         <div class="bottom30 row">
             <form class="bs-example form-inline " action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
                     <legend>Filter Campus/Building</legend>
@@ -63,11 +63,10 @@
                     ?>
                 </h2>
                 <div class="col-sm-2 no-padding bottom15">
-                    <img src='<?= $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
+                    <img src='<?= $bucket_dir. "/thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
                 </div>
 
                 <div class="col-sm-12 bottom10 no-padding dropper <?= ((count($item['location']) == 0) ? 'well' : ''); ?>" " data-image ="<?= $item['name']; ?>" >
-
                     <?php foreach ($item['location'] as $location): ?>
                         <?php
                         $image_location = ($location == "GWU" ? "" : $location . DIRECTORY_SEPARATOR) . urlencode($item['name']);

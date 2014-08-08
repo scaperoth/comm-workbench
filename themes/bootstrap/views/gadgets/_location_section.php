@@ -2,7 +2,7 @@
 
 <!--left-->
 <div class="col-xs-3 leftCol " id="sidebar">
-    <div data-spy="affix" data-offset-top="300" class="hidden-xs col-sm-12 " id="sidebar-affix">
+    <div data-spy="affix" data-offset-top="300" class="hidden-xs col-sm-12 sidebar-affix" >
         <div class="bottom30 ">
             <form class="bs-example form-inline  " action="<?= Yii::app()->createUrl('gadgets/addlocation'); ?>" method="post">                                       <fieldset>
                     <legend>Bucket Images</legend>
@@ -17,7 +17,7 @@
                                             $imageHtmlOptions = array(
                                                 'data-image' => urlencode($image),
                                                 'id' => "drag_" . $image,
-                                                'src' => $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $image,
+                                                'src' => $bucket_dir . "/thumb/thumb_" . $image,
                                                 'alt' => $image,
                                                 'draggable'=>'true',
                                             );
@@ -45,7 +45,7 @@
     </div>
 
     <!--right-->
-    <div class="col-sm-12 show-locations " >
+    <div class="col-sm-12 container show-locations " >
         <?php
         ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure, 'files', $bucket_dir);
         ?>

@@ -340,11 +340,12 @@ footer{
     min-height:30px;
     overflow-y:auto;
     background:#fff;
+    
+    max-height:250px;
 }
 
 .show-locations .dropper{
     min-height:93px;
-    max-height:250px;
     padding:10px;
 }
 
@@ -353,15 +354,12 @@ footer{
  ******/
 /* expanding input CSS only */
 .imager	{
-    -webkit-transition:width 0.1s ease-in-out;
 }
 .imager:active {
-    width:130px;
-    -webkit-transition:width 0.1s ease-in-out;
+    z-index:999999999;
 }
 .imager:hover {
-    width:130px;
-    -webkit-transition:width 0.1s ease-in-out;
+    z-index:999999999;
 }
 
 /***********

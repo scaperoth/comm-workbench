@@ -32,12 +32,12 @@ function get(name){
 /******************************
  * Affixed sidebar
  ******************************/
-$("#sidebar-affix").on("affix.bs.affix", (function() {
+$(".sidebar-affix").on("affix.bs.affix", (function() {
     $(this).addClass("col-xs-3")
     $(this).removeClass("col-sm-12")
 }))
 
-$("#sidebar-affix").on("affixed-top.bs.affix", (function() {
+$(".sidebar-affix").on("affixed-top.bs.affix", (function() {
     $(this).removeClass("col-xs-3")
     $(this).addClass("col-sm-12")
 }))

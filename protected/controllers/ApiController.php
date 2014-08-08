@@ -10,16 +10,17 @@
  */
 class ApiController extends Controller {
 
+
 //source and destination locations. A prefix of the application's base path
 //will be added before the action is exectured in beforeAction(). This base
 //path here is expected to be ../protected/components/
-    private $gadgets_shared = '\\data\\gadgets\\backup\\';
-    private $gadgets_local = '\\data\\gadgets\\filesystem\\';
-    private $gadgets_bucket = "\\assets\\images\\gadget_images";
-    private $wepa_shared = '\\data\\wepa\\backup\\';
-    private $wepa_local = '\\data\\wepa\\filesystem\\';
-    private $wepa_bucket = "\\assets\\images\\wepa_images\\production_images";
-    private $wepa_outage_bucket = "\\assets\\images\\wepa_images\\outage_images";
+    private $gadgets_shared = '/data/gadgets/backup/';
+    private $gadgets_local = '/data/gadgets/filesystem/';
+    private $gadgets_bucket = "/assets/images/gadget_images";
+    private $wepa_shared = '/data/wepa/backup/';
+    private $wepa_local = '/data/wepa/filesystem/';
+    private $wepa_bucket = "/assets/images/wepa_images/production_images";
+    private $wepa_outage_bucket = "/assets/images/wepa_images/outage_images";
     private $gadgets_shared_full;
     private $gadgets_local_full;
     private $gadgets_bucket_full;

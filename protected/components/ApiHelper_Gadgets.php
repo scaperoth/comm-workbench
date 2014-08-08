@@ -107,7 +107,7 @@ class ApiHelper_Gadgets extends CHtml {
                     break;
             }
 
-            $location = ($building ? $campus . DIRECTORY_SEPARATOR : $campus) . ($room ? $building . DIRECTORY_SEPARATOR : $building) . $room . DIRECTORY_SEPARATOR;
+            $location = ($building ? $campus . "/" : $campus) . ($room ? $building . "/" : $building) . $room . "/";
         }
 
         $linkOptions = array(
@@ -125,7 +125,7 @@ class ApiHelper_Gadgets extends CHtml {
         );
 
         $innerDivOptions = array(
-            'class' => "col-xs-12 dropper no-padding $well",
+            'class' => "col-xs-10 dropper no-padding $well",
             'data-location' => $foldername,
             'data-root' => ($root_child ? $root_child : ''),
             'data-campus' => ($campus ? $campus : ''),
@@ -157,7 +157,7 @@ class ApiHelper_Gadgets extends CHtml {
                 //echo BSHtml::openTag("div", $imageDivOptions);
                 echo BSHtml::openTag("a", $imageLinkOptions);
                 echo BSHtml::tag("img", array(
-                    "src" => $bucket_dir . DIRECTORY_SEPARATOR . "thumb/thumb_" . $value,
+                    "src" => $bucket_dir . "/thumb/thumb_" . $value,
                     "alt" => $value,
                     'class'=>'image',
                     'draggable'=>'true',

@@ -20,6 +20,7 @@ class GadgetsController extends Controller {
                 $image = urlencode($image);
                 $url = Yii::app()->createAbsoluteUrl("api/getdir/gadgets/$image");
                 $curl_response = Yii::app()->curl->get($url);
+
                 $image_locations[] = (json_decode($curl_response, true));
             }
         }
@@ -47,7 +48,7 @@ class GadgetsController extends Controller {
         if (!YII_DEBUG && !Yii::app()->request->isPostRequest) {
             throw new CHttpException('403', 'Forbidden access.');
         }
-        
+
 
         $model = new AddgadgetimageForm;
 
@@ -73,13 +74,29 @@ class GadgetsController extends Controller {
         if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
             throw new CHttpException('403', 'Forbidden access.');
         }
-        $dbstructure = json_decode($_POST['args']['dbstructure'], true);
+        $dbstructure = ApiHelper::_get_db_structure('gadgets');
+
         $bucket_dir = $_POST['args']['bucketdir'];
         $root = $_POST['args']['root'];
         $campus = $_POST['args']['campus'];
         $building = $_POST['args']['building'];
 
-                ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure, $root, $bucket_dir, $campus, $building);
+        switch ($_POST['args']['hierarchy']) {
+            case 'files':
+                $dbstructure = $dbstructure['files'];
+                break;
+            case 'root':
+                $dbstructure = $dbstructure['files'][$campus];
+
+                break;
+            case 'subfolder':
+                $dbstructure = $dbstructure['files'][$campus][$building];
+                break;
+            default:
+                break;
+        }
+
+        ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure, $root, $bucket_dir, $campus, $building);
     }
 
     /**
@@ -109,7 +126,7 @@ class GadgetsController extends Controller {
      * 
      * @throws CHttpException
      */
-    public function actionAddlocationtoimageajax() {
+    public function actionAddlocationajax() {
         if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
             throw new CHttpException('403', 'Forbidden access.');
         }
