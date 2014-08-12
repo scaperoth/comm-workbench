@@ -39,7 +39,7 @@ class UserIdentity extends CUserIdentity {
             Yii::app()->user->setFlash('danger', $json_obj->error);
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
         } else {
-            Yii::app()->user->setFlash('warning', 'Request Failed');
+            Yii::app()->user->setFlash('warning', 'Request Failed: '.$json_obj);
         }
         
         
