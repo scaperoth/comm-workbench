@@ -156,7 +156,7 @@
                 <hr class="" style="border-color:#bbb;"></hr>
                 <div class="row center">
 
-                    <img src="<?= Yii::app()->theme->baseUrl; ?>/assets/images/GW_horizontal_blue.fw.png" alt="Academic Technologies"/>
+                    <img src="<?php echo Yii::app()->theme->baseUrl; ?>/assets/images/GW_horizontal_blue.fw.png" alt="Academic Technologies"/>
                 </div>
                 <hr class="" style="border-color:#bbb;"></hr>
             </div>
