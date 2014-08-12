@@ -21,7 +21,7 @@ class UserIdentity extends CUserIdentity {
             'password' => $this->password,
             'group'=>'atsa',
         );
-        $ch = curl_init('http://authentication.acadtech.gwu.edu:3000/authentications');
+        $ch = curl_init('http://auth.acadtech.gwu.edu/authenticate');
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
