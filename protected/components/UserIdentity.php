@@ -21,7 +21,7 @@ class UserIdentity extends CUserIdentity {
             'password' => $this->password,
             'group'=>'atsa',
         );
-        $ch = curl_init('https://authentication.acadtech.gwu.edu:3000/authentications');
+        $ch = curl_init('http://authentication.acadtech.gwu.edu:3000/authentications');
         curl_setopt($ch, CURLOPT_POST, 1);
         curl_setopt($ch, CURLOPT_POSTFIELDS, $data);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -39,7 +39,7 @@ class UserIdentity extends CUserIdentity {
             Yii::app()->user->setFlash('danger', $json_obj->error);
             $this->errorCode = self::ERROR_PASSWORD_INVALID;
         } else {
-            Yii::app()->user->setFlash('warning', 'Request Failed: '.$json_obj);
+            Yii::app()->user->setFlash('warning', 'Request Failed: '.print_r($json_obj));
         }
         
         
