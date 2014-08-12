@@ -210,7 +210,7 @@ class ApiHelper extends CHtml {
             }
         }
 
-        return $image_details;
+        return array_multisort($image_details);
     }
 
     /**
