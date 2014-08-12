@@ -27,24 +27,24 @@ $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap
     <div class="col-md-12 bottom30">
         <div class="center">
             <?php
-            echo BsHtml::buttonGroup(array(
+            echo BSHtml::buttonGroup(array(
                 array(
                     'label' => 'Save',
                     'url' => Yii::app()->createAbsoluteUrl('site/save') . '?service=gadgets',
                     'icon' => 'save fw',
-                    'type' => BsHtml::BUTTON_TYPE_LINK,
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
                 ),
                 array(
                     'label' => 'Load',
                     'url' => Yii::app()->createAbsoluteUrl('site/load') . '?service=gadgets',
                     'icon' => 'download fw',
-                    'type' => BsHtml::BUTTON_TYPE_LINK,
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
                 ),
                 array(
                     'label' => 'Publish',
                     'url' => Yii::app()->createAbsoluteUrl('site/publish') . '?service=gadgets',
                     'icon' => 'check fw',
-                    'type' => BsHtml::BUTTON_TYPE_LINK,
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
                 )
                     ), array(
             ));
@@ -54,13 +54,13 @@ $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap
     <div class="col-md-12">
         <div class="center">
             <?php
-            echo BsHtml::buttonGroup(array(
+            echo BSHtml::buttonGroup(array(
                 array(
                     'label' => 'Image View',
                     'url' => '?page_id=image',
                     'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'image') ? "active" : ""),
                     'name' => 'options',
-                    'type' => BsHtml::BUTTON_TYPE_LINK,
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
                     'color' => BSHtml::BUTTON_COLOR_PRIMARY,
                 ),
                 array(
@@ -68,7 +68,7 @@ $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap
                     'url' => '?page_id=location',
                     'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'location') ? "active" : ""),
                     'name' => 'options',
-                    'type' => BsHtml::BUTTON_TYPE_LINK,
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
                     'color' => BSHtml::BUTTON_COLOR_PRIMARY,
                 ),
                     ), array(

@@ -55,7 +55,7 @@
         <?php
         $this->widget('bootstrap.widgets.BsNavbar', array(
             'collapse' => true,
-            'position' => BsHtml::NAVBAR_POSITION_FIXED_TOP,
+            'position' => BSHtml::NAVBAR_POSITION_FIXED_TOP,
             'brandLabel' => '<img src="' . $themePath . '/assets/images/at_logo.svg" alt="Academic Technologies\"/>',
             'brandUrl' => Yii::app()->homeUrl,
             'items' => array(
