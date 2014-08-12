@@ -19,7 +19,7 @@ class UserIdentity extends CUserIdentity {
         $data = array(
             'netid' => $this->username,
             'password' => $this->password,
-            'group'=>'atsa',
+            'group'=>'staff',
         );
         $ch = curl_init('http://auth.acadtech.gwu.edu/authenticate');
         curl_setopt($ch, CURLOPT_POST, 1);
