@@ -6,8 +6,6 @@
  */
 
 class ApiHelper extends CHtml {
-    
-    
 // Members
     /**
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
@@ -291,7 +289,9 @@ class ApiHelper extends CHtml {
 
     public static function _get_bucket_files($which_db, $assoc_array = true) {
         $db = self::_ReadFolderDirectory_from_db(Yii::app()->mongodb->$which_db);
-        return natcasesort($db['bucket']);
+        if (is_array($db['bucket']))
+            return natcasesort($db['bucket']);
+        else return $db['bucket'];
     }
 
     /**
