@@ -6,6 +6,8 @@
  */
 
 class ApiHelper extends CHtml {
+    
+    
 // Members
     /**
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
@@ -51,7 +53,7 @@ class ApiHelper extends CHtml {
           echo '</pre>';
          * 
          */
-        return natcasesort($destination_array);
+        return $destination_array;
     }
 
     /**
@@ -156,7 +158,7 @@ class ApiHelper extends CHtml {
         if (empty($listDir)) {
             return "No database connection";
         }
-        return natcasesort($listDir);
+        return $listDir;
     }
 
     /**
@@ -234,7 +236,7 @@ class ApiHelper extends CHtml {
             }
         }
 
-        return natcasesort($all_parents);
+        return $all_parents;
     }
 
     public static function _add_image_to_files($image_name, $dest, $source) {
@@ -289,9 +291,7 @@ class ApiHelper extends CHtml {
 
     public static function _get_bucket_files($which_db, $assoc_array = true) {
         $db = self::_ReadFolderDirectory_from_db(Yii::app()->mongodb->$which_db);
-        if (is_array($db['bucket']))
-            return natcasesort($db['bucket']);
-        else return $db['bucket'];
+        return $db['bucket'];
     }
 
     /**
@@ -329,7 +329,7 @@ class ApiHelper extends CHtml {
                 }
             }
         }
-        return natcasesort($bucket_files);
+        return $bucket_files;
     }
 
     /**
@@ -367,7 +367,7 @@ class ApiHelper extends CHtml {
 
         $bucket_files['files'] = self::_ReadFolderDirectory_from_db($which_db);
 
-        return natcasesort($bucket_files);
+        return $bucket_files;
     }
 
     /**
@@ -470,7 +470,7 @@ class ApiHelper extends CHtml {
         //array_multisort(array_keys($r), SORT_STRING, $r);
         $which_db->save($r);
 
-        return natcasesort($r);
+        return $r;
     }
 
     /**
