@@ -4,6 +4,7 @@ class WepaController extends Controller {
 
     public function filters() {
         return array(
+                'https',
             array(
                 'application.filters.AuthFilter',
             ),

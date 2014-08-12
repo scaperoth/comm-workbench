@@ -12,7 +12,7 @@
         /**
          * StyleSHeets
          */
-        $cs->registerCssFile('http://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:300italic,400italic,400,300'); //google fonts
+        $cs->registerCssFile('https://fonts.googleapis.com/css?family=Abril+Fatface|Open+Sans:300italic,400italic,400,300'); //google fonts
         $cs->registerCssFile($themePath . '/assets/css/bootstrap.min.css');
         $cs->registerCssFile('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css');
         $cs->registerCssFile('//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css');
@@ -56,7 +56,7 @@
         $this->widget('bootstrap.widgets.BsNavbar', array(
             'collapse' => true,
             'position' => BsHtml::NAVBAR_POSITION_FIXED_TOP,
-            'brandLabel' => '<img src="' . Yii::app()->theme->baseUrl . '/assets/images/at_logo.svg" alt="Academic Technologies\"/>',
+            'brandLabel' => '<img src="' . $themePath . '/assets/images/at_logo.svg" alt="Academic Technologies\"/>',
             'brandUrl' => Yii::app()->homeUrl,
             'items' => array(
                 array(

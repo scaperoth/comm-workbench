@@ -1,11 +1,12 @@
 <?php
 
 class SiteController extends Controller {
-
     public function filters() {
         return array(
+                'https',
             array(
                 'application.filters.AuthFilter  - login, logout',
+                
             ),
         );
     }

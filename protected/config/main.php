@@ -37,6 +37,7 @@ return array(
         'bootstrap.extensions.*',
         'application.models.*',
         'application.components.*',
+        'application.filters.*',
         'application.extensions.MongoYii.*',
         'application.extensions.MongoYii.validators.*',
         'application.extensions.MongoYii.behaviors.*',

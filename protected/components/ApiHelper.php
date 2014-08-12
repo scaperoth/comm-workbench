@@ -6,6 +6,7 @@
  */
 
 class ApiHelper extends CHtml {
+
 // Members
     /**
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
@@ -179,9 +180,9 @@ class ApiHelper extends CHtml {
             return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
     }
 
-    public static function _remove_image_from_files( $source,$image_name) {
+    public static function _remove_image_from_files($source, $image_name) {
         self::_delete_files($source . $image_name);
-        return $source.$image_name;
+        return $source . $image_name;
     }
 
     /* #############################################
@@ -447,11 +448,11 @@ class ApiHelper extends CHtml {
                             break;
                         case 2:
                             $path = array("bottomfolder" => array($item->getFilename() => array()));
-                            $path[$item->getFilename()]= array( );
+                            $path[$item->getFilename()] = array();
                             break;
                         default:
                             $path = array("bottomfolder" => array($item->getFilename() => array()));
-                            $path[$item->getFilename()]= array( );
+                            $path[$item->getFilename()] = array();
                             break;
                     }
                 } else {
