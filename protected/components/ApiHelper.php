@@ -158,7 +158,7 @@ class ApiHelper extends CHtml {
         if (empty($listDir)) {
             return "No database connection";
         }
-        return array_multisort($listDir);
+        return $listDir;
     }
 
     /**
