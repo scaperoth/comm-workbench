@@ -158,7 +158,7 @@ class ApiHelper extends CHtml {
         if (empty($listDir)) {
             return "No database connection";
         }
-        return $listDir;
+        return array_multisort($listDir);
     }
 
     /**
@@ -210,7 +210,7 @@ class ApiHelper extends CHtml {
             }
         }
 
-        return array_multisort($image_details);
+        return $image_details;
     }
 
     /**
