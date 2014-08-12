@@ -53,7 +53,7 @@ class ApiHelper extends CHtml {
           echo '</pre>';
          * 
          */
-        return $destination_array;
+        return natcasesort($destination_array);
     }
 
     /**
@@ -158,7 +158,7 @@ class ApiHelper extends CHtml {
         if (empty($listDir)) {
             return "No database connection";
         }
-        return $listDir;
+        return natcasesort($listDir);
     }
 
     /**
@@ -236,7 +236,7 @@ class ApiHelper extends CHtml {
             }
         }
 
-        return $all_parents;
+        return natcasesort($all_parents);
     }
 
     public static function _add_image_to_files($image_name, $dest, $source) {
@@ -291,7 +291,7 @@ class ApiHelper extends CHtml {
 
     public static function _get_bucket_files($which_db, $assoc_array = true) {
         $db = self::_ReadFolderDirectory_from_db(Yii::app()->mongodb->$which_db);
-        return $db['bucket'];
+        return natcasesort($db['bucket']);
     }
 
     /**
@@ -329,7 +329,7 @@ class ApiHelper extends CHtml {
                 }
             }
         }
-        return $bucket_files;
+        return natcasesort($bucket_files);
     }
 
     /**
@@ -367,7 +367,7 @@ class ApiHelper extends CHtml {
 
         $bucket_files['files'] = self::_ReadFolderDirectory_from_db($which_db);
 
-        return $bucket_files;
+        return natcasesort($bucket_files);
     }
 
     /**
@@ -470,7 +470,7 @@ class ApiHelper extends CHtml {
         //array_multisort(array_keys($r), SORT_STRING, $r);
         $which_db->save($r);
 
-        return $r;
+        return natcasesort($r);
     }
 
     /**
