@@ -1,7 +1,4 @@
-<?php
-
-
-?>
+<?php ?>
 <div class="col-xs-3  " id="">
     <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12 left5 sidebar-affix" >
         <div class="bottom30 row">
@@ -46,14 +43,17 @@
                 <?php endforeach; ?>
             </div><!--end bucket-->
         </div> <!--end bucket container-->
-        
+
     </div><!-- end affix container-->
 </div><!--/left-->
 
 <!--right-->
 
 <div class="col-sm-5 col-xs-10 col-xs-offset-1 col-sm-offset-1">
-    <?php $counter = -1; ?>
+    <?php
+    $counter = -1;
+    array_multisort($image_locations);
+    ?>
     <?php foreach ($image_locations as $item): ?>
 
         <div class="row bottom15 no-padding">
@@ -65,7 +65,7 @@
                     ?>
                 </h2>
                 <div class="col-sm-2 no-padding bottom15">
-                    <img src='<?= $bucket_dir. "/thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
+                    <img src='<?= $bucket_dir . "/thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
                 </div>
 
                 <div class="col-sm-12 bottom10 no-padding dropper <?= ((count($item['location']) == 0) ? 'well' : ''); ?>" " data-image ="<?= $item['name']; ?>" >
