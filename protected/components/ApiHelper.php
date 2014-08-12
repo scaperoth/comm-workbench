@@ -6,7 +6,8 @@
  */
 
 class ApiHelper extends CHtml {
-
+    
+    
 // Members
     /**
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
