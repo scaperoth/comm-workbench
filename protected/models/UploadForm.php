@@ -35,16 +35,16 @@ class UploadForm extends CFormModel {
      * @return boolean whether login is successful
      */
     public function upload() {
-        $url = Yii::app()->createAbsoluteUrl('api/bucketdir/' . $this->service.'/full');
+        $url = Yii::app()->createAbsoluteUrl('api/bucketdir/' . $this->service . '/full');
         $uploaddir = Yii::app()->curl->get($url);
         $uploaddir = str_replace("\"", "", $uploaddir);
         $uploaddir = trim($uploaddir) . "/";
-        
+
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         //C:\xampp\htdocs\comm-workbench\themes\bootstrap\assets\images\gadget_images/
         //C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
-         $extension = strtolower($this->getExtension( $this->name));
-        
+        $extension = strtolower($this->getExtension($this->name));
+
         if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif")) {
             echo ' Unknown Image extension ';
             return false;
@@ -55,8 +55,9 @@ class UploadForm extends CFormModel {
         } else {
 
             echo "Possible file upload attack!\n";
+            return false;
         }
-        
+
         ApiHelper::_create_thumbnail($this->name, $uploaddir, $extension);
 
         return true;

@@ -6,8 +6,6 @@
  */
 
 class ApiHelper extends CHtml {
-    
-    
 // Members
     /**
      * Key which has to be in HTTP USERNAME and PASSWORD headers 
@@ -28,95 +26,6 @@ class ApiHelper extends CHtml {
      * File manipulation
      * COULD BE OPTIMIZED
      * ############################################# */
-
-    /**
-     * abstracts the delete and copy functions
-     * returns array of the files in the destination directory
-     * @param type $source
-     * @param type $dest
-     * @return type
-     */
-    public static function _sync_from_source($source, $dest, $which_db) {
-        $destination_array = array();
-        $counter = 0;
-
-//first check to see if there's anything in the local fs that doesn't belong
-        self::_delete_from_dest($source, $dest);
-
-//now copy over all systems that do belong from source fs
-        self::_copy_from_source($source, $dest);
-        $destination_array['destination folder'] = $dest;
-        $destination_array['contents'] = self::_ReadFolderDirectory_from_db($which_db);
-        /*
-          echo '<pre>';
-          print_r($destination_array);
-          echo '</pre>';
-         * 
-         */
-        return $destination_array;
-    }
-
-    /**
-     * deletes all files from the destination directory that don't exist in the
-     * source directory to prepare it to copy over new files
-     * code pulled from http://stackoverflow.com/questions/5707806/recursive-copy-of-directory
-     * @param type $source
-     * @param type $dest
-     */
-    public static function _delete_from_dest($source, $dest) {
-//first check to see if there's anything in the destination fs that doesn't belong
-        foreach (
-        $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($dest, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-            if (!file_exists($source . DIRECTORY_SEPARATOR . $iterator->getSubPathName())) {
-                self::_delete_files($item);
-            }
-        }
-    }
-
-    /**
-     * copies all files (that don't already exist) from the source directory, and subdirectories, into the
-     * code pulled from http://stackoverflow.com/questions/5707806/recursive-copy-of-directory
-     * destination directory
-     * @param type $source
-     * @param type $dest
-     */
-    public static function _copy_from_source($source, $dest) {
-//now copy over all systems that do belong from source fs
-        foreach (
-        $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-
-//make sure file/folder doesn't already exist first
-            if (!file_exists($dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName())) {
-                if ($item->isDir()) {
-                    mkdir($dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
-                } else {
-                    copy($item, $dest . DIRECTORY_SEPARATOR . $iterator->getSubPathName());
-                }
-            }
-        }
-    }
-
-    /**
-     * php delete function that deals with directories recursively
-     * @param type $target
-     */
-    public static function _delete_files($target) {
-        if (is_dir($target)) {
-            $files = glob($target . '*', GLOB_MARK); //GLOB_MARK adds a slash to directories returned
-
-            foreach ($files as $file) {
-                self::_delete_files($file);
-            }
-            if (file_exists($target))
-                rmdir($target);
-        } elseif (is_file($target)) {
-            unlink($target);
-        }
-    }
 
     /**
      * shrinks large directory name to only relevant data
@@ -181,11 +90,6 @@ class ApiHelper extends CHtml {
             return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
     }
 
-    public static function _remove_image_from_files($source, $image_name) {
-        self::_delete_files($source . $image_name);
-        return $source . $image_name;
-    }
-
     /* #############################################
      * Image manipulation
      * ############################################# */
@@ -239,22 +143,13 @@ class ApiHelper extends CHtml {
         return $all_parents;
     }
 
-    public static function _add_image_to_files($image_name, $dest, $source) {
-        $newpath = $image_name;
-        $image_name = basename($image_name);
-
-        if ($newpath == 'GWU' . DIRECTORY_SEPARATOR)
-            $newpath = '';
-        $return = "$source/$image_name, $dest/$newpath";
-        if (copy($source . DIRECTORY_SEPARATOR . $image_name, $dest . $newpath)) {
-
-            return "File is valid, and was successfully uploaded.\n";
-        } else {
-            return false;
-        }
-        return $return;
-    }
-
+    /**
+     * generates thumbnail from given image
+     * @param type $image_name name of image to generate
+     * @param type $uploaddir location of original image
+     * @param type $extension image type extension
+     * @return string success or failure
+     */
     public static function _create_thumbnail($image_name, $uploaddir, $extension) {
         $uploadedfile = $uploaddir . "/" . $image_name;
 
@@ -294,121 +189,17 @@ class ApiHelper extends CHtml {
         return $db['bucket'];
     }
 
-    /**
-     * fills image bucket from source. 
-     * bucket found in themes/bootstrap/images/gadget_images/
-     * @param type $source
-     * @param type $bucket
-     */
-    public static function _fill_bucket($source, $bucket) {
-        $supported_images = array(
-            'gif',
-            'jpg',
-            'jpeg',
-            'png'
-        );
-
-        $bucket_files = array();
-        foreach (
-        $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-            if (!$item->isDir()) {
-                $file = $iterator->current();
-                $file = pathinfo($file->getPath() . "/" . $file->getFilename());
-                $ext = $file['extension'];
-
-                if (in_array($ext, $supported_images) && !in_array($file['basename'], $bucket_files)) {
-//echo 'Image found!</br>';
-                    $bucket_files[] = $file['basename'];
-                    copy($item, $bucket . DIRECTORY_SEPARATOR . $file['basename']);
-
-                    self::_create_thumbnail($file['basename'], $bucket, $ext);
-                } else {
-//echo 'not an image</br>';
-                }
-            }
-        }
-        return $bucket_files;
-    }
-
-    /**
-     * adds a specific image to the bucket
-     * @param type $source
-     * @param type $bucket
-     */
-    public static function _add_image_to_bucket($bucket, $file, $which_db) {
-        $bucket_files = array(
-        );
-
-        $allowedExts = array("gif", "jpeg", "jpg", "png");
-
-        $temp = explode(".", $file["name"]);
-        $extension = end($temp);
-
-        if ($file["size"] < 20000 && in_array($extension, $allowedExts)) {
-            if ($file["error"] > 0) {
-                $bucket_files["Return Code"] = $file["error"];
-            } else {
-                $bucket_files["Return Code"] = $file["name"];
-                $bucket_files["Return Code"] = $file["type"];
-                $bucket_files["Return Code"] = ($file["size"] / 1024) . " kB";
-                $bucket_files["Return Code"] = $file["tmp_name"];
-                if (file_exists("upload/" . $file["name"])) {
-                    $bucket_files["Return Code"] = $file["name"];
-                } else {
-                    move_uploaded_file($file["tmp_name"], $bucket . $file["name"]);
-                    $bucket_files["Return Code"] = "Stored in: " . $bucket . $file["name"];
-                }
-            }
-        } else {
-            echo "Invalid file";
-        }
-
-        $bucket_files['files'] = self::_ReadFolderDirectory_from_db($which_db);
-
-        return $bucket_files;
-    }
-
-    /**
-     * adds a specific image to the bucket
-     * @param type $source
-     * @param type $bucket
-     */
-    public static function _remove_image_from_bucket($bucket, $image_name = '') {
-        $message = "Success";
-        $delete_images = array();
-        foreach (
-        $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($bucket, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-            if (!$item->isDir()) {
-                if ($image_name == '' || $image_name == $item->getFilename()) {
-                    self::_delete_files($item);
-                    $deleted_images['images'] = $item->getFilename();
-                }
-            }
-        }
-
-        if (empty($deleted_images))
-            $message = 'File not found.';
-
-        $delete_images['message'] = $message;
-        return $delete_images;
-    }
-
     /* #############################################
-     * Dataase manipulation
+     * Database manipulation
      * ############################################# */
 
-    /*
+    /**
      * tranlsates folder directory into json array
      * from http://stackoverflow.com/questions/4987551/parse-directory-structure-strings-to-json-using-php
      * @param type $dir directory to start search from
      * @param type $listDir array the append directory to
      * @return type
      */
-
     public static function _ReadFolderDirectory_from_db($which_db) {
         $db_to_array = array();
 
@@ -421,69 +212,8 @@ class ApiHelper extends CHtml {
         return $db_to_array;
     }
 
-    /**
-     * translates the file system into a mongo db
-     * @param type $local
-     */
-    public static function _save_to_db_load_from_local($local, $which_db, $bucket) {
-
-        $which_db->remove();
-
-        $r = array(
-            "bucket" => self::_ReadFolderDirectory_from_local($bucket),
-            "timestamp" => date('m-d-y h:i:s'),
-            "files" => array(),
-        );
-        foreach (
-        $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($local, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
-        ) {
-            if ($item->getFilename() != 'Thumbs.db' && $item->getFilename() != 'Block.txt') {
-                if ($item->isDir()) {
-                    switch ($iterator->getDepth()) {
-                        case 0:
-                            $path = array("root" => array($item->getFilename() => array()));
-                            break;
-                        case 1:
-                            $path = array("subfolder" => array($item->getFilename() => array()));
-                            break;
-                        case 2:
-                            $path = array("bottomfolder" => array($item->getFilename() => array()));
-                            $path[$item->getFilename()] = array();
-                            break;
-                        default:
-                            $path = array("bottomfolder" => array($item->getFilename() => array()));
-                            $path[$item->getFilename()] = array();
-                            break;
-                    }
-                } else {
-                    $path = array("images" => array($item->getFilename()));
-                }
-
-                for ($depth = $iterator->getDepth() - 1; $depth >= 0; $depth--) {
-                    $path = array($iterator->getSubIterator($depth)->current()->getFilename() => $path);
-                }
-                $r["files"] = array_merge_recursive($r["files"], $path);
-            }
-        }
-
-        //array_multisort(array_keys($r), SORT_STRING, $r);
-        $which_db->save($r);
-
-        return $r;
-    }
-
-    /**
-     * TODO
-     * moves assets from bucket to local
-     * @param type $local
-     */
-    public static function _load_from_db_save_to_local($local, $bucket) {
-        
-    }
-
     /* #####################################
-     * GETTERS AND SETTERS
+     * GETTERS 
      * #################################### */
 
     public static function _get_bucket_url($which_service, $assoc_array = true) {
@@ -494,7 +224,9 @@ class ApiHelper extends CHtml {
 
     public static function _get_db_structure($which_service, $assoc_array = true) {
         $url = Yii::app()->createAbsoluteUrl("api/dbstructure/$which_service");
+
         $curl_response = Yii::app()->curl->get($url);
+
         return json_decode($curl_response, $assoc_array);
     }
 
@@ -584,5 +316,4 @@ class ApiHelper extends CHtml {
     }
 
 }
-
 ?>

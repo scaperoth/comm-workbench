@@ -15,7 +15,7 @@ class GadgetsController extends Controller {
         $bucket_files = ApiHelper::_get_bucket_files('gadgets');
         $bucket_dir = ApiHelper::_get_bucket_url('gadgets');
         $dbstructure = ApiHelper::_get_db_structure('gadgets');
-
+        
         foreach ($bucket_files as $image) {
             if (!is_array($image)) {
                 $image = urlencode($image);

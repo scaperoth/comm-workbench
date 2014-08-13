@@ -10,6 +10,7 @@
                         <div>
                             <select data-toggle="tooltip" data-placement="top" title="Campus" displaySize="4" class="location-select sidebar-select form-control" name="AddimageForm[campus]" id="AddimageForm_campus" data-script="location_load" data-group="0" data-type="campus" data-target="building">
                                 <option value=""></option>
+                                
                                 <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
 
                                     <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
