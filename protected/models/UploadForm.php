@@ -39,7 +39,7 @@ class UploadForm extends CFormModel {
         $uploaddir = Yii::app()->curl->get($url);
         $uploaddir = str_replace("\"", "", $uploaddir);
         $uploaddir = trim($uploaddir) . "/";
-
+        $uploaddir = dirname(Yii::getPathOfAlias('webroot')) .$uploaddir;
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         //C:\xampp\htdocs\comm-workbench\themes\bootstrap\assets\images\gadget_images/
         //C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
@@ -58,11 +58,54 @@ class UploadForm extends CFormModel {
             return false;
         }
 
-        ApiHelper::_create_thumbnail($this->name, $uploaddir, $extension);
+        self::_create_thumbnail($this->name, $uploaddir, $extension);
 
         return true;
     }
 
+    
+    /**
+     * generates thumbnail from given image
+     * @param type $image_name name of image to generate
+     * @param type $uploaddir location of original image
+     * @param type $extension image type extension
+     * @return string success or failure
+     */
+    public static function _create_thumbnail($image_name, $uploaddir, $extension) {
+        $uploadedfile = $uploaddir . "/" . $image_name;
+        
+        //create thumbnail
+        if ($extension == "jpg" || $extension == "jpeg") {
+            $src = imagecreatefromjpeg($uploadedfile);
+        } else if ($extension == "png") {
+            $src = imagecreatefrompng($uploadedfile);
+        } else {
+            $src = imagecreatefromgif($uploadedfile);
+        }
+
+        list($width, $height) = getimagesize($uploadedfile);
+
+        $newwidth = 120;
+        $newheight = ($height / $width) * $newwidth;
+        $tmp = imagecreatetruecolor($newwidth, $newheight);
+
+        imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
+
+        $filename = "$uploaddir/thumb/thumb_" . $image_name;
+
+        imagegif($tmp, $filename, 100);
+
+        imagedestroy($src);
+        imagedestroy($tmp);
+
+        return 'success';
+    }
+    
+    /**
+     * returns file extension
+     * @param type $str name of image to strip file extension
+     * @return string extension
+     */
     function getExtension($str) {
 
         $i = strrpos($str, ".");

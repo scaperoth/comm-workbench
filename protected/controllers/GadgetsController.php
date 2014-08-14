@@ -4,7 +4,7 @@ class GadgetsController extends Controller {
 
     public function filters() {
         return array(
-                'https',
+            'https',
             array(
                 'application.filters.AuthFilter',
             ),
@@ -12,20 +12,24 @@ class GadgetsController extends Controller {
     }
 
     public function actionIndex() {
-        $bucket_files = ApiHelper::_get_bucket_files('gadgets');
+        
         $bucket_dir = ApiHelper::_get_bucket_url('gadgets');
         $dbstructure = ApiHelper::_get_db_structure('gadgets');
-        
+        $bucket_files = $dbstructure['bucket'];
+        $root = ApiHelper::_get_local_path('gadgets');
+
         foreach ($bucket_files as $image) {
             if (!is_array($image)) {
-                $image = urlencode($image);
-                $url = Yii::app()->createAbsoluteUrl("api/getdir/gadgets/$image");
-                $curl_response = Yii::app()->curl->get($url);
-
-                $image_locations[] = (json_decode($curl_response, true));
+                $image_parent = ApiHelper::_find_image_parent($image, $root);
+                $image_locations[] = $image_parent;
             }
         }
-        $this->render('index', array('image_locations' => $image_locations, 'dbstructure' => $dbstructure, 'bucket_dir' => $bucket_dir, 'bucket_files' => $bucket_files));
+        $this->render('index', array(
+            'image_locations' => $image_locations,
+            'dbstructure' => $dbstructure,
+            'bucket_dir' => $bucket_dir,
+            'bucket_files' => $bucket_files
+        ));
     }
 
     public function action_image_section() {
@@ -145,7 +149,6 @@ class GadgetsController extends Controller {
             $model->image_name = $image;
 // validate user input and redirect to the previous page if valid
             if ($model->addimage()) {
-                
             } else {
                 Yii::app()->user->setFlash('warning', 'Request Failed');
             }

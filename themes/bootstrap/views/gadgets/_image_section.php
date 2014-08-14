@@ -56,7 +56,6 @@
     array_multisort($image_locations);
     ?>
     <?php foreach ($image_locations as $item): ?>
-
         <div class="row bottom15 no-padding">
             <div class="col-sm-12">
                 <h2>
@@ -66,7 +65,7 @@
                     ?>
                 </h2>
                 <div class="col-sm-2 no-padding bottom15">
-                    <img src='<?= $bucket_dir . "/thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
+                    <img src='<?= $bucket_dir . "thumb/thumb_" . $item['name'] ?>' alt='<?= $item['name'] ?>'>
                 </div>
 
                 <div class="col-sm-12 bottom10 no-padding dropper <?= ((count($item['location']) == 0) ? 'well' : ''); ?>" " data-image ="<?= $item['name']; ?>" >

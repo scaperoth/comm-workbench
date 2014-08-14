@@ -236,7 +236,7 @@ function drop_image_onto_location(ev) {
 
 
         ajaxsubmitnewlocation(params).done(function(ajax_data) {
-            //console.log(ajax_data)
+            console.log(ajax_data)
 
             newitem.push('<a class="col-xs-2 imager pre-delete no-padding" href="#?javascript:void(0)" draggable="true" data-image="' + data_image + '" id="trashable_' + data_image + '">')
             newitem.push($(newchild)[0].outerHTML)

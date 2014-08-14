@@ -17,7 +17,7 @@
                                             $imageHtmlOptions = array(
                                                 'data-image' => urlencode($image),
                                                 'id' => "drag_" . $image,
-                                                'src' => $bucket_dir . "/thumb/thumb_" . $image,
+                                                'src' => $bucket_dir . "thumb/thumb_" . $image,
                                                 'alt' => $image,
                                                 'draggable'=>'true',
                                             );

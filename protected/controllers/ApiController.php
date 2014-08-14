@@ -10,37 +10,6 @@
  */
 class ApiController extends Controller {
 
-//source and destination locations. A prefix of the application's base path
-//will be added before the action is exectured in beforeAction(). This base
-//path here is expected to be ../protected/components/
-    private $gadgets_shared = '/data/gadgets/backup/';
-    private $gadgets_local = '/data/gadgets/filesystem/';
-    private $gadgets_bucket = "/assets/images/gadget_images";
-    private $wepa_shared = '/data/wepa/backup/';
-    private $wepa_local = '/data/wepa/filesystem/';
-    private $wepa_bucket = "/assets/images/wepa_images/production_images";
-    private $wepa_outage_bucket = "/assets/images/wepa_images/outage_images";
-    private $gadgets_shared_full;
-    private $gadgets_local_full;
-    private $gadgets_bucket_full;
-    private $wepa_shared_full;
-    private $wepa_local_full;
-    private $wepa_bucket_full;
-    private $wepa_outage_bucket_full;
-
-    public function beforeAction($action) {
-//gadgets
-        $this->gadgets_shared_full = Yii::app()->basePath . $this->gadgets_shared;
-        $this->gadgets_local_full = Yii::app()->basePath . $this->gadgets_local;
-        $this->gadgets_bucket_full = dirname(Yii::getPathOfAlias('webroot')) . Yii::app()->theme->baseUrl . $this->gadgets_bucket;
-
-//wepa
-        $this->wepa_shared_full = Yii::app()->basePath . $this->wepa_shared;
-        $this->wepa_local_full = Yii::app()->basePath . $this->wepa_local;
-        $this->wepa_bucket_full = dirname(Yii::getPathOfAlias('webroot')) . Yii::app()->theme->baseUrl . $this->wepa_bucket;
-
-        return parent::beforeAction($action);
-    }
 
     /**
      * this may be used to display how to use api
@@ -61,7 +30,7 @@ class ApiController extends Controller {
     public function actionSync() {
 //first find out which service the API will be accessing
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
+            $service_details = ApiHelper::_get_service(CHttpRequest::getParam('which_service'));
 
             if ($push_or_pull = CHttpRequest::getParam('push_or_pull')) {
                 switch ($push_or_pull) {
@@ -92,7 +61,7 @@ class ApiController extends Controller {
     public function actionUpdate() {
 
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
+            $service_details = ApiHelper::_get_service(CHttpRequest::getParam('which_service'));
 
 //now which action will the service be completeing
             if ($load_or_save = CHttpRequest::getParam('load_or_save')) {
@@ -125,7 +94,7 @@ class ApiController extends Controller {
     public function actionGetdir() {
 //first find out which service the API will be accessing and get the details of that service
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service($service);
+            $service_details = ApiHelper::_get_service($service);
 
 //if an image name is given, get the directory of that image, else get them all
             if ($image_name = CHttpRequest::getParam('image_name')) {
@@ -149,7 +118,7 @@ class ApiController extends Controller {
         $which_path;
         if (CHttpRequest::getParam('which_service')) {
             $service = CHttpRequest::getParam('which_service');
-            $service_details = self::_get_service($service);
+            $service_details = ApiHelper::_get_service($service);
 
             if ($image_name = CHttpRequest::getParam('image_name')) {
                 $JSON_array = self::_add_image_to_files($image_name, $service_details['local_file'], $service_details['bucket']);
@@ -171,7 +140,7 @@ class ApiController extends Controller {
 //first find out which service the API will be accessing and get the details of that service
         if (CHttpRequest::getParam('which_service')) {
             $service = CHttpRequest::getParam('which_service');
-            $service_details = self::_get_service($service);
+            $service_details = ApiHelper::_get_service($service);
 
 
             if ($image_name = CHttpRequest::getParam('image_name')) {
@@ -198,16 +167,16 @@ class ApiController extends Controller {
 
         if (CHttpRequest::getParam('which_service')) {
             $service = CHttpRequest::getParam('which_service');
-            $service_details = self::_get_service($service);
+            $service_details = ApiHelper::_get_service($service);
 
 //if an image name is given, insert that image, else sync them all
 
             if (Yii::app()->request->isPostRequest) {
 //$image_name = CHttpRequest::getParam('image_name');
-                $JSON_array = self::_add_image_to_bucket($service_details['bucket'],$_POST, $service_details['database']);
-            }
-            else
+                $JSON_array = self::_add_image_to_bucket($service_details['bucket'], $_POST, $service_details['database']);
+            } else {
                 $JSON_array = self::_fill_bucket($service_details['local_file'], $service_details['bucket']);
+            }
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
@@ -223,7 +192,7 @@ class ApiController extends Controller {
     public function actionDeleteimageinbucket() {
 //first find out which service the API will be accessing and get the details of that service
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service(CHttpRequest::getParam('which_service'));
+            $service_details = ApiHelper::_get_service(CHttpRequest::getParam('which_service'));
 //if an image name is given, insert that image, else sync them all
             if ($image_name = CHttpRequest::getParam('image_name')) {
                 $JSON_array = self::_remove_image_from_bucket($service_details['bucket'], $image_name);
@@ -243,7 +212,7 @@ class ApiController extends Controller {
      */
     public function actionBucketdir() {
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service($service);
+            $service_details = ApiHelper::_get_service($service);
 //if an image name is given, insert that image, else sync them all
 
 
@@ -253,7 +222,7 @@ class ApiController extends Controller {
             }
             else
 //removes all images from bucket
-                $JSON_array = Yii::app()->theme->baseUrl . $this->gadgets_bucket;
+                $JSON_array = Yii::app()->theme->baseUrl . ApiHelper::GADGETS_BUCKET;
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
@@ -266,7 +235,7 @@ class ApiController extends Controller {
      */
     public function actionBucketfiles() {
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service($service);
+            $service_details = ApiHelper::_get_service($service);
 //if an image name is given, insert that image, else sync them all
 
             $JSON_array = ApiHelper::_ReadFolderDirectory_from_local($service_details['bucket']);
@@ -282,7 +251,7 @@ class ApiController extends Controller {
      */
     public function actionFilestructure() {
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service($service);
+            $service_details = ApiHelper::_get_service($service);
 //if an image name is given, insert that image, else sync them all
             if ($subdirectory = CHttpRequest::getParam('subdirectory')) {
                 if ($bottomdirectory = CHttpRequest::getParam('bottomdirectory')) {
@@ -305,7 +274,7 @@ class ApiController extends Controller {
      */
     public function actionDbstructure() {
         if ($service = CHttpRequest::getParam('which_service')) {
-            $service_details = self::_get_service($service);
+            $service_details = ApiHelper::_get_service($service);
 //if an image name is given, insert that image, else sync them all
 
             $JSON_array = ApiHelper::_ReadFolderDirectory_from_db($service_details['database']);
@@ -320,36 +289,6 @@ class ApiController extends Controller {
      * Other helpful functions...
      * #################################### */
 
-    /**
-     * returns which service is being selected
-     * is located here instead of the helper in order to use the
-     * local variables for file names and databases
-     * @param type $param
-     * @return type
-     */
-    private function _get_service($param) {
-        $service_details = array();
-        switch ($param) {
-            case 'gadgets':
-                $service_details['local_file'] = $this->gadgets_local_full;
-                $service_details['shared_file'] = $this->gadgets_shared_full;
-                $service_details['bucket'] = $this->gadgets_bucket_full;
-                $service_details['database'] = Yii::app()->mongodb->gadgets;
-                break;
-            case 'wepa':
-                $service_details['local_file'] = $this->wepa_local_full;
-                $service_details['shared_file'] = $this->wepa_shared_full;
-                $service_details['bucket'] = $this->wepa_bucket_full;
-                $service_details['outage_bucket'] = $this->wepa_outage_bucket_full;
-                $service_details['database'] = Yii::app()->mongodb->wepa;
-
-                break;
-        }
-
-
-        return $service_details;
-    }
-    
     /**
      * 
      * @param type $str
@@ -486,6 +425,8 @@ class ApiController extends Controller {
         $newpath = $image_name;
         $image_name = basename($image_name);
 
+        $source = dirname(Yii::getPathOfAlias('webroot')) . $source;
+
         if ($newpath == 'GWU' . DIRECTORY_SEPARATOR)
             $newpath = '';
         $return = "$source/$image_name, $dest/$newpath";
@@ -498,8 +439,6 @@ class ApiController extends Controller {
         return $return;
     }
 
-    
-
     /* #############################################
      * Bucket manipulation
      * ############################################# */
@@ -511,6 +450,7 @@ class ApiController extends Controller {
      * @param type $bucket
      */
     public static function _fill_bucket($source, $bucket) {
+        $model = new UploadForm();
         $supported_images = array(
             'gif',
             'jpg',
@@ -532,8 +472,7 @@ class ApiController extends Controller {
 //echo 'Image found!</br>';
                     $bucket_files[] = $file['basename'];
                     copy($item, $bucket . DIRECTORY_SEPARATOR . $file['basename']);
-
-                    ApiHelper::_create_thumbnail($file['basename'], $bucket, $ext);
+                    $model->_create_thumbnail($file['basename'], $bucket, $ext);
                 } else {
 //echo 'not an image</br>';
                 }
@@ -550,15 +489,15 @@ class ApiController extends Controller {
     public static function _add_image_to_bucket($uploaddir, $file, $which_db) {
         $bucket_files = array(
         );
-        
+        $uploaddir = dirname(Yii::getPathOfAlias('webroot')) .$uploaddir;
         $filename = $file['new_image']['name'];
         $tmpname = $file['new_image']['tmp_name'];
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         //C:\xampp\htdocs\comm-workbench\themes\bootstrap\assets\images\gadget_images/
         //C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         $extension = strtolower(self::getExtension($filename));
-        
-        
+
+
         if (($extension != "jpg") && ($extension != "jpeg") && ($extension != "png") && ($extension != "gif")) {
             $bucket_files = ' Unknown Image extension ';
         }
@@ -613,13 +552,14 @@ class ApiController extends Controller {
      */
     public static function _save_to_db_load_from_local($local, $which_db, $bucket) {
 
-        $which_db->remove();
+        $bucket = dirname(Yii::getPathOfAlias('webroot')) . $bucket;
 
         $r = array(
             "bucket" => ApiHelper::_ReadFolderDirectory_from_local($bucket),
             "timestamp" => date('m-d-y h:i:s'),
             "files" => array(),
         );
+
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($local, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item

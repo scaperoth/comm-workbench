@@ -7,10 +7,16 @@
 
 class ApiHelper extends CHtml {
 // Members
-    /**
-     * Key which has to be in HTTP USERNAME and PASSWORD headers 
-     */
-
+     //relative path. what you see is what you get.
+    const GADGETS_SHARED = '/data/gadgets/backup/';
+    const GADGETS_LOCAL = '/data/gadgets/filesystem/';
+    const GADGETS_BUCKET = "/assets/images/gadget_images/";
+    const WEPA_SHARED = '/data/wepa/backup/';
+    const WEPA_LOCAL = '/data/wepa/filesystem/';
+    const WEPA_BUCKET = "/assets/images/wepa_images/production_images";
+    const WEPA_OUTAGE_BUCKET = "/assets/images/wepa_images/outage_images";
+    
+    
     Const TOPHOLDER = 'structure';
     Const APPLICATION_ID = 'ASCCPE';
 
@@ -21,7 +27,25 @@ class ApiHelper extends CHtml {
     private $format = 'json';
 
     const LOGIN_ERROR = "You have insufficient permissions to continue";
-
+    
+    /* #############################################
+     * MISC
+     * ############################################# */
+    
+    /**
+     * appends full path to relative path constants
+     * path here is expected to be ../protected/components/ for non bucket dir
+     * path for bucket directory will be comm-workbench/themes/assets/bootstrap/
+     * @param type $relative_path path to append full path to
+     * @param type $bucket whether or not path is for image bucket dir
+     */
+    private function _create_full_path($relative_path, $bucket = false){
+        if($bucket)
+            return Yii::app()->theme->baseUrl .$relative_path;
+        else 
+            return Yii::app()->basePath . $relative_path;
+    }
+    
     /* #############################################
      * File manipulation
      * COULD BE OPTIMIZED
@@ -118,7 +142,8 @@ class ApiHelper extends CHtml {
     }
 
     /**
-     * returns every parent of image
+     * parent of image
+     * if the image is in multiple locations, it returns all parents
      * @param type $image_name
      * @param type $root
      */
@@ -127,6 +152,7 @@ class ApiHelper extends CHtml {
             'name' => $image_name,
             'location' => array()
         );
+        
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($root, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
@@ -141,43 +167,6 @@ class ApiHelper extends CHtml {
         }
 
         return $all_parents;
-    }
-
-    /**
-     * generates thumbnail from given image
-     * @param type $image_name name of image to generate
-     * @param type $uploaddir location of original image
-     * @param type $extension image type extension
-     * @return string success or failure
-     */
-    public static function _create_thumbnail($image_name, $uploaddir, $extension) {
-        $uploadedfile = $uploaddir . "/" . $image_name;
-
-        //create thumbnail
-        if ($extension == "jpg" || $extension == "jpeg") {
-            $src = imagecreatefromjpeg($uploadedfile);
-        } else if ($extension == "png") {
-            $src = imagecreatefrompng($uploadedfile);
-        } else {
-            $src = imagecreatefromgif($uploadedfile);
-        }
-
-        list($width, $height) = getimagesize($uploadedfile);
-
-        $newwidth = 120;
-        $newheight = ($height / $width) * $newwidth;
-        $tmp = imagecreatetruecolor($newwidth, $newheight);
-
-        imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
-
-        $filename = "$uploaddir/thumb/thumb_" . $image_name;
-
-        imagegif($tmp, $filename, 100);
-
-        imagedestroy($src);
-        imagedestroy($tmp);
-
-        return 'success';
     }
 
     /* #############################################
@@ -216,18 +205,52 @@ class ApiHelper extends CHtml {
      * GETTERS 
      * #################################### */
 
+    /**
+     * returns which service is being selected
+     * is located here instead of the helper in order to use the
+     * local variables for file names and databases
+     * @param type $service name of service to get data from
+     * @return type
+     */
+    public function _get_service($param) {
+        $service_details = array();
+        switch ($param) {
+            case 'gadgets':
+                $service_details['local_file'] = self::_create_full_path(self::GADGETS_LOCAL);
+                $service_details['shared_file'] = self::_create_full_path(self::GADGETS_SHARED);
+                $service_details['bucket'] = self::_create_full_path(self::GADGETS_BUCKET, true);
+                $service_details['database'] = Yii::app()->mongodb->gadgets;
+                break;
+            case 'wepa':
+                $service_details['local_file'] = self::_create_full_path(self::WEPA_LOCAL);
+                $service_details['shared_file'] = self::_create_full_path(self::WEPA_SHARED);
+                $service_details['bucket'] = self::_create_full_path(self::WEPA_BUCKET, true);
+                $service_details['outage_bucket'] = self::_create_full_path(self::WEPA_OUTAGE_BUCKET, true);
+                $service_details['database'] = Yii::app()->mongodb->wepa;
+
+                break;
+        }
+
+
+        return $service_details;
+    }
+
     public static function _get_bucket_url($which_service, $assoc_array = true) {
-        $url = Yii::app()->createAbsoluteUrl("api/bucketdir/$which_service");
-        $curl_response = Yii::app()->curl->get($url);
-        return json_decode($curl_response, $assoc_array);
+        $service = self::_get_service($which_service);
+        $bucket = $service['bucket'];
+        return $bucket;
+    }
+    
+    public static function _get_local_path($which_service, $assoc_array = true) {
+        $service = self::_get_service($which_service);
+        $bucket = $service['local_file'];
+        return $bucket;
     }
 
     public static function _get_db_structure($which_service, $assoc_array = true) {
-        $url = Yii::app()->createAbsoluteUrl("api/dbstructure/$which_service");
-
-        $curl_response = Yii::app()->curl->get($url);
-
-        return json_decode($curl_response, $assoc_array);
+        $service = self::_get_service($which_service);
+        $db = self::_ReadFolderDirectory_from_db($service['database']);
+        return $db;
     }
 
     /**
@@ -316,4 +339,5 @@ class ApiHelper extends CHtml {
     }
 
 }
+
 ?>
