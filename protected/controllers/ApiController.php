@@ -556,7 +556,7 @@ class ApiController extends CController {
         $r = array(
             "bucket" => ApiHelper::_ReadFolderDirectory_from_local($bucket),
             "timestamp" => date('m-d-y h:i:s'),
-            "files" => array(),
+            "files" => array(),     
         );
 
         foreach (

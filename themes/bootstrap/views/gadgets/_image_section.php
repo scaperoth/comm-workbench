@@ -1,35 +1,35 @@
+<?php array_multisort(array_keys($dbstructure['files']['root']), SORT_NATURAL ) ?>;
 <?php 
-
 ?>
 <div class="col-xs-3  " id="">
     <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12 left5 sidebar-affix" >
         <div class="bottom30 row">
             <form class="bs-example form-inline " id="location_search_form"  method="post">               <fieldset>
                     <legend>Filter Campus/Building</legend>
-                        <div class="form-group">
-                            <label class="control-label sr-only" for="AddimageForm_campus">Campus</label>
-                            <div>
-                                <select data-toggle="tooltip" data-placement="top" title="Campus" displaySize="4" class="location-select sidebar-select form-control" name="AddimageForm[campus]" id="AddimageForm_campus" data-script="location_load" data-group="0" data-type="campus" data-target="building">
-                                    <option value=""></option>
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="AddimageForm_campus">Campus</label>
+                        <div>
+                            <select data-toggle="tooltip" data-placement="top" title="Campus" displaySize="4" class="location-select sidebar-select form-control" name="AddimageForm[campus]" id="AddimageForm_campus" data-script="location_load" data-group="0" data-type="campus" data-target="building">
+                                <option value=""></option>
 
-                                    <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
+                                <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
 
-                                        <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
+                                    <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
 
-                                    <?php endforeach; ?>
-                                </select>
+                                <?php endforeach; ?>
+                            </select>
 
-                            </div>
                         </div>
-                        <div class="form-group">
-                            <label class="control-label sr-only" for="AddimageForm_building">Building</label>
-                            <div>
-                                <select displaySize="4" data-toggle="tooltip" data-placement="top" title="Building" class="location-select sidebar-select form-control" name="AddimageForm[building]" id="AddimageForm_building" data-script="location_load" data-group="0" data-type="building" data-target="room" >
-                                    <option disabled selected value=""></option>
-                                </select>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label sr-only" for="AddimageForm_building">Building</label>
+                        <div>
+                            <select displaySize="4" data-toggle="tooltip" data-placement="top" title="Building" class="location-select sidebar-select form-control" name="AddimageForm[building]" id="AddimageForm_building" data-script="location_load" data-group="0" data-type="building" data-target="room" >
+                                <option disabled selected value=""></option>
+                            </select>
 
-                            </div>
                         </div>
+                    </div>
                     <div class="form-group">
                         <label class="control-label sr-only" for="reset_button">Building</label>
                         <div>
