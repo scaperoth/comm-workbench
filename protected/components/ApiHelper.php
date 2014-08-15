@@ -104,15 +104,14 @@ class ApiHelper extends CHtml {
     public static function _ReadFolder_subdirectory($service, $subfolder = '', $bottomfolder = '', $rootfolder = 'files') {
         $filestructure = self::_get_db_structure($service);
         if (empty($subfolder)) {
-            array_multisort(array_values($filestructure[$rootfolder]['root']), SORT_DESC, array_keys($filestructure[$rootfolder]['root']), SORT_ASC, $filestructure[$rootfolder]['root']);
-            return $filestructure[$rootfolder]['root'];
+            $new_array = $filestructure[$rootfolder]['root'];
         } else if (empty($bottomfolder)) {
-            array_multisort(array_values($filestructure[$rootfolder][$subfolder]['subfolder']), SORT_DESC, array_keys($filestructure[$rootfolder][$subfolder]['subfolder']), SORT_ASC, $filestructure[$rootfolder][$subfolder]['subfolder']);
-            return $filestructure[$rootfolder][$subfolder]['subfolder'];
+            $new_array = $filestructure[$rootfolder][$subfolder]['subfolder'];
         } else {
-            array_multisort(array_values($filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']), SORT_DESC, array_keys($filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']), SORT_ASC, $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']);
-            return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
+            $new_array = $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
         }
+        array_multisort(array_values($new_array), SORT_DESC, array_keys($new_array), SORT_ASC, $new_array);
+        return $new_array;
     }
 
     /**

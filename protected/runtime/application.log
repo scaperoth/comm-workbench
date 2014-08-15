@@ -292,3 +292,11 @@ in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (1
 in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
 in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
 in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (126)
+2014/08/15 15:19:15 [warning] [curl log] https://localhost/comm-workbench/index.php/api/filestructure/gadgets/FB
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (126)
+2014/08/15 15:19:16 [warning] [curl log] https://localhost/comm-workbench/index.php/api/filestructure/gadgets/FB/AC0
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (126)
