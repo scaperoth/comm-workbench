@@ -19,6 +19,9 @@ $cs->registerScript('gadget_remove_ajax_url', ' var removelocationajaxurl ="' . 
 $cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $this->createUrl('drawlocationsajax') . '";');
 $cs->registerScript('gadget_script', file_get_contents('themes/bootstrap/assets/js/gadget_script.js'));
 $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap/assets/js/gadget_ajax.js'));
+
+array_multisort(array_values($dbstructure['files']['root']), SORT_DESC, array_keys($dbstructure['files']['root']), SORT_ASC, $dbstructure['files']['root']);
+
 ?>
 
 
