@@ -36,7 +36,6 @@ class AddgadgetimageForm extends CFormModel {
         
         $url = Yii::app()->createAbsoluteUrl("api/addimage/gadgets/$location");
         $curl_response = Yii::app()->curl->get($url);
-        
         if (!$curl_response) {
             return false;
         }
@@ -44,7 +43,6 @@ class AddgadgetimageForm extends CFormModel {
         
         $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
         $curl_response = Yii::app()->curl->get($url);
-       
         if (!$curl_response) {
             return false;
         }

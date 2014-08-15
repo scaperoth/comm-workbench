@@ -12,7 +12,7 @@ class GadgetsController extends Controller {
     }
 
     public function actionIndex() {
-        
+
         $bucket_dir = ApiHelper::_get_bucket_url('gadgets');
         $dbstructure = ApiHelper::_get_db_structure('gadgets');
         $bucket_files = $dbstructure['bucket'];
@@ -66,7 +66,10 @@ class GadgetsController extends Controller {
             } else {
                 Yii::app()->user->setFlash('warning', 'Request Failed');
             }
+
         }
+        
+            
         // display the original form form
         $this->redirect(array('gadgets/'));
     }
@@ -149,6 +152,7 @@ class GadgetsController extends Controller {
             $model->image_name = $image;
 // validate user input and redirect to the previous page if valid
             if ($model->addimage()) {
+                
             } else {
                 Yii::app()->user->setFlash('warning', 'Request Failed');
             }

@@ -10,7 +10,6 @@
  */
 class ApiController extends CController {
 
-
     /**
      * this may be used to display how to use api
      * This is the default 'index' action that is invoked
@@ -429,7 +428,7 @@ class ApiController extends CController {
 
         if ($newpath == 'GWU' . DIRECTORY_SEPARATOR)
             $newpath = '';
-        $return = "$source/$image_name, $dest/$newpath";
+        $return = "error with: $source/$image_name, $dest/$newpath";
         if (copy($source . DIRECTORY_SEPARATOR . $image_name, $dest . $newpath)) {
 
             return "File is valid, and was successfully uploaded.\n";
@@ -594,8 +593,8 @@ class ApiController extends CController {
         }
 
         //array_multisort(array_keys($r), SORT_STRING, $r);
-        $which_db->save($r);
 
+        print_r($which_db->save($r));
         return $r;
     }
 

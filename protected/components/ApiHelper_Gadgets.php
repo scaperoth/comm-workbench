@@ -157,7 +157,7 @@ class ApiHelper_Gadgets extends CHtml {
                 //echo BSHtml::openTag("div", $imageDivOptions);
                 echo BSHtml::openTag("a", $imageLinkOptions);
                 echo BSHtml::tag("img", array(
-                    "src" => $bucket_dir . "/thumb/thumb_" . $value,
+                    "src" => $bucket_dir . "thumb/thumb_" . $value,
                     "alt" => $value,
                     'class'=>'image',
                     'draggable'=>'true',

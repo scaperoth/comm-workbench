@@ -1,4 +1,6 @@
-<?php ?>
+<?php 
+
+?>
 <div class="col-xs-3  " id="">
     <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12 left5 sidebar-affix" >
         <div class="bottom30 row">

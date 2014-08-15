@@ -1,4 +1,6 @@
+<?php
 
+?>
 
 <!--left-->
 <div class="col-xs-3 leftCol " id="sidebar">
