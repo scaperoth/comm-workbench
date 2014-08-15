@@ -1,12 +1,12 @@
 <?php
 
 class SiteController extends Controller {
+
     public function filters() {
         return array(
-                'https',
+            'https',
             array(
                 'application.filters.AuthFilter  - login, logout',
-                
             ),
         );
     }
@@ -113,7 +113,7 @@ class SiteController extends Controller {
      * upload document to the proper bucket directory
      */
     public function actionUpload() {
-        
+
         $errors = 0;
         $model = new UploadForm();
 // if it is ajax validation request
@@ -123,20 +123,20 @@ class SiteController extends Controller {
         }
 // collect user input data
         if (isset($_FILES['file'])) {
-            
+
             for ($i = 0; $i < count($_FILES['file']['name']); $i++) {
 
-        
+
                 $model->name = $_FILES['file']['name'][$i];
                 $model->type = $_FILES['file']['type'][$i];
                 $model->tmp_name = $_FILES['file']['tmp_name'][$i];
                 $model->error = $_FILES['file']['error'][$i];
                 $model->size = $_FILES['file']['size'][$i];
                 $model->service = $_POST['service'];
-                    
+
 // validate user input and redirect to the previous page if valid
                 if (!$model->validate() || !$model->upload()) {
-                    
+
                     $errors = 1;
                 }
             }
@@ -147,11 +147,12 @@ class SiteController extends Controller {
             }
             else
                 Yii::app()->user->setFlash('warning', 'unable to upload file!');
+            $this->redirect(array('site/upload'));
         }
 // display the upload form
         $this->render('upload', array('model' => $model));
     }
-    
+
     /**
      * 
      */
@@ -165,9 +166,9 @@ class SiteController extends Controller {
 
         Yii::app()->user->setFlash('success', 'Refreshed');
 
-        $this->redirect("../".$service);
+        $this->redirect("../" . $service);
     }
-    
+
     /**
      * 
      */
@@ -183,9 +184,9 @@ class SiteController extends Controller {
         $curl_response = Yii::app()->curl->get($url);
 
         Yii::app()->user->setFlash('success', 'Loaded');
-        $this->redirect("../".$service);
+        $this->redirect("../" . $service);
     }
-    
+
     /**
      * 
      */
@@ -193,7 +194,7 @@ class SiteController extends Controller {
         if (!isset($_GET['service'])) {
             throw new CHttpException('403', 'Invalid access.');
         }
-        
+
         $service = $_GET['service'];
         $url = Yii::app()->createAbsoluteUrl("api/update/$service/save");
         $curl_response = Yii::app()->curl->get($url);
@@ -203,7 +204,7 @@ class SiteController extends Controller {
 
         Yii::app()->user->setFlash('success', 'Published');
 
-        $this->redirect("../".$service);
+        $this->redirect("../" . $service);
     }
-    
+
 }

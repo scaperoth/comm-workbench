@@ -38,7 +38,7 @@ class UploadForm extends CFormModel {
         $url = Yii::app()->createAbsoluteUrl('api/bucketdir/' . $this->service . '/full');
         $uploaddir = Yii::app()->curl->get($url);
         $uploaddir = str_replace("\"", "", $uploaddir);
-        $uploaddir = trim($uploaddir) . "/";
+        $uploaddir = trim($uploaddir);
         $uploaddir = dirname(Yii::getPathOfAlias('webroot')) .$uploaddir;
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         //C:\xampp\htdocs\comm-workbench\themes\bootstrap\assets\images\gadget_images/
