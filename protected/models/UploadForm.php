@@ -93,7 +93,7 @@ class UploadForm extends CFormModel {
 
         imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
-        $filename = "$uploaddir/thumb/thumb_" . $image_name;
+        $filename = $uploaddir."thumb/thumb_" . $image_name;
 
         imagegif($tmp, $filename, 100);
 
