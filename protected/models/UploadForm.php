@@ -42,8 +42,6 @@ class UploadForm extends CFormModel {
         $uploaddir = dirname(Yii::getPathOfAlias('webroot')) .$uploaddir;
         
         $uploaddir = urldecode(str_replace("\\","",$uploaddir));
-        print_r($uploaddir);
-        die();
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         //C:\xampp\htdocs\comm-workbench\themes\bootstrap\assets\images\gadget_images/
         //C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
