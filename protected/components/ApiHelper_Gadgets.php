@@ -56,10 +56,16 @@ class ApiHelper_Gadgets extends CHtml {
      */
     function draw_gadget_location_one_directory($rootlocation, $root_child, $bucket_dir, $campus = null, $building = null) {
         if ($root_child == 'files') {
-            self::draw_location_section($rootlocation[$root_child], $bucket_dir, 'GWU', $root_child);
+            $new_array = $rootlocation[$root_child];
+            array_multisort(array_values($new_array), SORT_DESC, array_keys($new_array), SORT_ASC, $new_array);
+            $foldername = 'GWU';
+            self::draw_location_section($new_array, $bucket_dir, $foldername, $root_child);
         } else {
+
             foreach ($rootlocation[$root_child] as $foldername => $folder_array) {
-                self::draw_location_section($rootlocation[$foldername], $bucket_dir, $foldername, $root_child, $campus, $building);
+                $new_array = $rootlocation[$root_child];
+                array_multisort(array_values($new_array), SORT_DESC, array_keys($new_array), SORT_ASC, $new_array);
+                self::draw_location_section($new_array, $bucket_dir, $foldername, $root_child, $campus, $building);
             }
         }
     }
@@ -78,7 +84,7 @@ class ApiHelper_Gadgets extends CHtml {
         $databuilding = ($building ? $building : '');
         $location = '';
         $next_step = 'root';
-        $well = ((empty($image_location['images']))?'well':'');
+        $well = ((empty($image_location['images'])) ? 'well' : '');
 
         if ($foldername != 'GWU') {
             switch ($dataroot) {
@@ -114,7 +120,7 @@ class ApiHelper_Gadgets extends CHtml {
             'class' => " col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font "
             . (($root_child == 'bottomfolder') ? '' : 'ajax-drilldown'),
             'href' => "#?javascript:void(0)",
-            'data-drilldown'=>$next_step,
+            'data-drilldown' => $next_step,
             'data-location' => $datalocation,
             'data-root' => $dataroot,
             'data-campus' => $datacampus,
@@ -138,7 +144,7 @@ class ApiHelper_Gadgets extends CHtml {
         $imageLinkOptions = array(
             'class' => "col-xs-2 imager pre-delete no-padding",
             'href' => '#?javascript:void(0)',
-            'draggable'=>'true',
+            'draggable' => 'true',
         );
 
         echo BSHtml::openTag("div", $rowDivOptions);
@@ -151,17 +157,17 @@ class ApiHelper_Gadgets extends CHtml {
 
         if (isset($image_location['images'])) {
             foreach ($image_location['images'] as $image_index => $value) {
-                $imageLinkOptions['data-image']= $location . urlencode($value);
-                $imageLinkOptions['id'] = 'trashable_'.urlencode($value);
-                
+                $imageLinkOptions['data-image'] = $location . urlencode($value);
+                $imageLinkOptions['id'] = 'trashable_' . urlencode($value);
+
                 //echo BSHtml::openTag("div", $imageDivOptions);
                 echo BSHtml::openTag("a", $imageLinkOptions);
                 echo BSHtml::tag("img", array(
                     "src" => $bucket_dir . "thumb/thumb_" . $value,
                     "alt" => $value,
-                    'class'=>'image',
-                    'draggable'=>'true',
-                    'id'=>$foldername."_".urlencode($value)
+                    'class' => 'image',
+                    'draggable' => 'true',
+                    'id' => $foldername . "_" . urlencode($value)
                 ));
                 echo BSHtml::closeTag("a");
                 //echo BSHtml::closeTag("div");
