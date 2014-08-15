@@ -550,7 +550,7 @@ class ApiController extends CController {
      * @param type $local
      */
     public static function _save_to_db_load_from_local($local, $which_db, $bucket) {
-
+        $which_db->remove();
         $bucket = dirname(Yii::getPathOfAlias('webroot')) . $bucket;
 
         $r = array(
