@@ -104,7 +104,7 @@ class ApiHelper extends CHtml {
      */
     public static function _ReadFolder_subdirectory($service, $subfolder = '', $bottomfolder = '', $rootfolder = 'files') {
         $filestructure = self::_get_db_structure($service);
-
+        
         if (empty($subfolder))
             return $filestructure[$rootfolder]['root'];
         else if (empty($bottomfolder)) {

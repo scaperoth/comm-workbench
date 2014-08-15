@@ -265,7 +265,7 @@ function drop_image_onto_location(ev) {
  */
 function drop_to_trash(ev) {
 
-    
+
     toggle_icon($(ev.target), false)
     var data = ev.originalEvent.dataTransfer.getData("Text")
     var item = document.getElementById(data)
@@ -295,7 +295,7 @@ function drop_to_trash(ev) {
         console.log("REMOVAL FAIL")
         //console.log(data)
     });
-    
+
 }
 
 function is_location_page() {
@@ -341,51 +341,64 @@ $('select[data-script=location_load].sidebar-select').each(function() {
 
         target.html('');
 
-        if ($(this).val() != '') {
-            //get select value for each piece
-            campus = $('select[data-type="campus"][data-group="' + group + '"]').val();
+        //get select value for each piece
+        campus = $('select[data-type="campus"][data-group="' + group + '"]').val();
 
-            building = $('select[data-type="building"][data-group="' + group + '"]').val();
+        building = $('select[data-type="building"][data-group="' + group + '"]').val();
 
-            //place data into object to send to ajax
-            values = {campus: campus, building: building};
 
-            ajaxgetlocations(values).done(function(ajax_data) { //send data, get response
-                //animate target
-                target.effect("highlight");
-                target.focus();
+        //place data into object to send to ajax
+        values = {campus: campus, building: building};
 
-                selectitems.push("<option value=''></option>");
+        ajaxgetlocations(values).done(function(ajax_data) { //send data, get response
+            //animate target
+            
 
-                $.each(ajax_data, function(i) {
-                    //if building is not selected, there will be no room
-                    room_data = building ? i : ""
-                    //if room is not the iterator, building is the iterator
-                    building_data = room_data ? building : i
+            if (campus === '') {
+                draganddropitems.push('<a href="#?javascript:void(0)" id="drag_GWU"  class=" col-lg-4 col-md-5 col-sm-5 col-xs-10 bottom10 right5 label label-primary medium-font" draggable="true" >GWU</a>')
+                
+                target = $(document.getElementById('AddimageForm_campus'));
+            }
+            
+            target.effect("highlight");
+            target.focus();
 
-                    //build out select options
-                    selectitems.push("<option value='" + i + "'>" + i + "</option>");
-                    draganddropitems.push('<a href="#?javascript:void(0)" id="drag_' + i + '"  class=" col-lg-4 col-md-5 col-sm-5 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus="' + campus + '" data-building="' + building_data + '" data-room="' + room_data + '" draggable="true" >' + i + '</a>')
+            selectitems.push("<option value=''></option>");
+            
+            $.each(ajax_data, function(i) {
+                //if building is not selected, there will be no room
+                room_data = building ? i : ""
+                //if room is not the iterator, building is the iterator
+                building_data = room_data ? building : i
 
-                });
+                //build out select options
+                selectitems.push("<option value='" + i + "'>" + i + "</option>");
+                draganddropitems.push('<a href="#?javascript:void(0)" id="drag_' + i + '"  class=" col-lg-4 col-md-5 col-sm-5 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus="' + campus + '" data-building="' + building_data + '" data-room="' + room_data + '" draggable="true" >' + i + '</a>')
 
-                //if there's a target, set new data (in the case of building)
-                target.html(selectitems.join(""));
-                //set new bucket_list data
-                $('#bucket_list').html(draganddropitems.join(''))
+            });
 
-                //unbind/rebind events for select (to keep from event stacking)
-                unbind_drag_and_drop()
-                bind_drag_and_drop()
 
-            }).fail(function(data) {
-                //catch an error
-                console.log('fail')
-                console.log(data)
-            })
-        }
+
+            //if there's a target, set new data (in the case of building)
+            target.html(selectitems.join(""));
+            //set new bucket_list data
+            $('#bucket_list').html(draganddropitems.join(''))
+
+            //unbind/rebind events for select (to keep from event stacking)
+            unbind_drag_and_drop()
+            bind_drag_and_drop()
+
+        }).fail(function(data) {
+            //catch an error
+            console.log('fail')
+            console.log(data)
+        })
+
     })
 });
+
+
+
 $('.ajax-drilldown').live('click', function(ev) {
     navigate_drilldown($(this))
 });

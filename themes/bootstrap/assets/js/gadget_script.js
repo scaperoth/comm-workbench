@@ -9,8 +9,17 @@ $('#location-view-button').click(function(e) {
     $('.location-section').show();
     $('.image-section').hide();
 });
+*/
 
- */
+
+ /********************
+ * Section refresh
+ *********************/
+$('#reset_button').click(function(){
+    selectbox = document.getElementById('AddimageForm_campus');
+    selectbox.value = ''
+    $('#AddimageForm_campus').change();
+})
 
 /************************
  * Drag and Drop Stuff

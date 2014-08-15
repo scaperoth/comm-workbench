@@ -39,7 +39,7 @@
     <div class="col-sm-12 pull-right" style="min-height:50px">
         <div class="pull-left">
             <span id="location-nav" class="hidden" data-location data-campus data-building data-root class="fa-stack fa-lg" data-toggle="tooltip" data-placement="bottom" title="Navigate Up">
-                <i class="fa fa-arrow-circle-up fa-3x fade-bg buff"></i>
+                <i class="fa fa-arrow-circle-left fa-3x fade-bg buff"></i>
             </span>
         </div>
     </div>

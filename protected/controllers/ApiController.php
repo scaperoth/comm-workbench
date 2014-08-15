@@ -261,7 +261,7 @@ class ApiController extends CController {
                     $JSON_array = ApiHelper::_ReadFolder_subdirectory($service, $subdirectory);
             }
             else
-                $JSON_array = ApiHelper::_ReadFolderDirectory_from_db($service_details['database']);
+                $JSON_array = ApiHelper::_ReadFolder_subdirectory($service);
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
