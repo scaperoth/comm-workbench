@@ -1,8 +1,6 @@
 <?php
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
+array_multisort(array_values($dbstructure['files']['root']), SORT_ASC, array_keys($dbstructure['files']['root']), SORT_ASC, $dbstructure['files']['root']);
+
 $args = array('image_locations' => $image_locations, 'dbstructure' => $dbstructure, 'bucket_dir' => $bucket_dir, 'bucket_files' => $bucket_files);
 
 $whichpage = 'image';
@@ -19,11 +17,6 @@ $cs->registerScript('gadget_remove_ajax_url', ' var removelocationajaxurl ="' . 
 $cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $this->createUrl('drawlocationsajax') . '";');
 $cs->registerScript('gadget_script', file_get_contents('themes/bootstrap/assets/js/gadget_script.js'));
 $cs->registerScript('gadget_ajax_functions', file_get_contents('themes/bootstrap/assets/js/gadget_ajax.js'));
-
-
-array_multisort(array_values($dbstructure['files']['root']), SORT_ASC, array_keys($dbstructure['files']['root']), SORT_ASC, $dbstructure['files']['root']);
-
-print_r($dbstructure['files']['root']);
 ?>
 
 
@@ -31,29 +24,29 @@ print_r($dbstructure['files']['root']);
     <!--controls-->
     <div class="col-md-12 bottom30">
         <div class="center">
-            <?php
-            echo BSHtml::buttonGroup(array(
-                array(
-                    'label' => 'Save',
-                    'url' => Yii::app()->createAbsoluteUrl('site/save') . '?service=gadgets',
-                    'icon' => 'save fw',
-                    'type' => BSHtml::BUTTON_TYPE_LINK,
-                ),
-                array(
-                    'label' => 'Load',
-                    'url' => Yii::app()->createAbsoluteUrl('site/load') . '?service=gadgets',
-                    'icon' => 'download fw',
-                    'type' => BSHtml::BUTTON_TYPE_LINK,
-                ),
-                array(
-                    'label' => 'Publish',
-                    'url' => Yii::app()->createAbsoluteUrl('site/publish') . '?service=gadgets',
-                    'icon' => 'check fw',
-                    'type' => BSHtml::BUTTON_TYPE_LINK,
-                )
-                    ), array(
-            ));
-            ?>
+<?php
+echo BSHtml::buttonGroup(array(
+    array(
+        'label' => 'Save',
+        'url' => Yii::app()->createAbsoluteUrl('site/save') . '?service=gadgets',
+        'icon' => 'save fw',
+        'type' => BSHtml::BUTTON_TYPE_LINK,
+    ),
+    array(
+        'label' => 'Load',
+        'url' => Yii::app()->createAbsoluteUrl('site/load') . '?service=gadgets',
+        'icon' => 'download fw',
+        'type' => BSHtml::BUTTON_TYPE_LINK,
+    ),
+    array(
+        'label' => 'Publish',
+        'url' => Yii::app()->createAbsoluteUrl('site/publish') . '?service=gadgets',
+        'icon' => 'check fw',
+        'type' => BSHtml::BUTTON_TYPE_LINK,
+    )
+        ), array(
+));
+?>
         </div>
     </div><!--/controls-->
     <div class="col-md-12">
@@ -84,19 +77,19 @@ print_r($dbstructure['files']['root']);
         <div id="ajax_panel"></div>
     </div>
     <!--left-->
-    <?php if ($whichpage != 'location'): ?>
+<?php if ($whichpage != 'location'): ?>
         <div class=" image-section" <?= (($whichpage == 'location') ? "hidden" : ""); ?>>
-            <?php $this->renderPartial('_image_section', $args); ?>
+    <?php $this->renderPartial('_image_section', $args); ?>
         </div><!--end image-section-->
     <?php endif; ?>
 
-    <?php if ($whichpage == 'location'): ?>
+        <?php if ($whichpage == 'location'): ?>
         <div class="location-section" <?= (($whichpage == 'image') ? "hidden" : ""); ?> >
-            <?php $this->renderPartial('_location_section', $args); ?>
+        <?php $this->renderPartial('_location_section', $args); ?>
         </div><!--end location-section-->
     <?php endif; ?>
     <div class="col-sm-3 hidden-xs center pull-right ">
-        
+
         <div class="col-sm-12  sidebar-affix" data-spy="affix" data-offset-top="300">
             <legend>Trash</legend>
             <div class="trashcan center trash "  >
