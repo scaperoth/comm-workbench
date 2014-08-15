@@ -9859,3 +9859,574 @@ in C:\xampp\htdocs\comm-workbench\protected\models\UploadForm.php (39)
 in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
 in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
 in C:\xampp\htdocs\comm-workbench\protected\models\UploadForm.php (39)
+2014/08/14 15:28:17 [warning] [curl log] https://localhost/comm-workbench/index.php/api/bucketdir/gadgets/full
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\UploadForm.php (39)
+2014/08/14 15:28:17 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\SiteController.php (145)
+2014/08/14 15:30:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (65)
+2014/08/14 15:30:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (69)
+2014/08/14 15:30:54 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:30:54 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:30:55 [warning] [curl log] https://localhost/comm-workbench/index.php/api/filestructure/gadgets/FB
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (123)
+2014/08/14 15:30:57 [warning] [curl log] https://localhost/comm-workbench/index.php/api/filestructure/gadgets/FB/AC0
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (123)
+2014/08/14 15:30:59 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\AC0\0108\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:30:59 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:31:10 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\AC0\0108\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (65)
+2014/08/14 15:31:10 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (69)
+2014/08/14 15:40:43 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:40:43 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:40:44 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB/13070072p4-widgets-4am%20reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (65)
+2014/08/14 15:40:44 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (69)
+2014/08/14 15:40:45 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:40:45 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:40:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (65)
+2014/08/14 15:40:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (69)
+2014/08/14 15:44:42 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:44:42 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:45:37 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:45:37 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:46:37 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:46:38 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:46:39 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:46:39 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:47:12 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:47:13 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (47)
+2014/08/14 15:47:42 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:47:51 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 15:49:15 [error] [php] include(ApiController.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php(37): spl_autoload_call()
+#1 C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php(151): AddgadgetimageForm->addimage()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\actions\CInlineAction.php(49): GadgetsController->actionAddlocationajax()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(308): CInlineAction->runWithParams()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(133): GadgetsController->runAction()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#6 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(130): AuthFilter->filter()
+#7 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilter.php(40): CFilterChain->run()
+#8 C:\xampp\htdocs\comm-workbench\protected\components\Controller.php(29): HttpsFilter->filter()
+#9 C:\xampp\htdocs\comm-workbench\framework\web\filters\CInlineFilter.php(58): GadgetsController->filterHttps()
+#10 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(130): CInlineFilter->filter()
+#11 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): CFilterChain->run()
+#12 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): GadgetsController->runActionWithFilters()
+#13 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): GadgetsController->run()
+#14 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#15 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#16 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/gadgets/addlocationajax
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (37)
+in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (151)
+in C:\xampp\htdocs\comm-workbench\protected\components\Controller.php (29)
+2014/08/14 15:50:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:00:51 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:01:03 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:01:13 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (66)
+2014/08/14 16:01:13 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (70)
+2014/08/14 16:02:30 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:02:30 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:02:32 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:02:32 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:03:02 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:03:02 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:03:07 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:03:07 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:05:46 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:05:46 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:05:46 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:05:46 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:05:50 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:05:50 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:05:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:05:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:06:02 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:06:03 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:06:02 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:06:02 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:06:14 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:06:14 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:06:14 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:06:14 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:06:22 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:06:22 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:06:44 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:06:45 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:06:44 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:06:45 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:09:51 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:09:51 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:09:51 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:09:51 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:09:59 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:10:00 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:10:08 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:10:09 [error] [php] include(accessControl.php): failed to open stream: No such file or directory (C:\xampp\htdocs\comm-workbench\framework\YiiBase.php:421)
+Stack trace:
+#0 C:\xampp\htdocs\comm-workbench\framework\YiiBase.php(196): import()
+#1 C:\xampp\htdocs\comm-workbench\framework\web\filters\CFilterChain.php(89): createComponent()
+#2 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(291): create()
+#3 C:\xampp\htdocs\comm-workbench\framework\web\CController.php(265): ApiController->runActionWithFilters()
+#4 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(282): ApiController->run()
+#5 C:\xampp\htdocs\comm-workbench\framework\web\CWebApplication.php(141): CWebApplication->runController()
+#6 C:\xampp\htdocs\comm-workbench\framework\base\CApplication.php(169): CWebApplication->processRequest()
+#7 C:\xampp\htdocs\comm-workbench\index.php(12): CWebApplication->run()
+REQUEST_URI=/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\index.php (12)
+2014/08/14 16:10:08 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:10:09 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:10:44 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:10:44 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:10:58 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:10:58 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:11:12 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:11:12 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:11:44 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:11:44 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:11:47 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:11:47 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:11:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:11:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:12:00 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:12:00 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:12:16 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:12:16 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:12:20 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:12:20 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:13:25 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:13:25 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:13:28 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:13:28 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:13:46 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:13:46 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:13:49 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:13:50 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)
+2014/08/14 16:14:02 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:14:02 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:14:56 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/14 16:14:56 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (46)
+2014/08/14 16:14:59 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (64)
+2014/08/14 16:14:59 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (68)

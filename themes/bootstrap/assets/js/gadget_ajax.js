@@ -153,7 +153,7 @@ function drop_location_onto_image(ev) {
             $(target).removeClass('well');
             unbind_drag_and_drop()
             bind_drag_and_drop()
-            //console.log(ajax_data);
+            console.log(ajax_data);
         }).fail(function(data) {
             console.log("NEW LOCATION FAIL")
             //console.log(data);

@@ -28,5 +28,6 @@ class Controller extends CController {
         $filter = new HttpsFilter;
         $filter->filter($filterChain);
     }
+    
 
 }

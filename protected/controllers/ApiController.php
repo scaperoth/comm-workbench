@@ -8,7 +8,7 @@
  * This api uses the ApiHelper class to call various functions
  * This ApiHelper can be found in protected/components/. It extends CHTML.
  */
-class ApiController extends Controller {
+class ApiController extends CController {
 
 
     /**
@@ -489,7 +489,7 @@ class ApiController extends Controller {
     public static function _add_image_to_bucket($uploaddir, $file, $which_db) {
         $bucket_files = array(
         );
-        $uploaddir = dirname(Yii::getPathOfAlias('webroot')) .$uploaddir;
+        $uploaddir = dirname(Yii::getPathOfAlias('webroot')) . $uploaddir;
         $filename = $file['new_image']['name'];
         $tmpname = $file['new_image']['tmp_name'];
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
