@@ -104,13 +104,13 @@ class ApiHelper extends CHtml {
     public static function _ReadFolder_subdirectory($service, $subfolder = '', $bottomfolder = '', $rootfolder = 'files') {
         $filestructure = self::_get_db_structure($service);
         if (empty($subfolder)) {
-            array_multisort(array_values($filestructure[$rootfolder]['root']), SORT_ASC, array_keys($filestructure[$rootfolder]['root']), SORT_ASC, $filestructure[$rootfolder]['root']);
+            array_multisort(array_values($filestructure[$rootfolder]['root']), SORT_DESC, array_keys($filestructure[$rootfolder]['root']), SORT_ASC, $filestructure[$rootfolder]['root']);
             return $filestructure[$rootfolder]['root'];
         } else if (empty($bottomfolder)) {
-            array_multisort(array_values($filestructure[$rootfolder][$subfolder]['subfolder']), SORT_ASC, array_keys($filestructure[$rootfolder][$subfolder]['subfolder']), SORT_ASC, $filestructure[$rootfolder][$subfolder]['subfolder']);
+            array_multisort(array_values($filestructure[$rootfolder][$subfolder]['subfolder']), SORT_DESC, array_keys($filestructure[$rootfolder][$subfolder]['subfolder']), SORT_ASC, $filestructure[$rootfolder][$subfolder]['subfolder']);
             return $filestructure[$rootfolder][$subfolder]['subfolder'];
         } else {
-            array_multisort(array_values($filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']), SORT_ASC, array_keys($filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']), SORT_ASC, $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']);
+            array_multisort(array_values($filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']), SORT_DESC, array_keys($filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']), SORT_ASC, $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']);
             return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
         }
     }
