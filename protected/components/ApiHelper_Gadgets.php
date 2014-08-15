@@ -30,8 +30,10 @@ class ApiHelper_Gadgets extends CHtml {
      * @param type $level
      */
     function draw_gadget_location_recursive($dbstructure, $rootlocation, $root_child, $bucket_dir) {
-
-        foreach ($rootlocation[$root_child] as $foldername => $folder_array) {
+        $new_array = $rootlocation[$root_child];
+        array_multisort(array_values($new_array), SORT_DESC, array_keys($new_array), SORT_ASC, $new_array);
+        
+        foreach ($new_array as $foldername => $folder_array) {
             self::draw_location_section($rootlocation[$foldername], $bucket_dir, $foldername);
             if ($root_child == 'root')
                 self::draw_gadget_location_recursive($dbstructure, $rootlocation[$foldername], 'subfolder', $bucket_dir);
@@ -55,17 +57,16 @@ class ApiHelper_Gadgets extends CHtml {
      * @param type $level
      */
     function draw_gadget_location_one_directory($rootlocation, $root_child, $bucket_dir, $campus = null, $building = null) {
+        $new_array = $rootlocation[$root_child];
+        array_multisort(array_values($new_array), SORT_DESC, array_keys($new_array), SORT_ASC, $new_array);
         if ($root_child == 'files') {
-            $new_array = $rootlocation[$root_child];
-            array_multisort(array_values($new_array), SORT_DESC, array_keys($new_array), SORT_ASC, $new_array);
             $foldername = 'GWU';
             self::draw_location_section($new_array, $bucket_dir, $foldername, $root_child);
         } else {
 
-            foreach ($rootlocation[$root_child] as $foldername => $folder_array) {
-                $new_array = $rootlocation[$root_child];
-                array_multisort(array_values($new_array), SORT_DESC, array_keys($new_array), SORT_ASC, $new_array);
-                self::draw_location_section($new_array, $bucket_dir, $foldername, $root_child, $campus, $building);
+            foreach ($new_array as $foldername => $folder_array) {
+
+                self::draw_location_section($rootlocation[$foldername], $bucket_dir, $foldername, $root_child, $campus, $building);
             }
         }
     }
