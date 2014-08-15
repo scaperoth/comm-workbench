@@ -147,7 +147,7 @@ class SiteController extends Controller {
             }
             else
                 Yii::app()->user->setFlash('warning', 'unable to upload file!');
-            $this->redirect(array('site/upload'));
+            //$this->redirect(array('site/upload'));
         }
 // display the upload form
         $this->render('upload', array('model' => $model));
