@@ -1,4 +1,7 @@
-
+<?php
+$new_array = $dbstructure['files']['root'];
+array_multisort(array_values($new_array), SORT_DESC, array_keys($new_array), SORT_ASC, $new_array);
+?>
 <div class="col-xs-3  " id="">
     <div data-spy="affix" data-offset-top="220" class="hidden-xs col-sm-12 left5 sidebar-affix" >
         <div class="bottom30 row">
@@ -10,7 +13,7 @@
                             <select data-toggle="tooltip" data-placement="top" title="Campus" displaySize="4" class="location-select sidebar-select form-control" name="AddimageForm[campus]" id="AddimageForm_campus" data-script="location_load" data-group="0" data-type="campus" data-target="building">
                                 <option value=""></option>
 
-                                <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
+                                <?php foreach ($new_array as $foldername => $folder_array): ?>
 
                                     <option value="<?= $foldername; ?>"><?= $foldername; ?></option>
 
@@ -44,7 +47,7 @@
             <div id="bucket_list" data-type="bucket_list" >
 
                 <a href="#?javascript:void(0)"  id="drag_GWU" class=" col-lg-4 col-md-5 col-sm-5 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus ='' draggable="true" >GWU</a>
-                <?php foreach ($dbstructure['files']['root'] as $foldername => $folder_array): ?>
+                <?php foreach ($new_array as $foldername => $folder_array): ?>
 
                     <a href="#?javascript:void(0)"  id="drag_<?= $foldername ?>" class=" col-lg-4 col-md-5 col-sm-5 col-xs-10 bottom10 right5 label label-primary medium-font" data-campus='<?= $foldername ?>'  draggable="true" ><?= $foldername; ?></a>
 
