@@ -7,7 +7,8 @@
 
 class ApiHelper extends CHtml {
 // Members
-     //relative path. what you see is what you get.
+    //relative path. what you see is what you get.
+
     const GADGETS_SHARED = '/data/gadgets/backup/';
     const GADGETS_LOCAL = '/data/gadgets/filesystem/';
     const GADGETS_BUCKET = "/assets/images/gadget_images/";
@@ -15,8 +16,6 @@ class ApiHelper extends CHtml {
     const WEPA_LOCAL = '/data/wepa/filesystem/';
     const WEPA_BUCKET = "/assets/images/wepa_images/production_images";
     const WEPA_OUTAGE_BUCKET = "/assets/images/wepa_images/outage_images";
-    
-    
     Const TOPHOLDER = 'structure';
     Const APPLICATION_ID = 'ASCCPE';
 
@@ -27,11 +26,11 @@ class ApiHelper extends CHtml {
     private $format = 'json';
 
     const LOGIN_ERROR = "You have insufficient permissions to continue";
-    
+
     /* #############################################
      * MISC
      * ############################################# */
-    
+
     /**
      * appends full path to relative path constants
      * path here is expected to be ../protected/components/ for non bucket dir
@@ -39,13 +38,13 @@ class ApiHelper extends CHtml {
      * @param type $relative_path path to append full path to
      * @param type $bucket whether or not path is for image bucket dir
      */
-    private function _create_full_path($relative_path, $bucket = false){
-        if($bucket)
-            return Yii::app()->theme->baseUrl .$relative_path;
-        else 
+    private function _create_full_path($relative_path, $bucket = false) {
+        if ($bucket)
+            return Yii::app()->theme->baseUrl . $relative_path;
+        else
             return Yii::app()->basePath . $relative_path;
     }
-    
+
     /* #############################################
      * File manipulation
      * COULD BE OPTIMIZED
@@ -104,14 +103,25 @@ class ApiHelper extends CHtml {
      */
     public static function _ReadFolder_subdirectory($service, $subfolder = '', $bottomfolder = '', $rootfolder = 'files') {
         $filestructure = self::_get_db_structure($service);
-        
-        if (empty($subfolder))
+        if (empty($subfolder)) {
+            array_multisort(array_values($filestructure[$rootfolder]['root']), SORT_DESC, array_keys($filestructure[$rootfolder]['root']), SORT_ASC, $filestructure[$rootfolder]['root']);
             return $filestructure[$rootfolder]['root'];
-        else if (empty($bottomfolder)) {
+        } else if (empty($bottomfolder)) {
+            array_multisort(array_values($filestructure[$rootfolder][$subfolder]['subfolder']), SORT_DESC, array_keys($filestructure[$rootfolder][$subfolder]['subfolder']), SORT_ASC, $filestructure[$rootfolder][$subfolder]['subfolder']);
             return $filestructure[$rootfolder][$subfolder]['subfolder'];
-        }
-        else
+        } else {
+            array_multisort(array_values($filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']), SORT_DESC, array_keys($filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']), SORT_ASC, $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder']);
             return $filestructure[$rootfolder][$subfolder][$bottomfolder]['bottomfolder'];
+        }
+    }
+
+    /**
+     * 
+     * @param type $sort_array
+     * @return type
+     */
+    public static function _sorter($sort_array) {
+        
     }
 
     /* #############################################
@@ -152,7 +162,7 @@ class ApiHelper extends CHtml {
             'name' => $image_name,
             'location' => array()
         );
-        
+
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($root, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
@@ -240,7 +250,7 @@ class ApiHelper extends CHtml {
         $bucket = $service['bucket'];
         return $bucket;
     }
-    
+
     public static function _get_local_path($which_service, $assoc_array = true) {
         $service = self::_get_service($which_service);
         $bucket = $service['local_file'];
