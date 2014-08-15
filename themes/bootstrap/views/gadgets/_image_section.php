@@ -1,4 +1,4 @@
-<?php array_multisort(array_keys($dbstructure['files']['root']), SORT_ASC ) ?>;
+<?php array_multisort(array_values($dbstructure['files']['root']), SORT_DESC, array_keys($dbstructure['files']['root']), SORT_ASC, $dbstructure['files']['root']); ?>;
 <?php 
 ?>
 <div class="col-xs-3  " id="">
