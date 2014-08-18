@@ -7,9 +7,11 @@
 
 class ApiHelper extends CHtml {
 // Members
+    //sets whether or not in production
+    const TEST = false;
     //relative path. what you see is what you get.
-
-    const GADGETS_SHARED = '/data/gadgets/backup/';
+    //const GADGETS_SHARED = '/data/gadgets/backup/';
+    const GADGETS_SHARED = '/mnt/fbwnas11/Test/';
     const GADGETS_LOCAL = '/data/gadgets/filesystem/';
     const GADGETS_BUCKET = "/assets/images/gadget_images/";
     const WEPA_SHARED = '/data/wepa/backup/';
@@ -18,6 +20,7 @@ class ApiHelper extends CHtml {
     const WEPA_OUTAGE_BUCKET = "/assets/images/wepa_images/outage_images";
     Const TOPHOLDER = 'structure';
     Const APPLICATION_ID = 'ASCCPE';
+    
 
     /**
      * Default response format
@@ -226,7 +229,7 @@ class ApiHelper extends CHtml {
         switch ($param) {
             case 'gadgets':
                 $service_details['local_file'] = self::_create_full_path(self::GADGETS_LOCAL);
-                $service_details['shared_file'] = self::_create_full_path(self::GADGETS_SHARED);
+                $service_details['shared_file'] = (self::TEST?self::GADGETS_SHARED:self::_create_full_path(self::GADGETS_SHARED));
                 $service_details['bucket'] = self::_create_full_path(self::GADGETS_BUCKET, true);
                 $service_details['database'] = Yii::app()->mongodb->gadgets;
                 break;
