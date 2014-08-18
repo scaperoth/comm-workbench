@@ -400,3 +400,43 @@ in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (1
 in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
 in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
 in C:\xampp\htdocs\comm-workbench\protected\controllers\GadgetsController.php (126)
+2014/08/15 15:48:25 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/15 15:48:25 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (45)
+2014/08/15 15:48:28 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/FB\13070072p4-widgets-4am+reboot-01.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (62)
+2014/08/15 15:48:28 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (66)
+2014/08/15 15:48:36 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/13110130p9-widget-Lecture+Capture.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (62)
+2014/08/15 15:48:36 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (66)
+2014/08/15 15:48:38 [warning] [curl log] https://localhost/comm-workbench/index.php/api/addimage/gadgets/\13110130p9-widget-Lecture+Capture.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (38)
+2014/08/15 15:48:38 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (45)
+2014/08/15 15:48:41 [warning] [curl log] https://localhost/comm-workbench/index.php/api/removeimage/gadgets/13110130p9-widget-Lecture+Capture.jpg
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (62)
+2014/08/15 15:48:41 [warning] [curl log] https://localhost/comm-workbench/index.php/api/update/gadgets/save
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (30)
+in C:\xampp\htdocs\comm-workbench\protected\extensions\curl\Curl.php (48)
+in C:\xampp\htdocs\comm-workbench\protected\models\AddgadgetimageForm.php (66)

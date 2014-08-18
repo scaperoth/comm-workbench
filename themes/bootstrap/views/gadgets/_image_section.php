@@ -76,6 +76,7 @@
                 </div>
 
                 <div class="col-sm-12 bottom10 no-padding dropper <?= ((count($item['location']) == 0) ? 'well' : ''); ?>" " data-image ="<?= $item['name']; ?>" >
+                    <?php array_multisort($item['location']);?>
                     <?php foreach ($item['location'] as $location): ?>
                         <?php
                         $image_location = ($location == "GWU" ? "" : $location . DIRECTORY_SEPARATOR) . urlencode($item['name']);
