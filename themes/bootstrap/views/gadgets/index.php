@@ -1,5 +1,4 @@
 <?php
-echo __DIR__;
 array_multisort(array_values($dbstructure['files']['root']), SORT_ASC, array_keys($dbstructure['files']['root']), SORT_ASC, $dbstructure['files']['root']);
 
 $args = array('image_locations' => $image_locations, 'dbstructure' => $dbstructure, 'bucket_dir' => $bucket_dir, 'bucket_files' => $bucket_files);
