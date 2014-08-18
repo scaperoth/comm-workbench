@@ -393,7 +393,7 @@ class ApiController extends CController {
             }
             if (file_exists($target))
                 rmdir($target);
-        } elseif (is_file($target)) {
+        } elseif (is_file($target)&& $target->getFilename() != 'Thumbs.db') {
             unlink($target);
         }
     }
