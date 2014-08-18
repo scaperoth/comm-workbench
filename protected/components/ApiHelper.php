@@ -11,7 +11,7 @@ class ApiHelper extends CHtml {
     const LOCAL = false;
     //relative path. what you see is what you get.
     //const GADGETS_SHARED = '/data/gadgets/backup/';
-    const GADGETS_SHARED = '/shared/';
+    const GADGETS_SHARED = '/var/www/html/shared/';
     const GADGETS_LOCAL = '/data/gadgets/filesystem/';
     const GADGETS_BUCKET = "/assets/images/gadget_images/";
     const WEPA_SHARED = '/data/wepa/backup/';
