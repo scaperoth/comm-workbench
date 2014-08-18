@@ -8,7 +8,7 @@
 class ApiHelper extends CHtml {
 // Members
     //sets whether or not in production
-    const LIVE = false;
+    const LOCAL = true;
     //relative path. what you see is what you get.
     const GADGETS_SHARED = '/data/gadgets/backup/';
     //const GADGETS_SHARED = '/shared/Test/';
