@@ -229,7 +229,7 @@ class ApiHelper extends CHtml {
         switch ($param) {
             case 'gadgets':
                 $service_details['local_file'] = self::_create_full_path(self::GADGETS_LOCAL);
-                $service_details['shared_file'] = (self::LIVE?self::_create_full_path(self::GADGETS_SHARED):self::GADGETS_SHARED);
+                $service_details['shared_file'] = (self::LOCAL?self::_create_full_path(self::GADGETS_SHARED):self::GADGETS_SHARED);
                 $service_details['bucket'] = self::_create_full_path(self::GADGETS_BUCKET, true);
                 $service_details['database'] = Yii::app()->mongodb->gadgets;
                 break;
