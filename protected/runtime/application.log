@@ -469,3 +469,11 @@ Stack trace:
 REQUEST_URI=/comm-workbench/index.php/gadgets/index
 HTTP_REFERER=https://localhost/comm-workbench/index.php
 ---
+2014/08/22 09:47:38 [warning] [curl log] https://forms.dev.acadtech.gwu.edu/comm-workbench/index.php/api/sync/gadgets/pull
+in /var/www/html/comm-workbench/protected/extensions/curl/Curl.php (30)
+in /var/www/html/comm-workbench/protected/extensions/curl/Curl.php (48)
+in /var/www/html/comm-workbench/protected/controllers/SiteController.php (181)
+2014/08/22 09:47:38 [warning] [curl log] https://forms.dev.acadtech.gwu.edu/comm-workbench/index.php/api/update/gadgets/save
+in /var/www/html/comm-workbench/protected/extensions/curl/Curl.php (30)
+in /var/www/html/comm-workbench/protected/extensions/curl/Curl.php (48)
+in /var/www/html/comm-workbench/protected/controllers/SiteController.php (184)
