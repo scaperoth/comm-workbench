@@ -10,11 +10,11 @@ class ApiHelper extends CHtml {
     //sets whether or not in production
     const LOCAL = true;
     //relative path. what you see is what you get.
-    const GADGETS_SHARED = '/data/gadgets/backup/';
+    const GADGETS_SHARED = '/data/gadgets/shared/';
     //const GADGETS_SHARED = '/var/www/html/shared/';
     const GADGETS_LOCAL = '/data/gadgets/filesystem/';
     const GADGETS_BUCKET = "/assets/images/gadget_images/";
-    const WEPA_SHARED = '/data/wepa/backup/';
+    const WEPA_SHARED = '/data/wepa/shared/';
     const WEPA_LOCAL = '/data/wepa/filesystem/';
     const WEPA_BUCKET = "/assets/images/wepa_images/production_images";
     const WEPA_OUTAGE_BUCKET = "/assets/images/wepa_images/outage_images";
