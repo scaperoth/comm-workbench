@@ -4,7 +4,7 @@ class WepaController extends Controller {
 
     public function filters() {
         return array(
-                'https',
+            'https',
             array(
                 'application.filters.AuthFilter',
             ),
@@ -12,7 +12,36 @@ class WepaController extends Controller {
     }
 
     public function actionIndex() {
-        $this->render('index');
+
+        $bucket_dir = ApiHelper::_get_bucket_url('wepa');
+        $dbstructure = ApiHelper::_get_db_structure('wepa');
+        $bucket_files = $dbstructure['bucket'];
+        $root = ApiHelper::_get_local_path('wepa');
+
+        foreach ($bucket_files as $image) {
+            if (!is_array($image)) {
+                $image_parent = ApiHelper::_find_image_parent($image, $root);
+                $image_locations[] = $image_parent;
+            }
+        }
+        $this->render('index', array(
+            'image_locations' => $image_locations,
+            'dbstructure' => $dbstructure,
+            'bucket_dir' => $bucket_dir,
+            'bucket_files' => $bucket_files
+        ));
+    }
+
+    public function action_image_section() {
+        $this->render('_image_section');
+    }
+
+    public function action_location_section() {
+        $this->render('_location_section');
+    }
+    
+    public function action_preview_section() {
+        $this->render('_preview_section');
     }
 
     // Uncomment the following methods and override them if needed

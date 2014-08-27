@@ -55,7 +55,7 @@ class GadgetsController extends Controller {
         }
 
 
-        $model = new AddgadgetimageForm;
+        $model = new AddimageForm;
 
         // collect user input data
         if (isset($_POST['AddimageForm'])) {
@@ -66,124 +66,11 @@ class GadgetsController extends Controller {
             } else {
                 Yii::app()->user->setFlash('warning', 'Request Failed');
             }
-
         }
-        
-            
+
+
         // display the original form form
         $this->redirect(array('gadgets/'));
-    }
-
-    /* ############################################
-     * AJAX actions
-     * ############################################ */
-
-    public function actionDrawlocationsajax() {
-        if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
-            throw new CHttpException('403', 'Forbidden access.');
-        }
-        $dbstructure = ApiHelper::_get_db_structure('gadgets');
-
-        $bucket_dir = $_POST['args']['bucketdir'];
-        $root = $_POST['args']['root'];
-        $campus = $_POST['args']['campus'];
-        $building = $_POST['args']['building'];
-
-        switch ($_POST['args']['hierarchy']) {
-            case 'files':
-                $dbstructure = $dbstructure['files'];
-                break;
-            case 'root':
-                $dbstructure = $dbstructure['files'][$campus];
-
-                break;
-            case 'subfolder':
-                $dbstructure = $dbstructure['files'][$campus][$building];
-                break;
-            default:
-                break;
-        }
-
-        ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure, $root, $bucket_dir, $campus, $building);
-    }
-
-    /**
-     * 
-     * @throws CHttpException
-     */
-    public function actionGetlocationdataajax() {
-        if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
-            throw new CHttpException('403', 'Forbidden access.');
-        }
-        if (empty($_POST['args'])) {
-            throw new CHttpException('404', 'Missing "group" POST parameter.');
-        }
-        $location = '';
-        foreach ($_POST['args'] as $arg) {
-            $location.= $arg . "/";
-        }
-        $url = Yii::app()->createAbsoluteUrl("api/filestructure/gadgets/$location");
-        $curl_response = Yii::app()->curl->get($url);
-        header('Content-Type: application/json; charset="UTF-8"');
-
-        echo $curl_response;
-        Yii::app()->end();
-    }
-
-    /**
-     * 
-     * @throws CHttpException
-     */
-    public function actionAddlocationajax() {
-        if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
-            throw new CHttpException('403', 'Forbidden access.');
-        }
-        if (empty($_POST['args'])) {
-            throw new CHttpException('404', 'Missing "group" POST parameter.');
-        }
-
-        $model = new AddgadgetimageForm;
-
-// collect user input data
-        if (isset($_POST['args'])) {
-
-            $model->attributes = $_POST['args'];
-            $image = urldecode($_POST['args']['image_name']);
-            $model->image_name = $image;
-// validate user input and redirect to the previous page if valid
-            if ($model->addimage()) {
-                
-            } else {
-                Yii::app()->user->setFlash('warning', 'Request Failed');
-            }
-        }
-    }
-
-    /**
-     * 
-     * @throws CHttpException
-     */
-    public function actionRemovelocationfromimageajax() {
-        if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
-            throw new CHttpException('403', 'Forbidden access.');
-        }
-        if (empty($_POST['image_name'])) {
-            throw new CHttpException('404', 'Missing "image_name" POST parameter.');
-        }
-
-        $model = new AddgadgetimageForm;
-
-// collect user input data
-        if (isset($_POST['image_name'])) {
-            $model->image_name = $_POST['image_name'];
-
-// validate user input and redirect to the previous page if valid
-            if ($model->removeimage()) {
-                
-            } else {
-                Yii::app()->user->setFlash('warning', 'Request Failed');
-            }
-        }
     }
 
 // Uncomment the following methods and override them if needed

@@ -1,6 +1,4 @@
-<?php
-
-?>
+<?php ?>
 
 <!--left-->
 <div class="col-xs-3 leftCol " id="sidebar">
@@ -14,14 +12,14 @@
                             <?php foreach ($bucket_files as $image): ?>
                                 <?php if (!is_array($image)): ?>
                                     <div class="col-sm-5 no-padding bottom15 ">
-                                        <a href="#?javascript:void(0)" data-image="<?=$image?>" class="col-xs-1 imager" id="link_<?=$image?>" draggable="true">
+                                        <a href="#?javascript:void(0)" data-image="<?= $image ?>" class="col-xs-1 imager" id="link_<?= $image ?>" draggable="true">
                                             <?php
                                             $imageHtmlOptions = array(
                                                 'data-image' => urlencode($image),
                                                 'id' => "drag_" . $image,
                                                 'src' => $bucket_dir . "thumb/thumb_" . $image,
                                                 'alt' => $image,
-                                                'draggable'=>'true',
+                                                'draggable' => 'true',
                                             );
                                             echo BSHtml::tag('img', $imageHtmlOptions);
                                             ?>
@@ -49,7 +47,7 @@
     <!--right-->
     <div class="col-sm-12 container show-locations " >
         <?php
-        ApiHelper_Gadgets::draw_gadget_location_one_directory($dbstructure, 'files', $bucket_dir);
+        ApiHTML::draw_location_one_directory($dbstructure, 'files', $bucket_dir);
         ?>
     </div><!--end show-locations-->
 </div><!--end col-sm-7-->
