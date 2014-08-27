@@ -11,10 +11,9 @@ $cs = Yii::app()->clientScript;
 //gadgets ajax variables
 $cs->registerScript('dbstructure_script', "var dbstructure = " . json_encode($dbstructure) . ";",CClientScript::POS_BEGIN);
 $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucket_dir) . ";",CClientScript::POS_BEGIN);
-$cs->registerScript('gadget_get_ajax_url', ' var getlocationajaxurl ="' . $this->createUrl('site/getlocationdataajax?service=gadgets') . '";',CClientScript::POS_BEGIN);
+$cs->registerScript('gadget_get_wepa_url', ' var getlocationajaxurl ="' . $this->createUrl('site/getlocationdataajax?service=wepa') . '";',CClientScript::POS_BEGIN);
 $cs->registerScript('gadget_add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('site/addlocationajax') . '";',CClientScript::POS_BEGIN);
-$cs->registerScript('gadget_remove_ajax_url', ' var removelocationajaxurl ="' . $this->createUrl('site/removelocationfromimageajax') . '";',CClientScript::POS_BEGIN);
-$cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $this->createUrl('site/drawlocationsajax?service=gadgets') . '";',CClientScript::POS_BEGIN);
+$cs->registerScript('wepa_remove_ajax_url', ' var removelocationajaxurl ="' . $this->createUrl('site/removelocationfromimageajax') . '";',CClientScript::POS_BEGIN);
 
 ?>
 
@@ -23,29 +22,29 @@ $cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $t
     <!--controls-->
     <div class="col-md-12 bottom30">
         <div class="center">
-<?php
-echo BSHtml::buttonGroup(array(
-    array(
-        'label' => 'Save',
-        'url' => Yii::app()->createAbsoluteUrl('site/save') . '?service=gadgets',
-        'icon' => 'save fw',
-        'type' => BSHtml::BUTTON_TYPE_LINK,
-    ),
-    array(
-        'label' => 'Load',
-        'url' => Yii::app()->createAbsoluteUrl('site/load') . '?service=gadgets',
-        'icon' => 'download fw',
-        'type' => BSHtml::BUTTON_TYPE_LINK,
-    ),
-    array(
-        'label' => 'Publish',
-        'url' => Yii::app()->createAbsoluteUrl('site/publish') . '?service=gadgets',
-        'icon' => 'check fw',
-        'type' => BSHtml::BUTTON_TYPE_LINK,
-    )
-        ), array(
-));
-?>
+            <?php
+            echo BSHtml::buttonGroup(array(
+                array(
+                    'label' => 'Save',
+                    'url' => Yii::app()->createAbsoluteUrl('site/save') . '?service=wepa',
+                    'icon' => 'save fw',
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
+                ),
+                array(
+                    'label' => 'Load',
+                    'url' => Yii::app()->createAbsoluteUrl('site/load') . '?service=wepa',
+                    'icon' => 'download fw',
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
+                ),
+                array(
+                    'label' => 'Publish',
+                    'url' => Yii::app()->createAbsoluteUrl('site/publish') . '?service=wepa',
+                    'icon' => 'check fw',
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
+                )
+                    ), array(
+            ));
+            ?>
         </div>
     </div><!--/controls-->
     <div class="col-md-12">
@@ -68,6 +67,14 @@ echo BSHtml::buttonGroup(array(
                     'type' => BSHtml::BUTTON_TYPE_LINK,
                     'color' => BSHtml::BUTTON_COLOR_PRIMARY,
                 ),
+                array(
+                    'label' => 'Preview',
+                    'url' => '?page_id=preview',
+                    'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'preview') ? "active" : ""),
+                    'name' => 'options',
+                    'type' => BSHtml::BUTTON_TYPE_LINK,
+                    'color' => BSHtml::BUTTON_COLOR_PRIMARY,
+                ),
                     ), array(
             ));
             ?>
@@ -76,15 +83,21 @@ echo BSHtml::buttonGroup(array(
         <div id="ajax_panel"></div>
     </div>
     <!--left-->
-<?php if ($whichpage != 'location'): ?>
+    <?php if ($whichpage === 'image'): ?>
         <div class=" image-section" <?= (($whichpage == 'location') ? "hidden" : ""); ?>>
-    <?php $this->renderPartial('_image_section', $args); ?>
+            <?php $this->renderPartial('_image_section', $args); ?>
         </div><!--end image-section-->
     <?php endif; ?>
 
-        <?php if ($whichpage == 'location'): ?>
+    <?php if ($whichpage === 'location'): ?>
         <div class="location-section" <?= (($whichpage == 'image') ? "hidden" : ""); ?> >
-        <?php $this->renderPartial('_location_section', $args); ?>
+            <?php $this->renderPartial('_location_section', $args); ?>
+        </div><!--end location-section-->
+    <?php endif; ?>
+        
+    <?php if ($whichpage === 'preview'): ?>
+        <div class="location-section" <?= (($whichpage == 'preview') ? "hidden" : ""); ?> >
+            <?php $this->renderPartial('_preview_section', $args); ?>
         </div><!--end location-section-->
     <?php endif; ?>
     <div class="col-sm-3 hidden-xs center pull-right ">

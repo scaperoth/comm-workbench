@@ -5,12 +5,13 @@
  * LoginForm is the data structure for keeping
  * user login form data. It is used by the 'login' action of 'SiteController'.
  */
-class AddgadgetimageForm extends CFormModel {
+class ChangeImageForm extends CFormModel {
 
     public $image_name;
     public $campus;
     public $building;
     public $room;
+    public $service;
 
     /**
      * Declares the validation rules.
@@ -33,15 +34,15 @@ class AddgadgetimageForm extends CFormModel {
         $room = $this->room ? $this->room . DIRECTORY_SEPARATOR : '';
         $image = urlencode($this->image_name);
         $location = $this->campus . DIRECTORY_SEPARATOR . $building . $room . $image;
-        
-        $url = Yii::app()->createAbsoluteUrl("api/addimage/gadgets/$location");
+        $service = $this->service;
+        $url = Yii::app()->createAbsoluteUrl("api/addimage/$service/$location");
         $curl_response = Yii::app()->curl->get($url);
         if (!$curl_response) {
             return false;
         }
         
         
-        $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
+        $url = Yii::app()->createAbsoluteUrl("api/update/$service/save");
         $curl_response = Yii::app()->curl->get($url);
         if (!$curl_response) {
             return false;
@@ -56,13 +57,13 @@ class AddgadgetimageForm extends CFormModel {
      */
     public function removeimage() {
         $image = $this->image_name;
-            
-        $url = Yii::app()->createAbsoluteUrl("api/removeimage/gadgets/$image");
+        $service = $this->service;
+        $url = Yii::app()->createAbsoluteUrl("api/removeimage/$service/$image");
         
         $curl_response = Yii::app()->curl->get($url);
         
         
-        $url = Yii::app()->createAbsoluteUrl("api/update/gadgets/save");
+        $url = Yii::app()->createAbsoluteUrl("api/update/$service/save");
         $curl_response = Yii::app()->curl->get($url);
         
         if (!$curl_response) {

@@ -16,8 +16,8 @@ class ApiHelper extends CHtml {
     const GADGETS_BUCKET = "/assets/images/gadget_images/";
     const WEPA_SHARED = '/data/wepa/shared/';
     const WEPA_LOCAL = '/data/wepa/filesystem/';
-    const WEPA_BUCKET = "/assets/images/wepa_images/production_images";
-    const WEPA_OUTAGE_BUCKET = "/assets/images/wepa_images/outage_images";
+    const WEPA_BUCKET = "/assets/images/wepa_images/production_images/";
+    const WEPA_OUTAGE_BUCKET = "/assets/images/wepa_images/outage_images/";
     Const TOPHOLDER = 'structure';
     Const APPLICATION_ID = 'ASCCPE';
     

@@ -393,7 +393,10 @@ class ApiController extends CController {
             }
             if (file_exists($target))
                 rmdir($target);
-        } elseif (is_file($target)&& $target->getFilename() != 'Thumbs.db') {
+        }
+        elseif (!is_object($target) && !strpos($target, 'Thumbs.db')) {
+            unlink($target);
+        } elseif (is_file($target) && $target->getFilename() != 'Thumbs.db') {
             unlink($target);
         }
     }
@@ -556,7 +559,7 @@ class ApiController extends CController {
         $r = array(
             "bucket" => ApiHelper::_ReadFolderDirectory_from_local($bucket),
             "timestamp" => date('m-d-y h:i:s'),
-            "files" => array(),     
+            "files" => array(),
         );
 
         foreach (

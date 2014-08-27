@@ -47,7 +47,7 @@
     <!--right-->
     <div class="col-sm-12 container show-locations " >
         <?php
-        ApiHTML::draw_location_one_directory($dbstructure, 'files', $bucket_dir);
+        ApiHTML::draw_location_one_directory($dbstructure['files'], 'root', $bucket_dir);
         ?>
     </div><!--end show-locations-->
 </div><!--end col-sm-7-->
