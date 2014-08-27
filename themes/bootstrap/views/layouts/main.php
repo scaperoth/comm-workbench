@@ -38,12 +38,18 @@
         if ($this->uniqueId === 'gadgets') {
             $cs->registerScriptFile($themePath . '/assets/js/gadget_script.js', CClientScript::POS_END);
             $cs->registerScript('service', 'var service = "gadgets"', CClientScript::POS_BEGIN);
+
+            $cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $this->createUrl('site/drawlocationsajax?service=gadgets') . '";', CClientScript::POS_BEGIN);
         } else {
             $cs->registerScriptFile($themePath . '/assets/js/wepa_script.js', CClientScript::POS_END);
             $cs->registerScript('service', 'var service = "wepa"', CClientScript::POS_BEGIN);
         }
+        $cs->registerScript('get_ajax_url', ' var getlocationajaxurl ="' . $this->createUrl('site/getlocationdataajax?service=wepa') . '";', CClientScript::POS_BEGIN);
+        $cs->registerScript('add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('site/addlocationajax') . '";', CClientScript::POS_BEGIN);
+        $cs->registerScript('remove_ajax_url', ' var removelocationajaxurl ="' . $this->createUrl('site/removelocationfromimageajax') . '";', CClientScript::POS_BEGIN);
+
         $cs->registerScriptFile($themePath . '/assets/js/global_ajax.js', CClientScript::POS_END);
-        
+
         $cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
         //variables used for javascript calls
         $cs->registerScript('images', 'var images = "' . $themePath . '/assets/images/";', CClientScript::POS_BEGIN);

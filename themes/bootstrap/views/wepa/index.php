@@ -11,10 +11,8 @@ $cs = Yii::app()->clientScript;
 //gadgets ajax variables
 $cs->registerScript('dbstructure_script', "var dbstructure = " . json_encode($dbstructure) . ";",CClientScript::POS_BEGIN);
 $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucket_dir) . ";",CClientScript::POS_BEGIN);
-$cs->registerScript('gadget_get_wepa_url', ' var getlocationajaxurl ="' . $this->createUrl('site/getlocationdataajax?service=wepa') . '";',CClientScript::POS_BEGIN);
-$cs->registerScript('gadget_add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('site/addlocationajax') . '";',CClientScript::POS_BEGIN);
-$cs->registerScript('wepa_remove_ajax_url', ' var removelocationajaxurl ="' . $this->createUrl('site/removelocationfromimageajax') . '";',CClientScript::POS_BEGIN);
 
+//ApiHelper::_remove_image_from_all_locations(ApiHelper::_get_local_path('wepa'),"13080087Ap11-Print+from+Anywhere.jpg");
 ?>
 
 

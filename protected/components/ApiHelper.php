@@ -8,6 +8,7 @@
 class ApiHelper extends CHtml {
 // Members
     //sets whether or not in production
+
     const LOCAL = true;
     //relative path. what you see is what you get.
     const GADGETS_SHARED = '/data/gadgets/shared/';
@@ -20,7 +21,29 @@ class ApiHelper extends CHtml {
     const WEPA_OUTAGE_BUCKET = "/assets/images/wepa_images/outage_images/";
     Const TOPHOLDER = 'structure';
     Const APPLICATION_ID = 'ASCCPE';
-    
+
+    /**
+      removes all images from source
+     * @param type $source location to start removing all images
+     * @param type $image_name
+     */
+    public static function _remove_image_from_all_locations($source, $image_name) {
+        $directory = $source;
+        $filenames = array();
+        $accepted_extensions = array(
+        );
+        $iterator = new DirectoryIterator($directory);
+        foreach ($iterator as $fileinfo) {
+            if ($fileinfo->isFile()) {
+                $filenames[] = $fileinfo->getPathname();
+            }
+        }
+        if (sizeof($filenames) > 1) {
+            foreach ($filenames as $file) {
+                unlink($file);
+            }
+        }
+    }
 
     /**
      * Default response format
@@ -229,7 +252,7 @@ class ApiHelper extends CHtml {
         switch ($param) {
             case 'gadgets':
                 $service_details['local_file'] = self::_create_full_path(self::GADGETS_LOCAL);
-                $service_details['shared_file'] = (self::LOCAL?self::_create_full_path(self::GADGETS_SHARED):self::GADGETS_SHARED);
+                $service_details['shared_file'] = (self::LOCAL ? self::_create_full_path(self::GADGETS_SHARED) : self::GADGETS_SHARED);
                 $service_details['bucket'] = self::_create_full_path(self::GADGETS_BUCKET, true);
                 $service_details['database'] = Yii::app()->mongodb->gadgets;
                 break;

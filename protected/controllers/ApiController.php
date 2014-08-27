@@ -132,6 +132,29 @@ class ApiController extends CController {
     }
 
     /**
+     * Adds an image to a specified location in local file system
+     * @throws CHttpException
+     */
+    public function actionAddimagetoall() {
+//first find out which service the API will be accessing and get the details of that service
+        $which_path;
+        if (CHttpRequest::getParam('which_service')) {
+            $service = CHttpRequest::getParam('which_service');
+            $service_details = ApiHelper::_get_service($service);
+
+            if ($image_name = CHttpRequest::getParam('image_name')) {
+                $JSON_array = self::_add_image_to_all_locations($image_name, $service_details['local_file'], $service_details['bucket']);
+            } else {
+                throw new CHttpException(404, "The API for 'api/addimage/$service/$image_name' cannot be found.");
+            }
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+
+    /**
      * Removes image from specific location in local file system
      * @throws CHttpException
      */
@@ -401,17 +424,6 @@ class ApiController extends CController {
         }
     }
 
-    /**
-     * removes image from source
-     * @param type $source directory to remove image
-     * @param type $image_name name of image to be removed
-     * @return string path and name of image that was removed
-     */
-    public static function _remove_image_from_files($source, $image_name) {
-        self::_delete_files($source . $image_name);
-        return $source . $image_name;
-    }
-
     /* #############################################
      * Image manipulation
      * ############################################# */
@@ -439,6 +451,44 @@ class ApiController extends CController {
             return false;
         }
         return $return;
+    }
+
+    /**
+     * adds all images to source
+     * @param type $source location to start adding all images
+     */
+    public static function _add_image_to_all_locations($image_name, $dest, $source) {
+        $directory = $dest;
+        $filenames = array();
+        $accepted_extensions = array('gif', 'jpeg', 'png', 'bmp');
+        foreach (
+        $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($dest, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+            if ($item->isDir()) {
+                $path = $item->getPathName();
+                $dest = rtrim($dest, "\/");
+                $dest = $dest . "\\";
+                $path = str_replace($dest, "", $path) . DIRECTORY_SEPARATOR;
+
+                if ($path !== "/") {
+                    $filenames[] = $path . $image_name;
+                    self::_add_image_to_files($path . $image_name, $dest, $source);
+                }
+            }
+        }
+        return $filenames;
+    }
+
+    /**
+     * removes image from source
+     * @param type $source directory to remove image
+     * @param type $image_name name of image to be removed
+     * @return string path and name of image that was removed
+     */
+    public static function _remove_image_from_files($source, $image_name) {
+        self::_delete_files($source . $image_name);
+        return $source . $image_name;
     }
 
     /* #############################################

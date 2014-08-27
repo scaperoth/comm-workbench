@@ -107,6 +107,7 @@ return array(
                 'api/deleteimageinbucket/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/deleteimageinbucket',
                 ///
                 'api/addimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimage',
+                'api/addimagetoall/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimagetoall',
                 ///
                 'api/removeimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
                 ///
