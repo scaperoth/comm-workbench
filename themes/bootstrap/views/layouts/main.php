@@ -133,10 +133,10 @@
                                     )
                                 ),
                                 array(
-                                    'label' => 'Preview',
+                                    'label' => 'Outage',
                                     'url' => array(
                                         'wepa/index',
-                                        'page_id' => 'preview'
+                                        'page_id' => 'outage'
                                     )
                                 ),
                             )

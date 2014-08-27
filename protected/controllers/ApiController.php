@@ -137,7 +137,6 @@ class ApiController extends CController {
      */
     public function actionAddimagetoall() {
 //first find out which service the API will be accessing and get the details of that service
-        $which_path;
         if (CHttpRequest::getParam('which_service')) {
             $service = CHttpRequest::getParam('which_service');
             $service_details = ApiHelper::_get_service($service);
@@ -170,6 +169,28 @@ class ApiController extends CController {
                 $JSON_array = CHttpRequest::getParam('image_name');
             } else {
                 throw new CHttpException(404, "The API for 'api/removeimage/$service/$image_name' cannot be found.");
+            }
+        }
+        else
+            throw new CHttpException(404, "The page you are looking for does not exist.");
+
+        ApiHelper::_sendResponse(200, CJSON::encode($JSON_array));
+    }
+
+    /**
+     * Removes all images from local file system
+     * @throws CHttpException
+     */
+    public function actionRemoveimagefromall() {
+//first find out which service the API will be accessing and get the details of that service
+        if (CHttpRequest::getParam('which_service')) {
+            $service = CHttpRequest::getParam('which_service');
+            $service_details = ApiHelper::_get_service($service);
+
+            if ($image_name = CHttpRequest::getParam('image_name')) {
+                $JSON_array = self::_remove_image_from_all_locations($service_details['local_file'], $image_name);
+            } else {
+                throw new CHttpException(404, "The API for 'api/removeimagefromall/$service/$image_name' cannot be found.");
             }
         }
         else
@@ -491,6 +512,28 @@ class ApiController extends CController {
         return $source . $image_name;
     }
 
+    /**
+      removes all images from source
+     * @param type $source location to start removing all images
+     * @param type $image_name
+     */
+    public static function _remove_image_from_all_locations($source, $image_name) {
+        $filenames = array();
+        $accepted_extensions = array(
+        );
+        foreach (
+        $iterator = new RecursiveIteratorIterator(
+        new RecursiveDirectoryIterator($source, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        ) {
+
+            if (!$item->isDir() && $item->getFilename() === $image_name) {
+                unlink($item->getPathname());
+                $filenames[] = $item->getPathname();
+            }
+        }
+        return $filenames;
+    }
+
     /* #############################################
      * Bucket manipulation
      * ############################################# */
@@ -605,13 +648,22 @@ class ApiController extends CController {
     public static function _save_to_db_load_from_local($local, $which_db, $bucket) {
         $which_db->remove();
         $bucket = dirname(Yii::getPathOfAlias('webroot')) . $bucket;
-
-        $r = array(
-            "bucket" => ApiHelper::_ReadFolderDirectory_from_local($bucket),
-            "timestamp" => date('m-d-y h:i:s'),
-            "files" => array(),
-        );
-
+        $wepa_bucket = dirname(Yii::getPathOfAlias('webroot')).ApiHelper::_get_bucket_url('wepa');
+        if ($bucket == $wepa_bucket) {
+            $wepa_outage_bucket = dirname(Yii::getPathOfAlias('webroot')).ApiHelper::_get_outage_bucket_url();
+            $r = array(
+                "bucket" => ApiHelper::_ReadFolderDirectory_from_local($bucket),
+                "outage_bucket"=>  ApiHelper::_ReadFolderDirectory_from_local($wepa_outage_bucket),
+                "timestamp" => date('m-d-y h:i:s'),
+                "files" => array(),
+            );
+        } else {
+            $r = array(
+                "bucket" => ApiHelper::_ReadFolderDirectory_from_local($bucket),
+                "timestamp" => date('m-d-y h:i:s'),
+                "files" => array(),
+            );
+        }
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($local, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item

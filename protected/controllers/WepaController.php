@@ -12,10 +12,15 @@ class WepaController extends Controller {
     }
 
     public function actionIndex() {
+        $page = 'image';
+        if (isset($_GET['page_id'])) {
+            $page = $_GET['page_id'];
+        }
 
-        $bucket_dir = ApiHelper::_get_bucket_url('wepa');
+        $bucket_dir = ($page === 'outage') ? ApiHelper::_get_outage_bucket_url() : ApiHelper::_get_bucket_url('wepa');
         $dbstructure = ApiHelper::_get_db_structure('wepa');
         $bucket_files = $dbstructure['bucket'];
+        $outage_bucket_files = $dbstructure['outage_bucket'];
         $root = ApiHelper::_get_local_path('wepa');
 
         foreach ($bucket_files as $image) {
@@ -28,7 +33,8 @@ class WepaController extends Controller {
             'image_locations' => $image_locations,
             'dbstructure' => $dbstructure,
             'bucket_dir' => $bucket_dir,
-            'bucket_files' => $bucket_files
+            'bucket_files' => $bucket_files,
+            'outage_bucket_files' => $outage_bucket_files
         ));
     }
 
@@ -39,9 +45,9 @@ class WepaController extends Controller {
     public function action_location_section() {
         $this->render('_location_section');
     }
-    
-    public function action_preview_section() {
-        $this->render('_preview_section');
+
+    public function action_outage_section() {
+        $this->render('_outage_section');
     }
 
     // Uncomment the following methods and override them if needed

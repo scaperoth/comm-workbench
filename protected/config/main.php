@@ -110,6 +110,7 @@ return array(
                 'api/addimagetoall/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimagetoall',
                 ///
                 'api/removeimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
+                'api/removeimagefromall/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimagefromall',
                 ///
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

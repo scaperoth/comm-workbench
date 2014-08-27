@@ -1,7 +1,7 @@
 <?php
 array_multisort(array_values($dbstructure['files']['root']), SORT_ASC, array_keys($dbstructure['files']['root']), SORT_ASC, $dbstructure['files']['root']);
 
-$args = array('image_locations' => $image_locations, 'dbstructure' => $dbstructure, 'bucket_dir' => $bucket_dir, 'bucket_files' => $bucket_files);
+$args = array('image_locations' => $image_locations, 'dbstructure' => $dbstructure, 'bucket_dir' => $bucket_dir, 'bucket_files' => $bucket_files, 'outage_bucket_files' => $outage_bucket_files);
 
 $whichpage = 'image';
 if (isset($_GET['page_id']))
@@ -9,12 +9,11 @@ if (isset($_GET['page_id']))
 
 $cs = Yii::app()->clientScript;
 //gadgets ajax variables
-$cs->registerScript('dbstructure_script', "var dbstructure = " . json_encode($dbstructure) . ";",CClientScript::POS_BEGIN);
-$cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucket_dir) . ";",CClientScript::POS_BEGIN);
+$cs->registerScript('dbstructure_script', "var dbstructure = " . json_encode($dbstructure) . ";", CClientScript::POS_BEGIN);
+$cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucket_dir) . ";", CClientScript::POS_BEGIN);
 
 //ApiHelper::_remove_image_from_all_locations(ApiHelper::_get_local_path('wepa'),"13080087Ap11-Print+from+Anywhere.jpg");
 ?>
-
 
 <div class="row">
     <!--controls-->
@@ -45,6 +44,16 @@ $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucke
             ?>
         </div>
     </div><!--/controls-->
+    <!--controls-->
+    <div class="col-md-12 bottom30">
+        <div class="center">
+            <h4>Outage</h4>
+            <div class="btn-group btn-toggle"> 
+                <button class="btn btn-default">ON</button>
+                <button class="btn btn-primary active">OFF</button>
+            </div>
+        </div>
+    </div>
     <div class="col-md-12">
         <div class="center">
             <?php
@@ -58,7 +67,7 @@ $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucke
                     'color' => BSHtml::BUTTON_COLOR_PRIMARY,
                 ),
                 array(
-                    'label' => 'Location View',
+                    'label' => 'Production Locations',
                     'url' => '?page_id=location',
                     'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'location') ? "active" : ""),
                     'name' => 'options',
@@ -66,9 +75,9 @@ $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucke
                     'color' => BSHtml::BUTTON_COLOR_PRIMARY,
                 ),
                 array(
-                    'label' => 'Preview',
-                    'url' => '?page_id=preview',
-                    'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'preview') ? "active" : ""),
+                    'label' => 'Outage View',
+                    'url' => '?page_id=outage',
+                    'class' => ' btn btn-lg btn-primary ' . (($whichpage == 'outage') ? "active" : ""),
                     'name' => 'options',
                     'type' => BSHtml::BUTTON_TYPE_LINK,
                     'color' => BSHtml::BUTTON_COLOR_PRIMARY,
@@ -82,20 +91,20 @@ $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucke
     </div>
     <!--left-->
     <?php if ($whichpage === 'image'): ?>
-        <div class=" image-section" <?= (($whichpage == 'location') ? "hidden" : ""); ?>>
+        <div class=" image-section" <?= (($whichpage !== 'image') ? "hidden" : ""); ?>>
             <?php $this->renderPartial('_image_section', $args); ?>
         </div><!--end image-section-->
     <?php endif; ?>
 
     <?php if ($whichpage === 'location'): ?>
-        <div class="location-section" <?= (($whichpage == 'image') ? "hidden" : ""); ?> >
+        <div class="location-section" <?= (($whichpage !== 'location') ? "hidden" : ""); ?> >
             <?php $this->renderPartial('_location_section', $args); ?>
         </div><!--end location-section-->
     <?php endif; ?>
-        
-    <?php if ($whichpage === 'preview'): ?>
-        <div class="location-section" <?= (($whichpage == 'preview') ? "hidden" : ""); ?> >
-            <?php $this->renderPartial('_preview_section', $args); ?>
+
+    <?php if ($whichpage === 'outage'): ?>
+        <div class="outage-section" <?= (($whichpage !== 'outage') ? "hidden" : ""); ?> >
+            <?php $this->renderPartial('_outage_section', $args); ?>
         </div><!--end location-section-->
     <?php endif; ?>
     <div class="col-sm-3 hidden-xs center pull-right ">

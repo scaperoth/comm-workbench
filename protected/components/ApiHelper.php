@@ -17,33 +17,13 @@ class ApiHelper extends CHtml {
     const GADGETS_BUCKET = "/assets/images/gadget_images/";
     const WEPA_SHARED = '/data/wepa/shared/';
     const WEPA_LOCAL = '/data/wepa/filesystem/';
+    const WEPA_OUTAGE_LOCAL = '/data/wepa/outage/';
     const WEPA_BUCKET = "/assets/images/wepa_images/production_images/";
     const WEPA_OUTAGE_BUCKET = "/assets/images/wepa_images/outage_images/";
     Const TOPHOLDER = 'structure';
     Const APPLICATION_ID = 'ASCCPE';
 
-    /**
-      removes all images from source
-     * @param type $source location to start removing all images
-     * @param type $image_name
-     */
-    public static function _remove_image_from_all_locations($source, $image_name) {
-        $directory = $source;
-        $filenames = array();
-        $accepted_extensions = array(
-        );
-        $iterator = new DirectoryIterator($directory);
-        foreach ($iterator as $fileinfo) {
-            if ($fileinfo->isFile()) {
-                $filenames[] = $fileinfo->getPathname();
-            }
-        }
-        if (sizeof($filenames) > 1) {
-            foreach ($filenames as $file) {
-                unlink($file);
-            }
-        }
-    }
+    
 
     /**
      * Default response format
@@ -114,7 +94,7 @@ class ApiHelper extends CHtml {
             closedir($handler);
         }
         if (empty($listDir)) {
-            return "No database connection";
+            return "";
         }
         return $listDir;
     }
@@ -258,11 +238,12 @@ class ApiHelper extends CHtml {
                 break;
             case 'wepa':
                 $service_details['local_file'] = self::_create_full_path(self::WEPA_LOCAL);
+                $service_details['outage_file'] = self::_create_full_path(self::WEPA_OUTAGE_LOCAL);
                 $service_details['shared_file'] = self::_create_full_path(self::WEPA_SHARED);
                 $service_details['bucket'] = self::_create_full_path(self::WEPA_BUCKET, true);
                 $service_details['outage_bucket'] = self::_create_full_path(self::WEPA_OUTAGE_BUCKET, true);
                 $service_details['database'] = Yii::app()->mongodb->wepa;
-
+                $service_details['outage_database'] = Yii::app()->mongodb->wepa_outage;
                 break;
         }
 
@@ -273,6 +254,12 @@ class ApiHelper extends CHtml {
     public static function _get_bucket_url($which_service, $assoc_array = true) {
         $service = self::_get_service($which_service);
         $bucket = $service['bucket'];
+        return $bucket;
+    }
+    
+    public static function _get_outage_bucket_url($which_service='wepa', $assoc_array = true) {
+        $service = self::_get_service($which_service);
+        $bucket = $service['outage_bucket'];
         return $bucket;
     }
 
