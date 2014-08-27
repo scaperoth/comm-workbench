@@ -34,19 +34,9 @@
         $cs->registerScriptFile($themePath . '/assets/fractionslider/jquery.fractionslider.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/nicescroll/jquery.nicescroll.min.js', CClientScript::POS_END);
         $cs->registerScriptFile($themePath . '/assets/js/script.js', CClientScript::POS_END);
-
-        if ($this->uniqueId === 'gadgets') {
-            $cs->registerScriptFile($themePath . '/assets/js/gadget_script.js', CClientScript::POS_END);
-            $cs->registerScript('service', 'var service = "gadgets"', CClientScript::POS_BEGIN);
-        } else {
-            $cs->registerScriptFile($themePath . '/assets/js/wepa_script.js', CClientScript::POS_END);
-            $cs->registerScript('service', 'var service = "wepa"', CClientScript::POS_BEGIN);
-        }
-        $cs->registerScriptFile($themePath . '/assets/js/global_ajax.js', CClientScript::POS_END);
-        
         $cs->registerScript('tooltip', "$('[data-toggle=\"tooltip\"]').tooltip();$('[data-toggle=\"popover\"]').tooltip()", CClientScript::POS_READY);
         //variables used for javascript calls
-        $cs->registerScript('images', 'var images = "' . $themePath . '/assets/images/";', CClientScript::POS_BEGIN);
+        $cs->registerScript('images', 'var images = "' . $themePath . '/assets/images/";');
         ?>
         <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
         <!--[if lt IE 9]>
@@ -89,51 +79,12 @@
                             //'icon' => 'dashboard fw',
                             'url' => array('gadgets/index'),
                             'icon' => 'gears fw',
-                            'items' => array(
-                                array(
-                                    'label' => 'Image View',
-                                    'url' => array(
-                                        'gadgets/index',
-                                        'page_id' => 'image'
-                                    )
-                                ),
-                                array(
-                                    'label' => 'Location View',
-                                    'url' => array(
-                                        'gadgets/index',
-                                        'page_id' => 'location'
-                                    )
-                                ),
-                            )
                         ),
                         array(
                             'label' => 'WEPA',
                             //'icon' => 'dashboard fw',
                             'url' => array('wepa/index'),
                             'icon' => 'print fw',
-                            'items' => array(
-                                array(
-                                    'label' => 'Image View',
-                                    'url' => array(
-                                        'wepa/index',
-                                        'page_id' => 'image'
-                                    )
-                                ),
-                                array(
-                                    'label' => 'Location View',
-                                    'url' => array(
-                                        'wepa/index',
-                                        'page_id' => 'location'
-                                    )
-                                ),
-                                array(
-                                    'label' => 'Preview',
-                                    'url' => array(
-                                        'wepa/index',
-                                        'page_id' => 'preview'
-                                    )
-                                ),
-                            )
                         ),
                         array(
                             'label' => 'Upload',
@@ -214,7 +165,7 @@
 
     </body>
     <script>
-
+        
     </script>
     <?php
     Yii::app()->clientScript->registerScript(
