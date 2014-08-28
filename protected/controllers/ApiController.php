@@ -34,7 +34,10 @@ class ApiController extends CController {
             if ($push_or_pull = CHttpRequest::getParam('push_or_pull')) {
                 switch ($push_or_pull) {
                     case 'push':
-                        $JSON_array = self::_sync_from_source($service_details['local_file'], $service_details['shared_file'], $service_details['database']);
+                        if ($service === 'wepa' && ApiHelper::_is_outage())
+                            $JSON_array = self::_sync_from_source($service_details['outage_file'], $service_details['shared_file'], $service_details['database'], $service);
+                        else
+                            $JSON_array = self::_sync_from_source($service_details['local_file'], $service_details['shared_file'], $service_details['database'], $service);
                         break;
                     case 'pull':
                         $JSON_array = self::_sync_from_source($service_details['shared_file'], $service_details['local_file'], $service_details['database']);
@@ -69,7 +72,9 @@ class ApiController extends CController {
                         $JSON_array = self::_load_from_db_save_to_local($service_details['local_file'], $service_details['database']);
                         break;
                     case 'save':
-                        $JSON_array = self::_save_to_db_load_from_local($service_details['local_file'], $service_details['database'], $service_details['bucket']);
+                        if (stripos($service, 'wepa') !== false)
+                            $service = 'wepa';
+                        $JSON_array = self::_save_to_db_load_from_local($service_details['local_file'], $service_details['database'], $service_details['bucket'], $service);
                         break;
                     default:
                         throw new CHttpException(404, "The API for 'api/update/$service/$load_or_save' cannot be found.");
@@ -263,9 +268,19 @@ class ApiController extends CController {
                 if ($which_type == 'full')
                     $JSON_array = $service_details['bucket'];
             }
-            else
-//removes all images from bucket
-                $JSON_array = Yii::app()->theme->baseUrl . ApiHelper::GADGETS_BUCKET;
+            else {
+                switch ($service) {
+                    case 'gadgets':
+                        $JSON_array = Yii::app()->theme->baseUrl . ApiHelper::GADGETS_BUCKET;
+                        break;
+                    case 'wepa':
+                        $JSON_array = Yii::app()->theme->baseUrl . ApiHelper::WEPA_BUCKET;
+                        break;
+                    case 'wepa-outage':
+                        $JSON_array = Yii::app()->theme->baseUrl . ApiHelper::WEPA_OUTAGE_BUCKET;
+                        break;
+                }
+            }
         }
         else
             throw new CHttpException(404, "The page you are looking for does not exist.");
@@ -360,12 +375,15 @@ class ApiController extends CController {
      * @param type $dest
      * @return type
      */
-    public static function _sync_from_source($source, $dest, $which_db) {
+    public static function _sync_from_source($source, $dest, $which_db, $service = null) {
         $destination_array = array();
         $counter = 0;
 
 //first check to see if there's anything in the local fs that doesn't belong
-        self::_delete_from_dest($source, $dest);
+        if ($service === 'wepa')
+            self::_delete_from_dest($source, $dest, $service);
+        else
+            self::_delete_from_dest($source, $dest);
 
 //now copy over all systems that do belong from source fs
         self::_copy_from_source($source, $dest);
@@ -387,16 +405,47 @@ class ApiController extends CController {
      * @param type $source
      * @param type $dest
      */
-    public static function _delete_from_dest($source, $dest) {
+    public static function _delete_from_dest($source, $dest, $service = null) {
+        $supported_images = array(
+            'gif',
+            'jpg',
+            'jpeg',
+            'png'
+        );
+
 //first check to see if there's anything in the destination fs that doesn't belong
         foreach (
         $iterator = new RecursiveIteratorIterator(
         new RecursiveDirectoryIterator($dest, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
         ) {
-            if (!file_exists($source . DIRECTORY_SEPARATOR . $iterator->getSubPathName())) {
-                self::_delete_files($item);
+            if ($service === 'wepa' && ApiHelper::_is_outage()) {
+                if (!file_exists($source . DIRECTORY_SEPARATOR . $iterator->getSubPathName()) &&
+                        self::_has_the_files($source . DIRECTORY_SEPARATOR . $iterator->getSubPath(), $supported_images)) {
+
+                    self::_delete_files($item);
+                }
+            } else {
+                if (!file_exists($source . DIRECTORY_SEPARATOR . $iterator->getSubPathName())) {
+                    self::_delete_files($item);
+                }
             }
         }
+    }
+
+    /**
+     * function to find files with specified extensions in a folder
+     * @param type $dir
+     * @param type $extensions
+     * @return boolean
+     */
+    private function _has_the_files($dir, $extensions = array()) {
+        $found = array();
+        if (empty($extensions) || !is_array($extensions) || !is_dir($dir))
+            return false;
+        foreach ($extensions as $ext)
+            if (count(glob($dir . '/*.' . $ext)) > 0)
+                $found[$ext] = 1;
+        return ( count($found) > 0 ) ? true : false;
     }
 
     /**
@@ -645,17 +694,28 @@ class ApiController extends CController {
      * translates the file system into a mongo db
      * @param type $local
      */
-    public static function _save_to_db_load_from_local($local, $which_db, $bucket) {
+    public static function _save_to_db_load_from_local($local, $which_db, $bucket, $service) {
+        //path to outage folder system if service has one
+        $outage_path = '';
+
+        //clear database
         $which_db->remove();
+
+        //must prepend full path to bucket dir path to work
         $bucket = dirname(Yii::getPathOfAlias('webroot')) . $bucket;
-        $wepa_bucket = dirname(Yii::getPathOfAlias('webroot')).ApiHelper::_get_bucket_url('wepa');
-        if ($bucket == $wepa_bucket) {
-            $wepa_outage_bucket = dirname(Yii::getPathOfAlias('webroot')).ApiHelper::_get_outage_bucket_url();
+
+        //do the same for the wepa bucket to check to see if current service is wepa
+        $outage_bucket = dirname(Yii::getPathOfAlias('webroot')) . ApiHelper::_get_outage_bucket_url();
+
+        if (stripos($service, 'wepa') !== false) { //if current service is wepa...
+            $outage_path = ApiHelper::_get_outage_path(); //apply outage path
+            //same rule for outage bucket as the regular bucket; prepend full path
             $r = array(
                 "bucket" => ApiHelper::_ReadFolderDirectory_from_local($bucket),
-                "outage_bucket"=>  ApiHelper::_ReadFolderDirectory_from_local($wepa_outage_bucket),
+                "outage_bucket" => ApiHelper::_ReadFolderDirectory_from_local($outage_bucket),
                 "timestamp" => date('m-d-y h:i:s'),
                 "files" => array(),
+                "outage" => array(),
             );
         } else {
             $r = array(
@@ -664,15 +724,39 @@ class ApiController extends CController {
                 "files" => array(),
             );
         }
+
+        $r = self::_mongo_array_builder($local, $bucket, $r, 'files', $service);
+
+        //if there is an outage path, then iterate through the outage dir too
+        if ($outage_path !== '') {
+            $r = self::_mongo_array_builder($outage_path, $bucket, $r, 'outage', $service);
+        }
+        //array_multisort(array_keys($r), SORT_STRING, $r);
+
+        $which_db->save($r);
+        return $r;
+    }
+
+    /**
+     * creates an array to insert into a mongo db
+     * @param type $local_folder local folder to build from
+     * @param string $bucket bucket path to populate bucket section
+     * @param string $nameofroot name for root section in db, ex: files, outage, etc.
+     */
+    private function _mongo_array_builder($local_folder, $bucket, $array, $nameofroot, $service) {
+
+
         foreach (
         $iterator = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($local, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
+        new RecursiveDirectoryIterator($local_folder, RecursiveDirectoryIterator::SKIP_DOTS), RecursiveIteratorIterator::SELF_FIRST) as $item
         ) {
             if ($item->getFilename() != 'Thumbs.db' && $item->getFilename() != 'Block.txt') {
                 if ($item->isDir()) {
                     switch ($iterator->getDepth()) {
                         case 0:
                             $path = array("root" => array($item->getFilename() => array()));
+                            if ($service == 'wepa')
+                                $path[$item->getFilename()] = array();
                             break;
                         case 1:
                             $path = array("subfolder" => array($item->getFilename() => array()));
@@ -693,14 +777,11 @@ class ApiController extends CController {
                 for ($depth = $iterator->getDepth() - 1; $depth >= 0; $depth--) {
                     $path = array($iterator->getSubIterator($depth)->current()->getFilename() => $path);
                 }
-                $r["files"] = array_merge_recursive($r["files"], $path);
+                $array[$nameofroot] = array_merge_recursive($array[$nameofroot], $path);
             }
         }
 
-        //array_multisort(array_keys($r), SORT_STRING, $r);
-
-        print_r($which_db->save($r));
-        return $r;
+        return $array;
     }
 
     /**

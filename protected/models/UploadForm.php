@@ -35,13 +35,13 @@ class UploadForm extends CFormModel {
      * @return boolean whether login is successful
      */
     public function upload() {
-        $url = Yii::app()->createAbsoluteUrl('api/bucketdir/' . $this->service . '/full');
-        $uploaddir = Yii::app()->curl->get($url);
+        $uploaddir = ApiHelper::_get_bucket_url($this->service);
+
         $uploaddir = str_replace("\"", "", $uploaddir);
         $uploaddir = trim($uploaddir);
-        $uploaddir = dirname(Yii::getPathOfAlias('webroot')) .$uploaddir;
-        
-        $uploaddir = urldecode(str_replace("\\","",$uploaddir));
+        $uploaddir = dirname(Yii::getPathOfAlias('webroot')) . $uploaddir;
+
+        $uploaddir = urldecode(str_replace("\\", "", $uploaddir));
         //file:///C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
         //C:\xampp\htdocs\comm-workbench\themes\bootstrap\assets\images\gadget_images/
         //C:/xampp/htdocs/comm-workbench/themes/bootstrap/assets/images/gadget_images/
@@ -65,7 +65,6 @@ class UploadForm extends CFormModel {
         return true;
     }
 
-    
     /**
      * generates thumbnail from given image
      * @param type $image_name name of image to generate
@@ -75,7 +74,7 @@ class UploadForm extends CFormModel {
      */
     public static function _create_thumbnail($image_name, $uploaddir, $extension) {
         $uploadedfile = $uploaddir . "/" . $image_name;
-        
+
         //create thumbnail
         if ($extension == "jpg" || $extension == "jpeg") {
             $src = imagecreatefromjpeg($uploadedfile);
@@ -93,7 +92,7 @@ class UploadForm extends CFormModel {
 
         imagecopyresampled($tmp, $src, 0, 0, 0, 0, $newwidth, $newheight, $width, $height);
 
-        $filename = $uploaddir."thumb/thumb_" . $image_name;
+        $filename = $uploaddir . "thumb/thumb_" . $image_name;
 
         imagegif($tmp, $filename, 100);
 
@@ -102,7 +101,7 @@ class UploadForm extends CFormModel {
 
         return 'success';
     }
-    
+
     /**
      * returns file extension
      * @param type $str name of image to strip file extension

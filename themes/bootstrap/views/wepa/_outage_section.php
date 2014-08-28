@@ -1,4 +1,6 @@
-<?php ?>
+<?php
+
+?>
 
 <!--left-->
 <div class="col-xs-3 leftCol " id="sidebar">
@@ -47,7 +49,7 @@
     <!--right-->
     <div class="col-sm-12 container show-locations " >
         <?php
-        ApiHTML::draw_location_one_directory($dbstructure['files'], 'root', $bucket_dir);
+        ApiHTML::draw_location_one_directory($dbstructure['outage'], 'root', $bucket_dir);
         ?>
     </div><!--end show-locations-->
 </div><!--end col-sm-7-->

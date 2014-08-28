@@ -24,6 +24,7 @@
                                 <select name="service" id="service" class="form-control">
                                     <option value="gadgets">Gadgets</option>
                                     <option value="wepa">WEPA</option>
+                                    <option value="wepa-outage">WEPA Outage</option>
                                 </select>
                             </div>
                         </div>

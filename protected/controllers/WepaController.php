@@ -22,6 +22,7 @@ class WepaController extends Controller {
         $bucket_files = $dbstructure['bucket'];
         $outage_bucket_files = $dbstructure['outage_bucket'];
         $root = ApiHelper::_get_local_path('wepa');
+        $isoutage = ApiHelper::_is_outage();
 
         foreach ($bucket_files as $image) {
             if (!is_array($image)) {
@@ -34,7 +35,8 @@ class WepaController extends Controller {
             'dbstructure' => $dbstructure,
             'bucket_dir' => $bucket_dir,
             'bucket_files' => $bucket_files,
-            'outage_bucket_files' => $outage_bucket_files
+            'outage_bucket_files' => $outage_bucket_files,
+            'isoutage' => $isoutage,
         ));
     }
 
@@ -48,6 +50,19 @@ class WepaController extends Controller {
 
     public function action_outage_section() {
         $this->render('_outage_section');
+    }
+
+    public function actiontoggleoutage() {
+        if (!YII_DEBUG && !Yii::app()->request->isAjaxRequest) {
+            throw new CHttpException('403', 'Forbidden access.');
+        }
+
+        $outage = array(
+            'isoutage' => !ApiHelper::_is_outage(),
+        );
+        Yii::app()->mongodb->admin->save($outage);
+        
+        echo $outage['isoutage'];
     }
 
     // Uncomment the following methods and override them if needed

@@ -1,7 +1,8 @@
 <?php
+
 array_multisort(array_values($dbstructure['files']['root']), SORT_ASC, array_keys($dbstructure['files']['root']), SORT_ASC, $dbstructure['files']['root']);
 
-$args = array('image_locations' => $image_locations, 'dbstructure' => $dbstructure, 'bucket_dir' => $bucket_dir, 'bucket_files' => $bucket_files, 'outage_bucket_files' => $outage_bucket_files);
+$args = array('image_locations' => $image_locations, 'dbstructure' => $dbstructure, 'bucket_dir' => $bucket_dir, 'bucket_files' => $bucket_files, 'outage_bucket_files' => $outage_bucket_files, 'isoutage'=>$isoutage);
 
 $whichpage = 'image';
 if (isset($_GET['page_id']))
@@ -47,10 +48,10 @@ $cs->registerScript('bucketdir_script', "var bucketdir =  " . json_encode($bucke
     <!--controls-->
     <div class="col-md-12 bottom30">
         <div class="center">
-            <h4>Outage</h4>
+            <h4 >Outage: <span id="outage-status"><?php echo $isoutage?"On":"Off";?></span></h4>
             <div class="btn-group btn-toggle"> 
-                <button class="btn btn-default">ON</button>
-                <button class="btn btn-primary active">OFF</button>
+                <button class="btn  <?php echo $isoutage?"btn-primary active":"btn-default";?>">ON</button>
+                <button class="btn  <?php echo $isoutage?"btn-default":"btn-primary active";?>">OFF</button>
             </div>
         </div>
     </div>

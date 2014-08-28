@@ -211,7 +211,6 @@ function drop_location_onto_image(ev) {
         $(newchild).attr('data-image', location + "/" + image_name)
         //time to update...
         values = {campus: campus, building: building, room: room, image_name: image_name}
-
         ajaxsubmitnewlocation(values).done(function(ajax_data) {
             $(target).append(newchild);
             $(target).removeClass('well');
@@ -297,7 +296,8 @@ function drop_image_onto_location(ev) {
         $(newchild).removeAttr('data-image')
         var data_image = location + "/" + image_name
         $(target).attr('data-image', data_image)
-
+        
+        
 
         ajaxsubmitnewlocation(params).done(function(ajax_data) {
             console.log(ajax_data)
@@ -364,7 +364,7 @@ function drop_to_trash(ev) {
 
 function is_location_page() {
     var page = get('page_id');
-    if (page === 'location')
+    if (page === 'location' || page==='outage')
         return true;
     else
         return false

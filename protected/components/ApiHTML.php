@@ -51,8 +51,7 @@ class ApiHTML extends CHtml {
         } else {
 
             foreach ($new_array as $foldername => $folder_array) {
-
-                self::draw_location_section($rootlocation[$foldername], $bucket_dir, $foldername, $root_child, $campus, $building);
+                    self::draw_location_section($rootlocation[$foldername], $bucket_dir, $foldername, $root_child, $campus, $building);
             }
         }
     }
@@ -102,9 +101,9 @@ class ApiHTML extends CHtml {
 
             $location = ($building ? $campus . "/" : $campus) . ($room ? $building . "/" : $building) . $room . "/";
         }
-        $service = $bucket_dir==ApiHelper::_get_bucket_url('gadgets')?'gadgets':'wepa';
+        $service = $bucket_dir == ApiHelper::_get_bucket_url('gadgets') ? 'gadgets' : 'wepa';
         $linkOptions = array(
-            'class' => ($service==='gadgets'?" col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font ":" col-lg-12 col-md-12 col-sm-12 col-xs-12 bottom10 right5 label label-primary medium-font ")
+            'class' => ($service === 'gadgets' ? " col-lg-2 col-md-4 col-sm-4 col-xs-10 bottom10 right5 label label-primary medium-font " : " col-lg-12 col-md-12 col-sm-12 col-xs-12 bottom10 right5 label label-primary medium-font ")
             . (($root_child == 'bottomfolder') ? '' : 'ajax-drilldown'),
             'href' => "#?javascript:void(0)",
             'data-drilldown' => $next_step,

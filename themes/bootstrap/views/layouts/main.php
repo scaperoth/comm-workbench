@@ -42,11 +42,16 @@
             $cs->registerScript('gadget_drilldown_ajax_url', ' var drilldownajaxurl ="' . $this->createUrl('site/drawlocationsajax?service=gadgets') . '";', CClientScript::POS_BEGIN);
         } else {
             $cs->registerScriptFile($themePath . '/assets/js/wepa_script.js', CClientScript::POS_END);
-            $cs->registerScript('service', 'var service = "wepa"', CClientScript::POS_BEGIN);
+            if (isset($_GET['page_id']) && $_GET['page_id'] === 'outage')
+                $cs->registerScript('service', 'var service = "wepa-outage"', CClientScript::POS_BEGIN);
+            else {
+                $cs->registerScript('service', 'var service = "wepa"', CClientScript::POS_BEGIN);
+            }
         }
         $cs->registerScript('get_ajax_url', ' var getlocationajaxurl ="' . $this->createUrl('site/getlocationdataajax?service=wepa') . '";', CClientScript::POS_BEGIN);
         $cs->registerScript('add_ajax_url', ' var addlocationajaxurl ="' . $this->createUrl('site/addlocationajax') . '";', CClientScript::POS_BEGIN);
         $cs->registerScript('remove_ajax_url', ' var removelocationajaxurl ="' . $this->createUrl('site/removelocationfromimageajax') . '";', CClientScript::POS_BEGIN);
+        $cs->registerScript('toggleoutageurl', ' var toggleoutageurl ="' . $this->createUrl('wepa/toggleoutage') . '";', CClientScript::POS_BEGIN);
 
         $cs->registerScriptFile($themePath . '/assets/js/global_ajax.js', CClientScript::POS_END);
 

@@ -23,8 +23,6 @@ class ApiHelper extends CHtml {
     Const TOPHOLDER = 'structure';
     Const APPLICATION_ID = 'ASCCPE';
 
-    
-
     /**
      * Default response format
      * either 'json' or 'xml'
@@ -207,7 +205,8 @@ class ApiHelper extends CHtml {
     public static function _ReadFolderDirectory_from_db($which_db) {
         $db_to_array = array();
 
-        $cursor = $which_db->find()->sort(array('timestamp' => -1))->limit(1);
+        //$cursor = $which_db->find()->sort(array('timestamp' => -1))->limit(1);
+        $cursor = $which_db->find();
 
         foreach ($cursor as $doc) {
 
@@ -229,6 +228,7 @@ class ApiHelper extends CHtml {
      */
     public function _get_service($param) {
         $service_details = array();
+        $service_details['admin'] = Yii::app()->mongodb->admin;
         switch ($param) {
             case 'gadgets':
                 $service_details['local_file'] = self::_create_full_path(self::GADGETS_LOCAL);
@@ -243,7 +243,13 @@ class ApiHelper extends CHtml {
                 $service_details['bucket'] = self::_create_full_path(self::WEPA_BUCKET, true);
                 $service_details['outage_bucket'] = self::_create_full_path(self::WEPA_OUTAGE_BUCKET, true);
                 $service_details['database'] = Yii::app()->mongodb->wepa;
-                $service_details['outage_database'] = Yii::app()->mongodb->wepa_outage;
+
+                break;
+            case 'wepa-outage':
+                $service_details['local_file'] = self::_create_full_path(self::WEPA_OUTAGE_LOCAL);
+                $service_details['shared_file'] = self::_create_full_path(self::WEPA_SHARED);
+                $service_details['bucket'] = self::_create_full_path(self::WEPA_OUTAGE_BUCKET, true);
+                $service_details['database'] = Yii::app()->mongodb->wepa;
                 break;
         }
 
@@ -256,10 +262,10 @@ class ApiHelper extends CHtml {
         $bucket = $service['bucket'];
         return $bucket;
     }
-    
-    public static function _get_outage_bucket_url($which_service='wepa', $assoc_array = true) {
+
+    public static function _get_outage_bucket_url($which_service = 'wepa-outage', $assoc_array = true) {
         $service = self::_get_service($which_service);
-        $bucket = $service['outage_bucket'];
+        $bucket = $service['bucket'];
         return $bucket;
     }
 
@@ -269,10 +275,28 @@ class ApiHelper extends CHtml {
         return $bucket;
     }
 
+    public static function _get_outage_path($which_service = 'wepa', $assoc_array = true) {
+        $service = self::_get_service($which_service);
+        $bucket = $service['outage_file'];
+        return $bucket;
+    }
+
     public static function _get_db_structure($which_service, $assoc_array = true) {
         $service = self::_get_service($which_service);
         $db = self::_ReadFolderDirectory_from_db($service['database']);
         return $db;
+    }
+
+    public static function _get_admin_db_structure($which_service = 'wepa', $assoc_array = true) {
+        $service = self::_get_service($which_service);
+        $db = self::_ReadFolderDirectory_from_db($service['admin']);
+        return $db;
+    }
+
+    public static function _is_outage($which_service = 'wepa', $assoc_array = true) {
+        $service = self::_get_service($which_service);
+        $db = self::_ReadFolderDirectory_from_db($service['admin']);
+        return $db['isoutage'];
     }
 
     /**

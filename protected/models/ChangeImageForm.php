@@ -36,12 +36,13 @@ class ChangeImageForm extends CFormModel {
         $location = $this->campus . DIRECTORY_SEPARATOR . $building . $room . $image;
         $service = $this->service;
         $url = Yii::app()->createAbsoluteUrl("api/addimage/$service/$location");
+
         $curl_response = Yii::app()->curl->get($url);
         if (!$curl_response) {
             return false;
         }
-        
-        
+
+
         $url = Yii::app()->createAbsoluteUrl("api/update/$service/save");
         $curl_response = Yii::app()->curl->get($url);
         if (!$curl_response) {
@@ -50,8 +51,8 @@ class ChangeImageForm extends CFormModel {
 
         return true;
     }
-    
-     /**
+
+    /**
      * removes an image from the file system
      * @return boolean whether login is successful
      */
@@ -59,13 +60,12 @@ class ChangeImageForm extends CFormModel {
         $image = $this->image_name;
         $service = $this->service;
         $url = Yii::app()->createAbsoluteUrl("api/removeimage/$service/$image");
-        
         $curl_response = Yii::app()->curl->get($url);
-        
-        
+
+
         $url = Yii::app()->createAbsoluteUrl("api/update/$service/save");
         $curl_response = Yii::app()->curl->get($url);
-        
+
         if (!$curl_response) {
             return false;
         }

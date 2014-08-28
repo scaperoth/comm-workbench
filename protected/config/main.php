@@ -82,35 +82,35 @@ return array(
         'urlManager' => array(
             'urlFormat' => 'path',
             'rules' => array(
-                'api/sync/<which_service:[\w]+>/<push_or_pull:[\w]+>' => 'api/sync',
+                'api/sync/<which_service:[\w\-]+>/<push_or_pull:[\w]+>' => 'api/sync',
                 ///
-                'api/bucketdir/<which_service:[\w]+>' => 'api/bucketdir',
-                'api/bucketdir/<which_service:[\w]+>/<which_type:[\w]+>' => 'api/bucketdir',
+                'api/bucketdir/<which_service:[\w\-]+>' => 'api/bucketdir',
+                'api/bucketdir/<which_service:[\w\-]+>/<which_type:[\w]+>' => 'api/bucketdir',
                 ///
-                'api/dbstructure/<which_service:[\w]+>' => 'api/dbstructure',
+                'api/dbstructure/<which_service:[\w\-]+>' => 'api/dbstructure',
                 ///
-                'api/filestructure/<which_service:[\w]+>' => 'api/filestructure',
-                'api/filestructure/<which_service:[\w]+>/<subdirectory:[\w\-]+>' => 'api/filestructure',
-                'api/filestructure/<which_service:[\w]+>/<subdirectory:[\w\-]+>/<bottomdirectory:[\w\-]+>' => 'api/filestructure',
+                'api/filestructure/<which_service:[\w\-]+>' => 'api/filestructure',
+                'api/filestructure/<which_service:[\w\-]+>/<subdirectory:[\w\-]+>' => 'api/filestructure',
+                'api/filestructure/<which_service:[\w\-]+>/<subdirectory:[\w\-]+>/<bottomdirectory:[\w\-]+>' => 'api/filestructure',
                 ///
-                'api/bucketfiles/<which_service:[\w]+>' => 'api/bucketfiles',
+                'api/bucketfiles/<which_service:[\w\-]+>' => 'api/bucketfiles',
                 ///
-                'api/getdir/<which_service:[\w]+>' => 'api/getdir',
-                'api/getdir/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/getdir',
+                'api/getdir/<which_service:[\w\-]+>' => 'api/getdir',
+                'api/getdir/<which_service:[\w\-]+>/<image_name:[\w\-\ \.]+>' => 'api/getdir',
                 ///
-                'api/update/<which_service:[\w]+>/<load_or_save:[\w]+>' => 'api/update',
+                'api/update/<which_service:[\w\-]+>/<load_or_save:[\w]+>' => 'api/update',
                 ///
-                'api/putimageinbucket/<which_service:[\w]+>' => 'api/putimageinbucket',
-                'api/putimageinbucket/<which_service:[\w]+>/<image_name:[\w\-\ \.]+>' => 'api/putimageinbucket',
+                'api/putimageinbucket/<which_service:[\w\-]+>' => 'api/putimageinbucket',
+                'api/putimageinbucket/<which_service:[\w\-]+>/<image_name:[\w\-\ \.]+>' => 'api/putimageinbucket',
                 ///
-                'api/deleteimageinbucket/<which_service:[\w]+>' => 'api/deleteimageinbucket',
-                'api/deleteimageinbucket/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/deleteimageinbucket',
+                'api/deleteimageinbucket/<which_service:[\w\-]+>' => 'api/deleteimageinbucket',
+                'api/deleteimageinbucket/<which_service:[\w\-]+>/<image_name:[\w\-\ \.\S]+>' => 'api/deleteimageinbucket',
                 ///
-                'api/addimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimage',
-                'api/addimagetoall/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimagetoall',
+                'api/addimage/<which_service:[\w\-]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimage',
+                'api/addimagetoall/<which_service:[\w\-]+>/<image_name:[\w\-\ \.\S]+>' => 'api/addimagetoall',
                 ///
-                'api/removeimage/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
-                'api/removeimagefromall/<which_service:[\w]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimagefromall',
+                'api/removeimage/<which_service:[\w\-]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimage',
+                'api/removeimagefromall/<which_service:[\w\-]+>/<image_name:[\w\-\ \.\S]+>' => 'api/removeimagefromall',
                 ///
                 '<controller:\w+>/<id:\d+>' => '<controller>/view',
                 '<controller:\w+>/<action:\w+>/<id:\d+>' => '<controller>/<action>',

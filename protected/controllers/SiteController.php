@@ -141,7 +141,10 @@ class SiteController extends Controller {
                 }
             }
             if (!$errors) {
-                $url = Yii::app()->createAbsoluteUrl("api/update/{$_POST['service']}/save");
+                if ($_POST['service'] === 'wepa-outage')
+                    $url = Yii::app()->createAbsoluteUrl("api/update/wepa/save");
+                else
+                    $url = Yii::app()->createAbsoluteUrl("api/update/{$_POST['service']}/save");
                 $curl_response = Yii::app()->curl->get($url);
                 Yii::app()->user->setFlash('success', 'image(s) uploaded!');
             }

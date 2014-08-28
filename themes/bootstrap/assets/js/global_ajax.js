@@ -50,7 +50,6 @@ function ajaxremovelocation(params) {
             // successful request; do something with the data
             $('#ajax_background').fadeOut();
             $('#ajax_panel').html('');
-            //console.log(data);
         },
         error: function(data) {
             $('#ajax_panel').html('');
@@ -120,6 +119,31 @@ function ajaxdrilldownlocations(params) {
         },
         error: function(data) {
             $('#ajax_panel').html('');
+        }
+    });
+}
+
+/*
+ * this function takes parameters and adds an image to the given location 
+ * @param {type} params
+ * @returns {unresolved}
+ */
+function ajaxtogglewepaoutage() {
+    return $.ajax({
+        type: 'POST',
+        url: toggleoutageurl,
+        beforeSend: function() {
+// this is where we append a loading image
+            $('#ajax_panel').html('<div  id="ajax_background"><div id="loading"><img src="' + images + 'loading.gif" alt="Loading..." /></div></div>');
+        },
+        success: function(data) {
+            // successful request; do something with the data
+            $('#ajax_background').fadeOut();
+            $('#ajax_panel').html('');
+        },
+        error: function(data) {
+            $('#ajax_panel').html('');
+
         }
     });
 }
